@@ -7,9 +7,11 @@ permalink: /gallery/
 ---
 
 
-<h1 align="center">Personal Timeline</h1>
 
-**Gallery**
+<p><b>Linkedin:</b><a href="https://www.linkedin.com/in/prakash09/"> https://www.linkedin.com/in/prakash09/</a></p>
+<p><b>Email:</b> prakash.ksv9@gmail.com</p>
+<p><b>Twitter:</b><a href="https://twitter.com/Prakashkumar09"> https://twitter.com/Prakashkumar09</a></p>
+
 
 
 <div class="row">
