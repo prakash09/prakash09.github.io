@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Starting up as a software engineer: the challenges beyond tech and product development"
+title: "Starting up as a tech co-founder: the challenges beyond tech and product development"
 
 ---
 I've loved coding ever since I got my first computer in 8th grade. I was a boring kid, so the first thing I did was learn to touch type. Soon, I could easily do over 40WPM. One day, one of my friends shared a music file, and as soon as I opened it, my CD drive started automatically opening and closing. Then, after 5 seconds, there was a message on the screen that said "Your system is hacked," and the system shut down. 
