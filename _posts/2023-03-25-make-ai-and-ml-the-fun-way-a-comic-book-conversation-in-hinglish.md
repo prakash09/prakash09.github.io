@@ -63,8 +63,6 @@ To make the study plan more exciting and engaging, I have created a comic format
 
 ## The Comic Format
 
-Let's start, I will update it everyday:
-
 > **Ravi**: Hey Priya! Aaj maine Linear Algebra ke baare mein padhna shuru kiya hai. Mujhe lagta hai ki yeh AI aur Machine Learning mein bahut important hai.
 >
 > **Priya**: Sahi pakde hain, Ravi! Linear Algebra bahut hi fundamental hai, aur AI aur Machine Learning ke algorithms mein kaafi use hota hai. Chalo, basic concepts se shuru karte hain. Sabse pehle samjhte hain ki "Scalar" kya hota hai.
@@ -176,6 +174,8 @@ Let's start, I will update it everyday:
 > **Priya**: Neurons ek mathematical function hote hain, jo input signals ko process karke output signal generate karte hain. Ek neuron apne inputs ko weights se multiply karta hai, uske baad biases add karta hai, aur phir ek activation function apply karta hai. Jaise, ek simple perceptron model mein, output y ko hum calculate karte hain:
 >
 > y = activation*function(w1 * x1 + w2 \_ x2 + ... + wn \* xn + b)
+>
+> **Updated on: 5th May 2023**
 >
 > **Ravi**: Achha, aur activation functions kya hoti hain?
 >
