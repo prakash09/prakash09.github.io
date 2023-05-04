@@ -9,14 +9,14 @@ I have optimized the study plan for easy consumption, even during travel, with a
 
 ## Topics Covered
 
-### Week 1-4: Python and Mathematical Foundations
+### Python and Mathematical Foundations
 
 - Linear algebra
 - Calculus
 - Probability and statistics
 - Optimization
 
-### Week 5-8: Machine Learning Basics
+### Machine Learning Basics
 
 - Introduction to machine learning
 - Supervised learning
@@ -26,7 +26,7 @@ I have optimized the study plan for easy consumption, even during travel, with a
 - Feature engineering
 - Bias and variance
 
-### Week 9-12: Deep Learning Basics
+### Deep Learning Basics
 
 - Neural networks
 - Convolutional Neural Networks (CNNs)
@@ -35,7 +35,7 @@ I have optimized the study plan for easy consumption, even during travel, with a
 - Transfer learning and fine-tuning
 - Hyperparameter tuning
 
-### Week 13-16: Natural Language Processing (NLP)
+### Natural Language Processing (NLP)
 
 - Text preprocessing and representation
 - Word embeddings (Word2Vec, GloVe)
@@ -44,7 +44,7 @@ I have optimized the study plan for easy consumption, even during travel, with a
 - Sequence-to-sequence models and attention mechanisms
 - Transformers and BERT
 
-### Week 17-20: Computer Vision
+### Computer Vision
 
 - Image preprocessing and representation
 - Object detection (YOLO, SSD)
@@ -52,7 +52,7 @@ I have optimized the study plan for easy consumption, even during travel, with a
 - Facial recognition
 - OCR and handwriting recognition
 
-### Week 21-24: Reinforcement Learning and Deployment
+### Reinforcement Learning and Deployment
 
 - Q-learning and Deep Q-Networks (DQNs)
 - Policy gradients and Actor-Critic methods
