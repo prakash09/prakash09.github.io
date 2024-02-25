@@ -12,12 +12,6 @@ permalink: /gallery/
 <p><b>Email:</b> prakash.ksv9@gmail.com</p>
 <p><b>Twitter:</b><a href="https://twitter.com/Prakashkumar09"> https://twitter.com/Prakashkumar09</a></p>
 
-<h3> Need any help/advice in tech? Schedule a call.<h3>
-<!-- Calendly inline widget begin -->
-<div class="calendly-inline-widget" data-url="https://calendly.com/prakashkumar09/15mins" style="min-width:320px;height:630px;"></div>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<!-- Calendly inline widget end -->
-
 
 <h3> Gallery </h3>
 <div class="row">

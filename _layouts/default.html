@@ -29,6 +29,7 @@
 
             <nav>
               <a href="{{ site.baseurl }}/">Home</a>
+              <a href="javascript: scrollToPost();">Posts</a>
               <a href="{{ site.baseurl }}/books">Books</a>
               <a href="{{ site.baseurl }}/gallery">Gallery</a>
             </nav>
@@ -52,5 +53,10 @@
     </div>
 
     {% include analytics.html %}
+<script>
+    function scrollToPost() {
+      window.location.href = "{{ site.baseurl }}/#all_posts";
+    }
+  </script>
   </body>
 </html>
