@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}{% if site.description and site.description != "" %} – {{ site.description }}{% endif %}</title>
     {% seo title=false %}
     {% include meta.html %}
 
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }}{% if site.description and site.description != "" %} - {{ site.description }}{% endif %}" href="{{ site.baseurl }}/feed.xml" />
     <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 
     <meta name="theme-color" content="#000000">
@@ -20,18 +20,21 @@
       <div class="wrapper-masthead">
         <div class="container">
           <header class="masthead clearfix">
-            <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.baseurl }}{{ site.avatar }}" alt="{{ site.title }}" /></a>
+            <div class="masthead-left">
+              <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.baseurl }}{{ site.avatar }}" alt="{{ site.title }}" /></a>
 
-            <div class="site-info">
-              <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-              <p class="site-description">{{ site.description }}</p> 
+              <div class="site-info">
+                <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+                {% if site.description and site.description != "" %}
+                  <p class="site-description">{{ site.description }}</p>
+                {% endif %}
+              </div>
             </div>
 
-            <nav>
+            <nav class="masthead-nav">
               <a href="{{ site.baseurl }}/">Home</a>
               <a href="javascript: scrollToPost();">Posts</a>
               <a href="{{ site.baseurl }}/books">Books</a>
-              <a href="{{ site.baseurl }}/gallery">Gallery</a>
             </nav>
           </header>
         </div>

@@ -2,39 +2,45 @@
 layout: default
 ---
 
-<div class="introduction">
-  <h1>Hi! 👋</h1>
-  My name is Prakash Kumar, and I'm a tech entrepreneur with a passion for coding and building products. I've co-founded two startups: Rheo TV (acquired by Unacademy) and Relevel. I'm currently working on my next venture(Announcement soon!).
-  <p>After Rheo TV's acquisition, I joined Relevel as a co-founder. There, I built the entire tech team and product from the ground up, leading us to an amazing team of over 40 members and reaching $10M in ARR before my departure.
-  </p>
-<p>At Rheo TV, we built cutting-edge distributed live streaming systems. We raised funding from top investors like Sequoia's Surge and Lightspeed Ventures and were eventually acquired by Unacademy.
-</p>
-<p>Leading a tech team of 40+ in such a short period has pushed me to grow tremendously. These blogs are insights, learnings, and reflections on the mistakes I've made along the way.
-</p>
-</div>
-<div clas="twitter_follow_button">
-  <a href="https://twitter.com/Prakashkumar09?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Prakashkumar09</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</div>
-<div class="new_section">
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Hey, welcome.</h1>
+
+    <div id="intro" class="intro-text is-collapsed">
+      <p>My name is Prakash Kumar. I’m currently building <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a> and <a href="https://videocompany.ai" target="_blank" rel="noopener noreferrer">VideoCompany.ai</a>.</p>
+      <p>I’m a tech entrepreneur with a deep love for coding and building products from first principles. Previously, I co-founded Rheo TV and Relevel.</p>
+      <p>At Rheo TV, we built cutting-edge distributed live-streaming systems. We raised funding from top investors including Sequoia’s Surge and Lightspeed Ventures, and the company was eventually acquired by Unacademy.</p>
+      <p>Post-acquisition, I co-founded Relevel with Unacademy, where I built the product and tech organization from the ground up. Over time, we grew the team to 40+ people and scaled the business to $10M in ARR before my departure.</p>
+      <p>I write these blogs as my public notes—insights, learnings, and reflections, including the mistakes I’ve made along the way.</p>
+    </div>
+
+    <button id="introToggle" class="intro-toggle" type="button" aria-expanded="false" aria-controls="intro">
+      View more
+    </button>
+
+    <div class="hero-cta">
+      <a class="button primary" href="javascript: scrollToPost();">Read posts</a>
+      <a class="button" href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>
+      <a class="button" href="https://videocompany.ai" target="_blank" rel="noopener noreferrer">VideoCompany.ai</a>
+    </div>
+  </div>
+</section>
+
+<section class="new_section">
   <h3 id="all_posts">All Posts</h3>
-</div>
-<div class="posts">
-  <ul>
-  {% for post in paginator.posts %}
-  <li>
-    <article class="post">
+</section>
 
-        <div style="margin: 2%;"><a class="redirect_link" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }} </a>-{{ post.date | date: "%B %e, %Y" }}</div>
-
-<!--      <div class="entry">-->
-<!--        {{ post.excerpt }}-->
-<!--      </div>-->
-
-<!--      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>-->
-    </article>
+<section class="posts posts-home">
+  <ul class="post-list">
+    {% for post in paginator.posts %}
+    <li class="post-card">
+      <a class="post-card-link" href="{{ site.baseurl }}{{ post.url }}">
+        <h2 class="post-card-title">{{ post.title }}</h2>
+        <p class="post-card-meta">{{ post.date | date: "%B %e, %Y" }}</p>
+      </a>
     </li>
-  {% endfor %}
-    </ul>
+    {% endfor %}
+  </ul>
 
   <!-- pagination -->
   {% if paginator.total_pages > 1 %}
@@ -62,4 +68,19 @@ layout: default
     {% endif %}
   </div>
   {% endif %}
-</div>
+</section>
+
+<script>
+  (function () {
+    var intro = document.getElementById("intro");
+    var toggle = document.getElementById("introToggle");
+    if (!intro || !toggle) return;
+
+    toggle.addEventListener("click", function () {
+      var isCollapsed = intro.classList.contains("is-collapsed");
+      intro.classList.toggle("is-collapsed", !isCollapsed);
+      toggle.setAttribute("aria-expanded", String(isCollapsed));
+      toggle.textContent = isCollapsed ? "View less" : "View more";
+    });
+  })();
+</script>

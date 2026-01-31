@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<article class="post detailed">
+<article class="post detailed{% if page.typography %} font-{{ page.typography }}{% endif %}">
   <h1>{{ page.title }}</h1>
 
   <div>
