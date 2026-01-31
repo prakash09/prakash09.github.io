@@ -577,8 +577,8 @@ p > img {
   border-bottom: 1px solid $lightGray;
 
   @include mobile {
-    flex-direction: column;
-    text-align: center;
+    gap: 14px;
+    padding: 16px 0;
   }
 }
 
@@ -586,10 +586,11 @@ p > img {
   display: flex;
   align-items: center;
   gap: 14px;
+  flex: 1 1 auto;
+  min-width: 0;
 
   @include mobile {
-    flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 }
 
@@ -599,8 +600,8 @@ p > img {
   height: 70px;
 
   @include mobile {
-    display: block;
-    margin: 0 auto;
+    width: 44px;
+    height: 44px;
   }
 
   img {
@@ -612,8 +613,7 @@ p > img {
   min-width: 0;
 
   @include mobile {
-    display: block;
-    margin: 0 auto;
+    margin: 0;
   }
 }
 
@@ -628,7 +628,14 @@ p > img {
   text-align: left;
 
   @include mobile {
-    text-align: center;
+    font-size: 22px;
+  }
+
+  a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -649,12 +656,18 @@ p > img {
   justify-content: flex-end;
   gap: 18px;
   margin: 0 0 0 auto;
+  flex: 0 0 auto;
   font-family: var(--font-body);
   font-size: 18px;
 
   @include mobile {
-    justify-content: center;
     font-size: 16px;
+    gap: 14px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   a {
@@ -665,12 +678,7 @@ p > img {
     letter-spacing: 0;
 
     @include mobile {
-      margin: 0;
-      color: $blue;
-      padding: 8px 12px;
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
+      color: $darkGray;
     }
   }
 }
