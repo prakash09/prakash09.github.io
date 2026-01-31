@@ -4,7 +4,11 @@ layout: default
 
 <article class="page">
 
-  <h1>{{ page.title }}</h1>
+  {% unless page.hide_title %}
+    {% if page.title and page.title != "" %}
+      <h1>{{ page.title }}</h1>
+    {% endif %}
+  {% endunless %}
 
   <div class="entry">
     {{ content }}
