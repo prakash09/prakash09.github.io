@@ -38,8 +38,12 @@ title: "Favourite quotes and thoughts"
 
 17. No one sees what you see, even if they see it too.
 
-18. वक़्त की ख़ूबसूरती होती है कि वह बदलता है |
+18. वक़्त की ख़ूबसूरती होती है कि वह बदलता है.
 
-19. The ideal life would be one where you had a hobby that as a byproduct made you money, a hobby that kept you healthy and a hobby that made you more smarter and creative.
+19. अपने हिस्से का संघर्ष सबको करना पड़ता है।
 
-20. Use workouts to gain muscle, diet to burn fat and cardio to improve your overall health & longevity.
+20. The ideal life would be one where you had a hobby that as a byproduct made you money, a hobby that kept you healthy and a hobby that made you more smarter and creative.
+
+21. Use workouts to gain muscle, diet to burn fat and cardio to improve your overall health & longevity.
+
+22. Think in decades. Most people overestimate what they can do in one year and underestimate what they can do in ten years.
