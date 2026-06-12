@@ -49,3 +49,5 @@ title: "Favourite quotes and thoughts"
 22. Use workouts to gain muscle, diet to burn fat and cardio to improve your overall health & longevity.
 
 23. Think in decades. Most people overestimate what they can do in one year and underestimate what they can do in ten years.
+
+24. The future isn't built by those who know every rule, but by those who know how to wire the pieces together. You don't need to play every instrument to conduct the orchestra—you need only the vision to make them sing as one.
