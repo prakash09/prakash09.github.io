@@ -20,10 +20,13 @@
   --c-hairline-hi:  #2E323A;
 
   // ---- Color: ink --------------------------------------------
-  --c-ink:          #ECEDEE;
-  --c-ink-soft:     #C3C7CC;
-  --c-muted:        #8B9099;
-  --c-faint:        #5C616A;
+  // Every one of these is real text (dates, kickers, TOC links), so
+  // every one clears WCAG AA against canvas AND surface. --c-faint is
+  // the floor: anything quieter than this fails, so nothing is.
+  --c-ink:          #ECEDEE;  // 16.7:1 on canvas
+  --c-ink-soft:     #C3C7CC;  // 11.5:1
+  --c-muted:        #8B9099;  //  6.1:1
+  --c-faint:        #808691;  //  5.4:1 on canvas, 4.7:1 on surface-hi
 
   // ---- Color: accents ----------------------------------------
   --c-ember:        #FF7A45;
@@ -37,6 +40,14 @@
   --c-ember-ring:   rgba(255, 122, 69, 0.34);
   --c-ember-glow:   rgba(255, 122, 69, 0.20);
   --c-cyan-wash:    rgba(88, 196, 220, 0.10);
+
+  // ---- Color: status -----------------------------------------
+  // Only for things that are semantically good/bad — diff lines and
+  // syntax errors. Never decorative; the accent above does that job.
+  --c-good:         #7EE7A8;
+  --c-good-wash:    rgba(126, 231, 168, 0.10);
+  --c-bad:          #FF8A8A;
+  --c-bad-wash:     rgba(255, 138, 138, 0.10);
 
   // ---- Signature gradient ------------------------------------
   --grad-signature: linear-gradient(90deg, #FF7A45 0%, #F0568A 52%, #58C4DC 100%);
@@ -139,4 +150,10 @@
 
 @mixin motion-ok {
   @media (prefers-reduced-motion: no-preference) { @content; }
+}
+
+// Fingers, not cursors: used to grow hit areas rather than to guess
+// from viewport width.
+@mixin touch {
+  @media (hover: none) and (pointer: coarse) { @content; }
 }

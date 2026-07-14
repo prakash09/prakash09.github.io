@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="The Candor">
+  <title>The Candor</title>
+  <!--
+    A "C" built from three concentric broadcast arcs: candour as signal —
+    something said outward, plainly. Butt caps and an even 1.6 gap rhythm
+    keep it geometric; a 3.0 stroke keeps every arc legible at 16px.
+
+    Colours are explicit here, not currentColor: this file is served as a
+    favicon and as a standalone asset, where currentColor would resolve to
+    black. The masthead uses _includes/logo.html, which does inherit.
+  -->
+  <rect width="32" height="32" rx="7" fill="#0B0C0E"/>
+  <g fill="none" stroke="#FF7A45" stroke-width="3" stroke-linecap="butt">
+    <path d="M23.42 7.20 A11.4 11.4 0 1 0 23.42 24.80"/>
+    <path d="M20.82 10.30 A7.4 7.4 0 1 0 20.82 21.70"/>
+    <path d="M18.22 13.40 A3.4 3.4 0 1 0 18.22 18.60"/>
+  </g>
+</svg>

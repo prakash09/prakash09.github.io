@@ -52,9 +52,26 @@
   var navSheet = document.getElementById("navSheet");
 
   if (navToggle && navSheet) {
-    navToggle.addEventListener("click", function () {
-      var open = navSheet.classList.toggle("is-open");
+    var setNav = function (open) {
+      navSheet.classList.toggle("is-open", open);
       navToggle.setAttribute("aria-expanded", String(open));
+    };
+
+    navToggle.addEventListener("click", function () {
+      setNav(!navSheet.classList.contains("is-open"));
+    });
+
+    // Same-page anchors would otherwise leave the sheet covering the
+    // thing the reader just asked to see.
+    navSheet.addEventListener("click", function (e) {
+      if (e.target.closest("a")) setNav(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && navSheet.classList.contains("is-open")) {
+        setNav(false);
+        navToggle.focus();
+      }
     });
   }
 

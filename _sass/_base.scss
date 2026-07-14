@@ -17,6 +17,9 @@ html {
 body {
   position: relative;
   min-height: 100vh;
+  // Mobile browser chrome makes 100vh taller than the visible area;
+  // svh is the honest number where it's supported.
+  min-height: 100svh;
   background: var(--c-canvas);
   color: var(--c-ink);
   font-family: var(--font-body);
@@ -28,8 +31,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  // A long URL in a post must wrap, not widen the page.
+  overflow-wrap: break-word;
   // Nothing may push the page sideways.
   overflow-x: hidden;
+  // Kill the grey flash on tap; we have our own :active states.
+  -webkit-tap-highlight-color: transparent;
 }
 
 // ---- Grain -------------------------------------------------

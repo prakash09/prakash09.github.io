@@ -20,6 +20,12 @@
 <meta property="og:image" content="{{ site.url }}{{ page.image }}"/>
 <meta property="twitter:image" content="{{ site.url }}{{ page.image }}"/>
 {% else %}
-<meta property="og:image" content="{{ site.url }}{{ site.avatar }}"/>
-<meta property="twitter:image" content="{{ site.url }}{{ site.avatar }}"/>
+<meta property="og:image" content="{{ site.url }}{{ site.og_image }}"/>
+<meta property="twitter:image" content="{{ site.url }}{{ site.og_image }}"/>
+{% endif %}
+
+<meta name="twitter:card" content="summary_large_image" />
+{% if site.footer-links.twitter %}
+<meta name="twitter:site" content="@{{ site.footer-links.twitter }}" />
+<meta name="twitter:creator" content="@{{ site.footer-links.twitter }}" />
 {% endif %}

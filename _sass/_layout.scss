@@ -52,12 +52,23 @@
   gap: var(--sp-3);
   min-width: 0;
 
+  @include touch { min-height: 2.75rem; }
+
   &:hover .masthead__wordmark { color: var(--c-ink); }
 }
 
-.masthead__avatar {
-  width: 2.25rem;
-  height: 2.25rem;
+// The mark inherits colour, so it can warm to ember on hover without
+// a second asset.
+.logo {
+  flex: 0 0 auto;
+  width: 1.875rem;
+  height: 1.875rem;
+  color: var(--c-ember);
+  transition: transform var(--dur) var(--ease);
+}
+
+.masthead__brand:hover .logo {
+  transform: rotate(-12deg);
 }
 
 .masthead__id { min-width: 0; }
@@ -287,12 +298,18 @@
 .footer__nav {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-3);
+
+  @include touch { gap: 0; }
 }
 
 .footer__nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-2) 0;
   color: var(--c-muted);
   font-size: var(--fs-sm);
+
+  @include touch { min-height: 2.75rem; }
 
   &:hover { color: var(--c-ink); }
 }

@@ -10,8 +10,10 @@ author: Prakash Kumar
 #
 ## Short bio or description (displayed in the header)
 description: ""
-## URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: /images/the_candor_logo.png
+## Brand mark (masthead + fallback social image)
+avatar: /images/candor-mark.svg
+## Social share card (1200x630)
+og_image: /images/og-card.png
 
 #
 # Flags below are optional

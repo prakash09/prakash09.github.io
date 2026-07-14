@@ -83,8 +83,15 @@
   transition: color var(--dur-fast) var(--ease);
 }
 
-.archive-date {
+.archive-meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-4);
   flex: 0 0 auto;
+}
+
+.archive-date,
+.archive-read {
   font-family: var(--font-mono);
   font-size: var(--fs-micro);
   letter-spacing: var(--tk-micro);
@@ -93,9 +100,44 @@
   white-space: nowrap;
 }
 
+.archive-topic {
+  margin: var(--sp-6) 0 var(--sp-3);
+  font-size: var(--fs-h3);
+  color: var(--c-ink);
+}
+
+.archive-topic__count {
+  margin-left: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--c-faint);
+}
+
 // ---- Books ---------------------------------------------------
 // The Goodreads widget replaces the markup at runtime with its
 // own, so these must stay keyed to its class names.
+
+// The widget injects its own <h2><a>My Bookshelf</a></h2>, which would
+// otherwise sit here as an unstyled, un-tappable duplicate of the page
+// title. Demote it to a quiet source link with a real hit area.
+[id^="gr_grid_widget"] > h2 {
+  margin: 0 0 var(--sp-5);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    color: var(--c-faint);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    font-weight: 500;
+    letter-spacing: var(--tk-micro);
+    text-transform: uppercase;
+
+    @include touch { min-height: 2.75rem; }
+
+    &:hover { color: var(--c-ember); }
+  }
+}
 
 .gr_grid_container {
   display: grid;
@@ -117,7 +159,7 @@
 
 .gr_grid_book_container {
   position: relative;
-  aspect-ratio: 98 / 150;
+  aspect-ratio: 98 / 157;
   border: var(--hairline) solid var(--c-hairline);
   border-radius: var(--r-sm);
   background: var(--c-surface);
@@ -133,7 +175,9 @@
   }
 
   img {
-    object-fit: cover;
+    // `contain`, not `cover`: Goodreads covers are not all the same
+    // shape, and cropping one slices the title straight off the jacket.
+    object-fit: contain;
     // Covers are printed for white pages; knock them back a hair
     // so the grid sits in the dark instead of glaring out of it.
     filter: saturate(0.92) brightness(0.9);
