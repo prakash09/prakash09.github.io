@@ -53,12 +53,23 @@ feels like it has a lot of orange on it, it is wrong.
 
 ## Type
 
-- **Inter Tight** — display and headings
-- **Inter** — body
-- **JetBrains Mono** — kickers, dates, tags, code, anything that is *data*
+- **Fraunces** — display and headings
+- **Source Serif 4** — body, prose, form fields
+- **JetBrains Mono** — kickers, dates, tags, buttons, code: anything that is *data* or *interface*
 
-Body is `1.1875rem / 1.75`, and prose is capped at `--w-prose: 68ch`. Headings use
-`text-wrap: balance`, paragraphs `pretty`.
+This is a publication, not a product. Inter is a UI typeface and the default of every
+SaaS site on the web; it makes a blog look like an admin panel no matter how good the
+layout is. So the reading faces are serifs, and mono carries the interface. Nothing
+reads in a face that is also used for a button.
+
+Body is `1.25rem / 1.7` (a serif needs more size than a grotesk to hold the same
+apparent weight), and prose is capped at `--w-prose: 68ch`. Headings use
+`text-wrap: balance`, paragraphs `pretty`. Tracking is `--tk-tight: -0.011em`: the
+`-0.022em` that suited Inter smears a serif.
+
+Post titles use `--fs-title`, which is deliberately **smaller** than `--fs-h1`. A
+headline that runs three lines before the reader reaches a word of the essay is not a
+headline, it is an obstacle. `--fs-h1` is reserved for the one statement on the home page.
 
 > **`clamp()` may only appear inside a token.** GitHub Pages builds this with Ruby
 > Sass 3.7, which evaluates maths in ordinary declarations and dies on `1rem + 2vw`.

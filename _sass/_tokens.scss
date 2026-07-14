@@ -54,28 +54,39 @@
   --grad-ring:      linear-gradient(140deg, #FF7A45 0%, #F0568A 50%, #58C4DC 100%);
 
   // ---- Type --------------------------------------------------
-  --font-display: "Inter Tight", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-body:    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  // Inter is the default typeface of every SaaS product on the web, and
+  // it is a *UI* face: built for buttons and tables, not for reading a
+  // 3,000-word essay. This is a publication, so it gets a publication's
+  // typography — an expressive display serif, a calm text serif built
+  // for screens, and a mono that keeps the engineering in the room.
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-body:    "Source Serif 4", "Source Serif Pro", Georgia, Cambria, serif;
   --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --fs-display: clamp(2.5rem, 1.85rem + 2.9vw, 4rem);
-  --fs-h1:      clamp(2rem, 1.55rem + 2vw, 3rem);
-  --fs-h2:      clamp(1.5rem, 1.32rem + 0.8vw, 1.9rem);
-  --fs-h3:      clamp(1.25rem, 1.16rem + 0.4vw, 1.45rem);
-  --fs-lead:    clamp(1.125rem, 1.06rem + 0.3vw, 1.3125rem);
-  --fs-body:    1.1875rem;
-  --fs-sm:      0.9375rem;
-  --fs-xs:      0.8125rem;
+  --fs-h1:      clamp(2rem, 1.6rem + 1.8vw, 2.875rem);
+  // Post titles. Deliberately below --fs-h1: a headline that fills three
+  // lines before the reader reaches a single word of the essay is not a
+  // headline, it is an obstacle.
+  --fs-title:   clamp(1.875rem, 1.5rem + 1.5vw, 2.5rem);
+  --fs-h2:      clamp(1.5rem, 1.35rem + 0.7vw, 1.875rem);
+  --fs-h3:      clamp(1.25rem, 1.18rem + 0.35vw, 1.4rem);
+  --fs-lead:    clamp(1.1875rem, 1.11rem + 0.35vw, 1.375rem);
+  --fs-body:    1.25rem;
+  --fs-sm:      1rem;
+  --fs-xs:      0.875rem;
   --fs-micro:   0.75rem;
 
-  --lh-tight:   1.12;
-  --lh-snug:    1.28;
-  --lh-body:    1.75;
+  --lh-tight:   1.14;
+  --lh-snug:    1.3;
+  --lh-body:    1.7;
 
   // Light-on-dark small text blooms; a touch of tracking counters it.
+  // Serifs need far less negative tracking than a grotesk: the tight
+  // -0.022em that suited Inter smears Fraunces.
   --tk-micro:   0.12em;
-  --tk-tight:   -0.022em;
-  --tk-body:    0.005em;
+  --tk-tight:   -0.011em;
+  --tk-body:    0;
 
   // ---- Space (0.25rem base) ----------------------------------
   --sp-1:  0.25rem;
@@ -97,7 +108,7 @@
   // ---- Layout ------------------------------------------------
   --w-text:   44rem;   // reading column
   --w-page:   52rem;   // default page container
-  --w-home:   60rem;   // home: rail + prose, sized so neither floats in a void
+  --w-home:   72rem;   // home: a two-column fold and a three-column index both need the room
   --w-wide:   72rem;   // archive / books grids
   --w-prose:  68ch;    // hard measure cap for long-form
   --hairline: 0.0625rem;

@@ -30,10 +30,14 @@
   border-radius: var(--r-sm);
   background: transparent;
   color: var(--c-ink);
-  font-family: var(--font-body);
-  font-size: var(--fs-sm);
+
+  // The reading faces are for reading. Controls speak in mono, like the
+  // kickers and tags, so interface and prose never wear the same voice.
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
   cursor: pointer;
   transition: transform var(--dur-fast) var(--ease),
               border-color var(--dur-fast) var(--ease),
@@ -73,7 +77,7 @@
 .btn--sm {
   min-height: 2.25rem;
   padding: var(--sp-2) var(--sp-4);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-micro);
 
   // "Small" is a visual weight, not a licence to be un-tappable.
   @include touch {

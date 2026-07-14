@@ -4,26 +4,31 @@
 
 .post {
   position: relative;
-  padding-top: var(--sp-9);
+  padding-top: var(--sp-7);
 
-  @include phone { padding-top: var(--sp-7); }
+  @include phone { padding-top: var(--sp-6); }
 }
 
 // ---- Header --------------------------------------------------
 // Left-aligned. A centred title reads as a template; an essay
 // should start where the text starts.
+//
+// The header is apparatus, not the essay. Every line it spends on
+// itself is a line the reader has to get past to reach the writing,
+// so the title sits below --fs-h1 and the deck below body size: a
+// summary, quietly, not a second headline.
 
 .post__header {
-  margin-bottom: var(--sp-7);
+  margin-bottom: var(--sp-6);
 }
 
 .post__title {
   margin: 0 0 var(--sp-4);
   font-family: var(--font-display);
-  font-size: var(--fs-h1);
+  font-size: var(--fs-title);
   font-weight: 600;
   line-height: var(--lh-tight);
-  letter-spacing: -0.028em;
+  letter-spacing: var(--tk-tight);
   color: var(--c-ink);
   text-align: left;
   text-wrap: balance;
@@ -31,9 +36,9 @@
 
 .post__deck {
   margin: 0 0 var(--sp-5);
-  max-width: var(--w-prose);
-  font-size: var(--fs-lead);
-  line-height: 1.55;
+  max-width: 42rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
   color: var(--c-muted);
   text-wrap: pretty;
 }
@@ -42,7 +47,7 @@
   display: flex;
   align-items: center;
   gap: var(--sp-3);
-  padding-bottom: var(--sp-5);
+  padding-bottom: var(--sp-4);
 }
 
 .post__avatar {
@@ -76,7 +81,7 @@
 // ---- Body ----------------------------------------------------
 
 .post__body {
-  padding-top: var(--sp-6);
+  padding-top: var(--sp-5);
   border-top: var(--hairline) solid var(--c-hairline);
 }
 

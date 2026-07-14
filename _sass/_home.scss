@@ -1,97 +1,121 @@
 // ============================================================
-// HOME — author intro, featured post, search, post index
+// HOME — lede, identity strip, the writing index, about
 // ============================================================
+//
+// The front page of a blog should be the writing. Earlier versions
+// opened with a wall of biography above the fold, which pushed every
+// essay below it and left the reader nothing to read. So: one line
+// saying what this is, one strip saying who wrote it, and then the
+// essays, immediately, with the weight of a table of contents.
+// The full biography still lives here, in his own words, further down
+// where someone who wants it will go looking.
 
-// ---- Intro ---------------------------------------------------
-// This is an author's introduction, not a product hero. No giant
-// marketing headline, no stat tiles, no CTA row — those read as a
-// SaaS landing page. Identity on the left, his own prose on the
-// right, and the writing itself starts inside the first screen.
+// ---- Lede ----------------------------------------------------
 
-.intro {
+// The section below supplies its own top rhythm, so the lede adds no
+// bottom padding of its own. Stacking both left a dead band of canvas
+// between the byline and the first essay.
+.lede {
   position: relative;
-  padding: var(--sp-9) 0 var(--sp-8);
+  padding: var(--sp-8) 0 0;
 
   @include phone {
-    padding: var(--sp-7) 0 var(--sp-6);
+    padding: var(--sp-6) 0 0;
   }
 }
 
-.intro__aurora {
+.lede__aurora {
   position: absolute;
-  top: -12rem;
+  top: -14rem;
   left: 0;
   right: 0;
   height: 32rem;
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(40% 46% at 18% 46%, var(--c-ember-glow), transparent 70%),
-    radial-gradient(36% 42% at 74% 30%, var(--c-cyan-wash), transparent 72%);
-  -webkit-mask-image: radial-gradient(70% 65% at 45% 50%, #000 15%, transparent 80%);
-  mask-image: radial-gradient(70% 65% at 45% 50%, #000 15%, transparent 80%);
+    radial-gradient(38% 44% at 22% 52%, var(--c-ember-glow), transparent 70%),
+    radial-gradient(34% 40% at 76% 34%, var(--c-cyan-wash), transparent 72%);
+  -webkit-mask-image: radial-gradient(70% 65% at 45% 55%, #000 15%, transparent 80%);
+  mask-image: radial-gradient(70% 65% at 45% 55%, #000 15%, transparent 80%);
   filter: blur(1.5rem);
   opacity: 0.75;
 }
 
-// The rail and the prose together fill the container exactly. The earlier
-// version capped the prose at 40rem inside a 72rem page, which left a dead
-// right-hand third and made the whole thing read as an unfinished template.
-.intro__grid {
+// Statement left, identity right. Two columns because one column of
+// text in a 72rem page is a column of text with a 30rem hole beside it.
+.lede__grid {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 12rem minmax(0, 1fr);
-  gap: var(--sp-8);
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) 18rem;
+  gap: var(--sp-9);
+  align-items: end;
 
   @include tablet-down {
     grid-template-columns: 1fr;
-    gap: var(--sp-5);
+    gap: var(--sp-6);
   }
 }
 
-.intro__id {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--sp-1);
+// His own sentence, given the weight of a masthead. Not a product
+// claim, not a positioning line: a description of the writing.
+.lede__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tk-tight);
+  color: var(--c-ink);
+  text-wrap: balance;
+}
 
-  // On a phone the identity reads as a byline: photo beside the name,
-  // not a column of its own.
+// ---- Identity ------------------------------------------------
+// A byline card, not a rail: hairline on its inner edge, hugging the
+// baseline of the statement it belongs to. Credentials as one factual
+// sentence rather than stat tiles.
+
+.ident {
+  padding-left: var(--sp-5);
+  border-left: var(--hairline) solid var(--c-hairline);
+
   @include tablet-down {
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
-    flex-wrap: wrap;
-    gap: var(--sp-4);
+    gap: 0 var(--sp-4);
+    padding: var(--sp-5) 0 0;
+    border-left: 0;
+    border-top: var(--hairline) solid var(--c-hairline);
   }
 }
 
-.intro__avatar {
-  width: 4.5rem;
-  height: 4.5rem;
+.ident__avatar {
+  width: 3.25rem;
+  height: 3.25rem;
   margin-bottom: var(--sp-3);
   border-radius: var(--r-full);
 
   img { border-radius: var(--r-full); }
 
   @include tablet-down {
-    width: 3.5rem;
-    height: 3.5rem;
+    grid-row: span 2;
     margin-bottom: 0;
   }
 }
 
-.intro__name {
+.ident__name {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   letter-spacing: var(--tk-tight);
   color: var(--c-ink);
+
+  @include tablet-down { align-self: end; }
 }
 
-.intro__role {
+.ident__role {
   margin: 0 0 var(--sp-3);
   font-family: var(--font-mono);
   font-size: var(--fs-micro);
@@ -99,16 +123,33 @@
   letter-spacing: var(--tk-micro);
   text-transform: uppercase;
   color: var(--c-ember);
+
+  @include tablet-down {
+    margin-bottom: 0;
+    align-self: start;
+  }
 }
 
-// Stacked, so they read as three links and not as one run-on string
-// ("CLIPWISE.AI X LINKEDIN").
-.intro__links {
+.ident__facts {
+  margin: 0 0 var(--sp-4);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--c-muted);
+  text-wrap: pretty;
+
+  a { color: var(--c-cyan); }
+
+  @include tablet-down {
+    grid-column: 1 / -1;
+    margin-top: var(--sp-4);
+  }
+}
+
+.ident__links {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--sp-1);
-  margin-top: var(--sp-3);
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
 
   a {
     display: inline-flex;
@@ -118,6 +159,7 @@
     letter-spacing: var(--tk-micro);
     text-transform: uppercase;
     color: var(--c-faint);
+    transition: color var(--dur-fast) var(--ease);
 
     // "X" is one glyph wide. A thumb is not.
     @include touch {
@@ -128,43 +170,14 @@
     &:hover { color: var(--c-ember); }
   }
 
-  @include tablet-down {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--sp-4);
-    margin-top: 0;
-    width: 100%;
-  }
+  @include tablet-down { grid-column: 1 / -1; }
 }
 
-.intro__body {
-  font-size: var(--fs-body);
-  line-height: 1.7;
-  color: var(--c-ink-soft);
+.ident__links .ident__more {
+  gap: var(--sp-1);
+  color: var(--c-ember);
 
-  p { margin: 0 0 var(--sp-4); }
-
-  a { color: var(--c-cyan); }
-}
-
-.intro__hello {
-  margin: 0 0 var(--sp-5);
-  font-family: var(--font-display);
-  font-size: var(--fs-h1);
-  font-weight: 600;
-  line-height: var(--lh-tight);
-  letter-spacing: -0.028em;
-  color: var(--c-ink);
-}
-
-// The line that says what this site actually is.
-.intro__note {
-  margin: var(--sp-5) 0 0;
-  padding-left: var(--sp-4);
-  border-left: 0.125rem solid var(--c-ember);
-  color: var(--c-muted);
-  font-size: var(--fs-sm);
-  line-height: 1.7;
+  &::after { content: "\2193"; }
 }
 
 // ---- Generic home section ------------------------------------
@@ -173,37 +186,126 @@
   padding: var(--sp-section) 0 0;
 }
 
-// ---- Featured post -------------------------------------------
+// ---- The writing index ---------------------------------------
+// A numbered index, not a stack of cards. The hanging mono numeral is
+// the same device the numbered posts use inside `.prose--numbered`, so
+// the site indexes itself in one voice. Newest is 01 and carries the
+// largest title, which is what a "featured" card was doing before,
+// without repeating the post twice on one page.
 
-.featured {
-  display: block;
-  padding: var(--sp-6);
-
-  @include phone { padding: var(--sp-5); }
+// No top border: the section heading already draws one, and two hairlines
+// a few rem apart read as a mistake rather than a rule.
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.featured__title {
-  margin: var(--sp-2) 0 var(--sp-3);
-  font-family: var(--font-display);
-  font-size: var(--fs-h2);
+.entry {
+  border-bottom: var(--hairline) solid var(--c-hairline);
+}
+
+// Three columns: the index number, the headline, and the summary. It is
+// a table of contents, so it is set like one, and it uses the full width
+// of the page instead of stacking everything into one narrow gutter.
+.entry__link {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: var(--sp-6);
+  align-items: start;
+  padding: var(--sp-6) var(--sp-3);
+  border-radius: var(--r-sm);
+  transition: background-color var(--dur) var(--ease);
+
+  &:hover {
+    background: var(--c-surface);
+
+    .entry__title { color: var(--c-ember); }
+    .entry__num   { color: var(--c-ember); }
+    .entry__go    { opacity: 1; transform: none; }
+  }
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+    padding: var(--sp-5) var(--sp-2);
+  }
+}
+
+.entry__num {
+  padding-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
   font-weight: 600;
-  letter-spacing: var(--tk-tight);
-  line-height: var(--lh-snug);
-  color: var(--c-ink);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tk-micro);
+  color: var(--c-faint);
   transition: color var(--dur-fast) var(--ease);
+
+  // On a phone the gutter would eat a third of the line. The date in
+  // the meta row already tells you where you are.
+  @include tablet-down { display: none; }
 }
 
-.featured:hover .featured__title { color: var(--c-ember); }
+.entry__head,
+.entry__side {
+  display: block;
+  min-width: 0;
+}
 
-.featured__excerpt {
-  margin: 0 0 var(--sp-4);
-  max-width: 42rem;
-  font-size: var(--fs-sm);
-  line-height: 1.7;
+.entry__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
   color: var(--c-muted);
 }
 
-.featured__more {
+.entry__title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tk-tight);
+  color: var(--c-ink);
+  text-wrap: balance;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+// The newest essay is the one you are most likely to want. It gets the
+// size a featured card used to get, in the row it already occupies,
+// rather than being printed twice on one page.
+.entry--lead .entry__title {
+  font-size: var(--fs-title);
+}
+
+.entry--lead .entry__link {
+  padding-top: var(--sp-7);
+  padding-bottom: var(--sp-7);
+
+  @include tablet-down {
+    padding-top: var(--sp-6);
+    padding-bottom: var(--sp-6);
+  }
+}
+
+.entry__excerpt {
+  display: block;
+  margin: 0 0 var(--sp-4);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--c-muted);
+  text-wrap: pretty;
+}
+
+.entry__go {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
@@ -213,13 +315,18 @@
   letter-spacing: var(--tk-micro);
   text-transform: uppercase;
   color: var(--c-ember);
-}
+  opacity: 0;
+  transform: translateX(-0.25rem);
+  transition: opacity var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
 
-.featured__arrow {
-  transition: transform var(--dur) var(--ease);
+  // Hover is not a thing a finger does; on touch the affordance is
+  // simply always there.
+  @include touch {
+    opacity: 1;
+    transform: none;
+  }
 }
-
-.featured:hover .featured__arrow { transform: translateX(0.25rem); }
 
 // ---- Search --------------------------------------------------
 
@@ -292,101 +399,45 @@
   color: var(--c-faint);
 }
 
-// ---- Post index ----------------------------------------------
-// Hairline rows, not boxes. A list of essays should read as a
-// list, and the type should carry it.
+// ---- About ---------------------------------------------------
+// His biography, verbatim, in the place a reader goes looking for it
+// rather than the place that blocks the writing.
 
-.post-index {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: var(--hairline) solid var(--c-hairline);
-}
-
-.post-row {
-  border-bottom: var(--hairline) solid var(--c-hairline);
-}
-
-.post-row__link {
+.about {
   display: grid;
-  grid-template-columns: 8rem 1fr;
-  gap: var(--sp-5);
-  align-items: baseline;
-  padding: var(--sp-5) var(--sp-3);
-  border-radius: var(--r-sm);
-  transition: background-color var(--dur) var(--ease);
-
-  &:hover {
-    background: var(--c-surface);
-
-    .post-row__title { color: var(--c-ember); }
-    .post-row__arrow { opacity: 1; transform: translateX(0); }
-  }
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: var(--sp-9);
+  align-items: start;
 
   @include tablet-down {
     grid-template-columns: 1fr;
-    gap: var(--sp-2);
+    gap: var(--sp-6);
   }
 }
 
-.post-row__date {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
-  white-space: nowrap;
-  padding-top: 0.25rem;
+.about__body {
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--c-ink-soft);
+
+  p { margin: 0 0 var(--sp-4); }
+  p:last-child { margin-bottom: 0; }
+
+  a { color: var(--c-cyan); }
 }
 
-.post-row__body {
-  display: block;
-  min-width: 0;
-}
-
-.post-row__title {
-  display: block;
-  margin: 0 0 var(--sp-2);
+// The line that says what the whole site is for. It was a footnote under
+// the biography; here it is the thing your eye lands on beside it.
+.about__note {
+  margin: 0;
+  padding: 0 0 0 var(--sp-5);
+  border-left: 0.125rem solid var(--c-ember);
   font-family: var(--font-display);
   font-size: var(--fs-h3);
-  font-weight: 600;
-  letter-spacing: var(--tk-tight);
-  line-height: var(--lh-snug);
+  font-style: italic;
+  line-height: 1.5;
   color: var(--c-ink);
-  transition: color var(--dur-fast) var(--ease);
-}
-
-.post-row__excerpt {
-  display: block;
-  margin: 0 0 var(--sp-3);
-  font-size: var(--fs-sm);
-  line-height: 1.65;
-  color: var(--c-muted);
   text-wrap: pretty;
-}
-
-.post-row__meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--sp-3);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
-}
-
-.post-row__arrow {
-  opacity: 0;
-  transform: translateX(-0.25rem);
-  color: var(--c-ember);
-  transition: opacity var(--dur) var(--ease),
-              transform var(--dur) var(--ease);
-
-  @include tablet-down { display: none; }
 }
 
 // ---- Subscribe band ------------------------------------------

@@ -2,79 +2,53 @@
 layout: default
 ---
 
-{% assign featured = site.posts.first %}
+<section class="lede">
+  <div class="lede__aurora" aria-hidden="true"></div>
 
-<section class="intro">
-  <div class="intro__aurora" aria-hidden="true"></div>
+  <div class="container container--home lede__grid">
+    <div class="lede__say">
+      <p class="kicker kicker--ember">Notes from building</p>
 
-  <div class="container container--home intro__grid">
-    <aside class="intro__id">
-      <span class="avatar-ring intro__avatar">
-        <img src="{{ site.baseurl }}/images/prakash.png" alt="Prakash Kumar" width="112" height="112" />
+      <h1 class="lede__title">
+        Insights, learnings and reflections, including the mistakes
+        I&rsquo;ve made along the way.
+      </h1>
+    </div>
+
+    <aside class="ident">
+      <span class="avatar-ring ident__avatar">
+        <img src="{{ site.baseurl }}/images/prakash.png" alt="Prakash Kumar" width="104" height="104" />
       </span>
 
-      <p class="intro__name">Prakash Kumar</p>
-      <p class="intro__role">Founder &amp; CTO</p>
+      <p class="ident__name">Prakash Kumar</p>
+      <p class="ident__role">Founder &amp; CTO</p>
 
-      <div class="intro__links">
-        <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>
+      <p class="ident__facts">
+        Building <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>.
+        Previously Rheo TV, acquired by Unacademy, and Relevel, scaled to $10M ARR.
+      </p>
+
+      <div class="ident__links">
+        <a class="ident__more" href="#about">Full story</a>
         <a href="https://x.com/{{ site.footer-links.twitter }}" target="_blank" rel="noopener noreferrer">X</a>
         <a href="https://www.linkedin.com/in/{{ site.footer-links.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </aside>
-
-    <div class="intro__body">
-      <h1 class="intro__hello">Hey, welcome.</h1>
-
-      <p>My name is Prakash Kumar. I’m currently building <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>.</p>
-
-      <p>I’m a tech entrepreneur with a deep love for coding and building products from first principles. Previously, I co-founded Rheo TV and Relevel.</p>
-
-      <p>At Rheo TV, we built cutting-edge distributed live-streaming systems. We raised funding from top investors including Sequoia’s Surge and Lightspeed Ventures, and the company was eventually acquired by Unacademy.</p>
-
-      <p>Post-acquisition, I co-founded Relevel with Unacademy, where I built the product and tech organization from the ground up. Over time, we grew the team to 40+ people and scaled the business to $10M in ARR before my departure.</p>
-
-      <p class="intro__note">I write these blogs as my public notes: insights, learnings, and reflections, including the mistakes I’ve made along the way.</p>
-    </div>
   </div>
 </section>
-
-{% if featured %}
-<section class="section" aria-labelledby="latest-head">
-  <div class="container container--home">
-    <div class="section-head">
-      <h2 class="section-head__title" id="latest-head">Latest</h2>
-      <span class="section-head__count">{{ featured.date | date: "%B %Y" }}</span>
-    </div>
-
-    <a class="card featured reveal" href="{{ site.baseurl }}{{ featured.url }}">
-      <p class="kicker">
-        {% if featured.categories.size > 0 %}{{ featured.categories.first }}<span class="kicker__dot"></span>{% endif %}
-        {{ featured.content | number_of_words | divided_by: 200 | plus: 1 }} min read
-      </p>
-
-      <h3 class="featured__title">{{ featured.title }}</h3>
-
-      <p class="featured__excerpt">{{ featured.excerpt | strip_html | strip | truncate: 220 }}</p>
-
-      <span class="featured__more">
-        Read essay
-        <svg class="featured__arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </span>
-    </a>
-  </div>
-</section>
-{% endif %}
 
 <section class="section" id="writing" aria-labelledby="writing-head">
   <div class="container container--home">
     <div class="section-head">
-      <h2 class="section-head__title" id="writing-head">All posts</h2>
-      <span class="section-head__count">{{ site.posts | size }} essays</span>
+      <h2 class="section-head__title" id="writing-head">Writing</h2>
+      <span class="section-head__count">{{ site.posts | size }} {% if site.posts.size == 1 %}essay{% else %}essays{% endif %}</span>
     </div>
 
+    {% comment %}
+      Search earns its place once the list is long enough to get lost in.
+      Below that it is a box that says "template".
+    {% endcomment %}
+    {% if site.posts.size > 6 %}
     <div class="search">
       <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14"/>
@@ -84,30 +58,45 @@ layout: default
       <span class="search__hint">/</span>
       <div class="search__results" id="search-results"></div>
     </div>
+    {% endif %}
 
-    <ul class="post-index">
+    <ol class="entries">
       {% for post in paginator.posts %}
-        {% if paginator.page == 1 and post.url == featured.url %}{% continue %}{% endif %}
-        <li class="post-row reveal">
-          <a class="post-row__link" href="{{ site.baseurl }}{{ post.url }}">
-            <span class="post-row__date">{{ post.date | date: "%b %e, %Y" }}</span>
+        {% comment %} Index numbers keep counting across pages, so 01 is always the newest. {% endcomment %}
+        {% assign seen = paginator.page | minus: 1 | times: paginator.per_page %}
+        {% assign n = seen | plus: forloop.index %}
+        <li class="entry reveal{% if paginator.page == 1 and forloop.first %} entry--lead{% endif %}">
+          <a class="entry__link" href="{{ site.baseurl }}{{ post.url }}">
+            <span class="entry__num" aria-hidden="true">{{ n | prepend: '0' | slice: -2, 2 }}</span>
 
-            <span class="post-row__body">
-              <span class="post-row__title">{{ post.title }}</span>
-              <span class="post-row__excerpt">{{ post.excerpt | strip_html | strip | truncate: 165 }}</span>
-
-              <span class="post-row__meta">
-                <span>{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
-                {% for category in post.categories limit: 2 %}
-                  <span class="kicker__dot"></span>
+            <span class="entry__head">
+              <span class="entry__meta">
+                {% for category in post.categories limit: 1 %}
                   <span>{{ category }}</span>
+                  <span class="kicker__dot"></span>
                 {% endfor %}
+                <span>{{ post.date | date: "%b %Y" }}</span>
+                <span class="kicker__dot"></span>
+                <span>{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+              </span>
+
+              <span class="entry__title">{{ post.title }}</span>
+            </span>
+
+            <span class="entry__side">
+              <span class="entry__excerpt">{{ post.excerpt | strip_html | strip | truncate: 220 }}</span>
+
+              <span class="entry__go">
+                Read
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </span>
             </span>
           </a>
         </li>
       {% endfor %}
-    </ul>
+    </ol>
 
     {% if paginator.total_pages > 1 %}
     <nav class="pagination" aria-label="Pagination">
@@ -137,6 +126,32 @@ layout: default
   </div>
 </section>
 
+<section class="section" id="about" aria-labelledby="about-head">
+  <div class="container container--home">
+    <div class="section-head">
+      <h2 class="section-head__title" id="about-head">About</h2>
+      <span class="section-head__count">Prakash Kumar</span>
+    </div>
+
+    <div class="about reveal">
+      <div class="about__body">
+        <p>My name is Prakash Kumar. I&rsquo;m currently building <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>.</p>
+
+        <p>I&rsquo;m a tech entrepreneur with a deep love for coding and building products from first principles. Previously, I co-founded Rheo TV and Relevel.</p>
+
+        <p>At Rheo TV, we built cutting-edge distributed live-streaming systems. We raised funding from top investors including Sequoia&rsquo;s Surge and Lightspeed Ventures, and the company was eventually acquired by Unacademy.</p>
+
+        <p>Post-acquisition, I co-founded Relevel with Unacademy, where I built the product and tech organization from the ground up. Over time, we grew the team to 40+ people and scaled the business to $10M in ARR before my departure.</p>
+      </div>
+
+      <blockquote class="about__note">
+        I write these blogs as my public notes: insights, learnings, and
+        reflections, including the mistakes I&rsquo;ve made along the way.
+      </blockquote>
+    </div>
+  </div>
+</section>
+
 <section class="container container--home">
   <div class="band reveal">
     <h2 class="band__title">Get the next one by email</h2>
@@ -148,6 +163,7 @@ layout: default
   </div>
 </section>
 
+{% if site.posts.size > 6 %}
 <script src="{{ site.baseurl }}/assets/simple-jekyll-search.min.js"></script>
 <script>
   window.SimpleJekyllSearch({
@@ -160,3 +176,4 @@ layout: default
     limit: 6
   });
 </script>
+{% endif %}

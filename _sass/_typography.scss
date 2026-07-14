@@ -37,7 +37,7 @@ hr {
   font-size: var(--fs-display);
   font-weight: 600;
   line-height: var(--lh-tight);
-  letter-spacing: -0.03em;
+  letter-spacing: var(--tk-tight);
   text-wrap: balance;
 }
 
