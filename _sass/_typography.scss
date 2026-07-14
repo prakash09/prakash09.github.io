@@ -150,6 +150,20 @@ hr {
     }
   }
 
+  // A button that happens to sit inside prose is still a button, not a
+  // link in a sentence: no cyan, no underline creeping under it.
+  a.btn {
+    background-image: none;
+    color: var(--c-ink);
+
+    &:hover { color: var(--c-ink); }
+  }
+
+  a.btn--primary,
+  a.btn--primary:hover {
+    color: var(--c-canvas);
+  }
+
   // ---- Lists ------------------------------------------------
   ul, ol {
     margin: 0 0 var(--sp-5);

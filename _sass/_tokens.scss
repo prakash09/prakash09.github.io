@@ -68,7 +68,7 @@
   // Post titles. Deliberately below --fs-h1: a headline that fills three
   // lines before the reader reaches a single word of the essay is not a
   // headline, it is an obstacle.
-  --fs-title:   clamp(1.875rem, 1.5rem + 1.5vw, 2.5rem);
+  --fs-title:   clamp(1.625rem, 1.4rem + 1vw, 2.125rem);
   --fs-h2:      clamp(1.5rem, 1.35rem + 0.7vw, 1.875rem);
   --fs-h3:      clamp(1.25rem, 1.18rem + 0.35vw, 1.4rem);
   --fs-lead:    clamp(1.1875rem, 1.11rem + 0.35vw, 1.375rem);

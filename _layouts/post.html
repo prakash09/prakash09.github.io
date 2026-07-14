@@ -8,36 +8,33 @@ layout: default
 <article class="post">
   <div class="post__grid">
     <div class="post__main">
+    {% comment %}
+      The headline leads. Everything the header knows about itself —
+      author, date, category, length — is one quiet mono line below the
+      deck, so the reader meets the essay before its apparatus.
+    {% endcomment %}
     <header class="post__header">
-      <p class="kicker kicker--ember">
-        {% if page.categories.size > 0 %}
-          {{ page.categories.first }}
-          <span class="kicker__dot"></span>
-        {% endif %}
-        {{ minutes }} min read
-      </p>
-
       <h1 class="post__title">{{ page.title }}</h1>
 
       {% if page.description and page.description != "" %}
         <p class="post__deck">{{ page.description }}</p>
       {% endif %}
 
-      <div class="post__byline">
-        <span class="avatar-ring post__avatar">
-          <img src="{{ site.baseurl }}/images/prakash.png" alt="" width="36" height="36" loading="lazy" />
-        </span>
-
-        <span class="post__byline-text">
-          <span class="post__author">{{ site.author }}</span>
-          <span class="post__dates">
-            {{ page.date | date: "%B %e, %Y" }}
-            {% if page.last_modified_at %}
-              <span class="post__updated">&middot; Updated {{ page.last_modified_at | date: "%b %-d, %Y" }}</span>
-            {% endif %}
-          </span>
-        </span>
-      </div>
+      <p class="post__meta">
+        <span class="post__author">{{ site.author }}</span>
+        <span class="kicker__dot"></span>
+        <span>{{ page.date | date: "%B %-d, %Y" }}</span>
+        {% if page.categories.size > 0 %}
+          <span class="kicker__dot"></span>
+          <span>{{ page.categories.first }}</span>
+        {% endif %}
+        <span class="kicker__dot"></span>
+        <span>{{ minutes }} min read</span>
+        {% if page.last_modified_at %}
+          <span class="kicker__dot"></span>
+          <span class="post__updated">Updated {{ page.last_modified_at | date: "%b %-d, %Y" }}</span>
+        {% endif %}
+      </p>
     </header>
 
     <div class="post__body prose{% if page.prose_style %} prose--{{ page.prose_style }}{% endif %}" id="postBody">

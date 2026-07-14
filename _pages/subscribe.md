@@ -41,13 +41,19 @@ description: "Long-form notes on building companies and the products inside them
   </form>
 
   <div class="subscribe__success" id="subscribeSuccess" role="status">
-    <div>
-      <h2 class="subscribe__success-title">You're on the list.</h2>
-      <p class="subscribe__success-body">
-        The next essay will land in your inbox. In the meantime, there's
-        <a href="{{ site.baseurl }}/categories/">an archive to work through</a>.
-      </p>
-    </div>
+    <span class="subscribe__check" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+
+    <h2 class="subscribe__success-title">You&rsquo;re on the list.</h2>
+
+    <p class="subscribe__success-body">
+      The next essay will land in your inbox. In the meantime, the archive is open.
+    </p>
+
+    <a class="btn btn--ghost" href="{{ site.baseurl }}/categories/">Browse the archive</a>
   </div>
 
   <iframe class="subscribe__sink" name="subscribeSink" id="subscribeSink" title="Form target" tabindex="-1" aria-hidden="true"></iframe>
