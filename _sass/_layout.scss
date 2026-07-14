@@ -1,0 +1,353 @@
+// ============================================================
+// LAYOUT — masthead, scroll progress, main, footer
+// ============================================================
+
+.page-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1 0 auto;
+  position: relative;
+  z-index: 2;
+  padding-bottom: var(--sp-section);
+}
+
+// ============================================================
+// MASTHEAD
+// ============================================================
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  background: rgba(11, 12, 14, 0.72);
+  -webkit-backdrop-filter: saturate(1.6) blur(0.75rem);
+  backdrop-filter: saturate(1.6) blur(0.75rem);
+  border-bottom: var(--hairline) solid transparent;
+  transition: border-color var(--dur) var(--ease),
+              background-color var(--dur) var(--ease);
+
+  // Set by JS once the page scrolls: the bar earns its edge only
+  // when there is content behind it.
+  &.is-stuck {
+    border-bottom-color: var(--c-hairline);
+    background: rgba(11, 12, 14, 0.88);
+  }
+}
+
+.masthead__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  height: var(--nav-h);
+}
+
+.masthead__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-width: 0;
+
+  &:hover .masthead__wordmark { color: var(--c-ink); }
+}
+
+.masthead__avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.masthead__id { min-width: 0; }
+
+.masthead__wordmark {
+  display: block;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  line-height: 1.2;
+  color: var(--c-ink);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.masthead__tagline {
+  display: block;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+  white-space: nowrap;
+
+  @include phone { display: none; }
+}
+
+// ---- Nav -----------------------------------------------------
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+
+  @include phone { display: none; }
+}
+
+.nav__link {
+  position: relative;
+  padding: var(--sp-2) 0;
+  color: var(--c-muted);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition: color var(--dur-fast) var(--ease);
+
+  // Underline wipes in from the left.
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0.0625rem;
+    background: var(--c-ember);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease);
+  }
+
+  &:hover {
+    color: var(--c-ink);
+
+    &::after { transform: scaleX(1); }
+  }
+
+  &.is-active {
+    color: var(--c-ink);
+
+    &::after { transform: scaleX(1); }
+  }
+}
+
+// ---- Mobile menu ---------------------------------------------
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--c-ink);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease);
+
+  &:hover { border-color: var(--c-hairline-hi); }
+
+  @include phone { display: inline-flex; }
+}
+
+.nav-toggle__bar {
+  position: relative;
+  display: block;
+  width: 1rem;
+  height: 0.0625rem;
+  background: currentColor;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 1rem;
+    height: 0.0625rem;
+    background: currentColor;
+    transition: transform var(--dur) var(--ease);
+  }
+
+  &::before { top: -0.3125rem; }
+  &::after  { top: 0.3125rem; }
+}
+
+[aria-expanded="true"] .nav-toggle__bar {
+  background: transparent;
+
+  &::before { transform: translateY(0.3125rem) rotate(45deg); }
+  &::after  { transform: translateY(-0.3125rem) rotate(-45deg); }
+}
+
+.nav-sheet {
+  display: none;
+  border-top: var(--hairline) solid var(--c-hairline);
+  background: var(--c-canvas);
+
+  &.is-open {
+    @include phone { display: block; }
+  }
+}
+
+.nav-sheet__link {
+  display: block;
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: var(--hairline) solid var(--c-hairline);
+  color: var(--c-ink);
+  font-size: var(--fs-body);
+  font-weight: 500;
+
+  &:last-child { border-bottom: 0; }
+  &:hover { color: var(--c-ember); background: var(--c-surface); }
+}
+
+// ---- Scroll progress -----------------------------------------
+// Pinned to the masthead's bottom edge. scaleX only — this can
+// never trigger layout.
+
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--hairline) * -1);
+  height: 0.125rem;
+  background: var(--grad-signature);
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
+// ============================================================
+// FOOTER
+// ============================================================
+
+.footer {
+  position: relative;
+  flex: 0 0 auto;
+  margin-top: auto;
+  padding: var(--sp-9) 0 var(--sp-7);
+  border-top: var(--hairline) solid var(--c-hairline);
+  background: var(--c-canvas-sunk);
+  overflow: hidden;
+
+  // Hairline grid — the third and last texture on the site.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image:
+      linear-gradient(var(--c-ink) var(--hairline), transparent var(--hairline)),
+      linear-gradient(90deg, var(--c-ink) var(--hairline), transparent var(--hairline));
+    background-size: 3rem 3rem;
+    -webkit-mask-image: radial-gradient(ellipse 60% 100% at 50% 0%, #000, transparent 75%);
+    mask-image: radial-gradient(ellipse 60% 100% at 50% 0%, #000, transparent 75%);
+  }
+}
+
+.footer__inner {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-6);
+
+  @include phone {
+    flex-direction: column;
+    gap: var(--sp-6);
+  }
+}
+
+.footer__brand {
+  max-width: 22rem;
+}
+
+.footer__name {
+  margin: 0 0 var(--sp-2);
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  color: var(--c-ink);
+}
+
+.footer__blurb {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--c-muted);
+}
+
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.footer__nav-link {
+  color: var(--c-muted);
+  font-size: var(--fs-sm);
+
+  &:hover { color: var(--c-ink); }
+}
+
+.footer__social {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-sm);
+  color: var(--c-muted);
+  transition: color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
+
+  svg {
+    width: 1.0625rem;
+    height: 1.0625rem;
+    fill: currentColor;
+  }
+
+  &:hover {
+    color: var(--c-ember);
+    border-color: var(--c-ember-ring);
+    background: var(--c-ember-wash);
+    transform: translateY(-0.0625rem);
+  }
+}
+
+.footer__meta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-5);
+  border-top: var(--hairline) solid var(--c-hairline);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+
+  @include phone {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-3);
+  }
+}

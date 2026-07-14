@@ -98,3 +98,6 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+  - vendor
+  - .jekyll-cache
+  - DESIGN_SYSTEM.md

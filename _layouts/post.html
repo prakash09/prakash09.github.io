@@ -2,38 +2,116 @@
 layout: default
 ---
 
-<article class="post detailed{% if page.typography %} font-{{ page.typography }}{% endif %}">
-  <h1>{{ page.title }}</h1>
+{% assign words = page.content | number_of_words %}
+{% assign minutes = words | divided_by: 200 | plus: 1 %}
 
-  <div>
-    <p class="author_title">{{site.author}}  ·  {{ page.date | date: "%B %e, %Y" }}</p>
-    {% if page.last_modified_at %}
-    <p class="author_title" datetime="{{ page.last_modified_at | date_to_xmlschema }}">(Updated: {{ page.last_modified_at | date: "%b %-d, %Y" }})</p>
-    {% endif %}
-    <div class="post-tags">
-      {% if post %}
-        {% assign categories = post.categories %}
-      {% else %}
-        {% assign categories = page.categories %}
+<article class="post">
+  <div class="post__grid">
+    <div class="post__main">
+    <header class="post__header">
+      <p class="kicker kicker--ember">
+        {% if page.categories.size > 0 %}
+          {{ page.categories.first }}
+          <span class="kicker__dot"></span>
+        {% endif %}
+        {{ minutes }} min read
+      </p>
+
+      <h1 class="post__title">{{ page.title }}</h1>
+
+      {% if page.description and page.description != "" %}
+        <p class="post__deck">{{ page.description }}</p>
       {% endif %}
-      {% for category in categories %}
-        <a href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
-        {% unless forloop.last %}&nbsp;{% endunless %}
-      {% endfor %}
+
+      <div class="post__byline">
+        <span class="avatar-ring post__avatar">
+          <img src="{{ site.baseurl }}{{ site.avatar }}" alt="" width="36" height="36" />
+        </span>
+
+        <span class="post__byline-text">
+          <span class="post__author">{{ site.author }}</span>
+          <span class="post__dates">
+            {{ page.date | date: "%B %e, %Y" }}
+            {% if page.last_modified_at %}
+              <span class="post__updated">&middot; Updated {{ page.last_modified_at | date: "%b %-d, %Y" }}</span>
+            {% endif %}
+          </span>
+        </span>
+      </div>
+    </header>
+
+    <div class="post__body prose" id="postBody">
+      {{ content }}
     </div>
-  </div>
-    
-  <div class="entry">
-    {{ content }}
+
+    <footer class="post__footer">
+      {% if page.categories.size > 0 %}
+        <div class="post__tags chip-row">
+          {% for category in page.categories %}
+            <a class="chip" href="{{ site.baseurl }}/categories/#{{ category | slugize }}">{{ category }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="share">
+        <span class="share__label">Share</span>
+
+        <a class="btn btn--sm" href="https://x.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url }}" target="_blank" rel="noopener noreferrer">
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X
+        </a>
+
+        <a class="btn btn--sm" href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank" rel="noopener noreferrer">
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13M7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg>
+          LinkedIn
+        </a>
+
+        <button class="btn btn--sm" type="button" id="copyLink" data-url="{{ site.url }}{{ page.url }}">
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5" stroke-linecap="round"/>
+            <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5" stroke-linecap="round"/>
+          </svg>
+          Copy link
+        </button>
+      </div>
+
+      {% if page.previous or page.next %}
+        <nav class="post-nav" aria-label="More posts">
+          {% if page.previous %}
+            <a class="post-nav__link" href="{{ site.baseurl }}{{ page.previous.url }}">
+              <span class="post-nav__dir">&larr; Previous</span>
+              <span class="post-nav__title">{{ page.previous.title }}</span>
+            </a>
+          {% else %}
+            <span></span>
+          {% endif %}
+
+          {% if page.next %}
+            <a class="post-nav__link post-nav__link--next" href="{{ site.baseurl }}{{ page.next.url }}">
+              <span class="post-nav__dir">Next &rarr;</span>
+              <span class="post-nav__title">{{ page.next.title }}</span>
+            </a>
+          {% endif %}
+        </nav>
+      {% endif %}
+
+      <div class="band">
+        <h2 class="band__title">Get the next one by email</h2>
+        <p class="band__body">
+          Long-form notes on building companies and the products inside them. No spam,
+          unsubscribe whenever.
+        </p>
+        <a class="btn btn--primary" href="{{ site.baseurl }}/subscribe/">Subscribe</a>
+      </div>
+    </footer>
+    </div>
+
+    <aside class="toc" id="toc" hidden>
+      <p class="toc__label">On this page</p>
+    </aside>
   </div>
 
-  <div>
-    <p><span class="share-box">Share:</span> <a href="http://twitter.com/share?text={{ page.title }}&url={{site.url}}{{page.url}}" target="_blank">Twitter</a>, <a href="https://www.facebook.com/sharer.php?u={{site.url}}{{page.url}}" target="_blank">Facebook</a></p>
-  </div>
-
-  <!--<div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
-  </div>-->
+  <div class="copied" id="copied" role="status">Link copied</div>
 
   {% include disqus.html %}
 </article>

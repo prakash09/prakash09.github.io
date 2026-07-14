@@ -1,24 +1,33 @@
 ---
 layout: page
 permalink: /categories/
-title: Categories
+title: Writing
+kicker: Archive
+description: Everything I've published, grouped by what it's about.
+wide: true
 ---
 
-
-<div id="archives">
+<div class="archive">
 {% for category in site.categories %}
-  <div class="archive-group">
-    {% capture category_name %}{{ category | first }}{% endcapture %}
-    <div id="#{{ category_name | slugize }}"></div>
-    <p></p>
-    
-    <h3 class="category-head">{{ category_name }}</h3>
-    <a name="{{ category_name | slugize }}"></a>
-    {% for post in site.categories[category_name] %}
-    <article class="archive-item">
-      <h4><a href="{{ site.baseurl }}{{ post.url }}">{% if post.title and post.title != "" %}{{post.title}}{% else %}{{post.excerpt |strip_html}}{%endif%}</a></h4>
-    </article>
-    {% endfor %}
-  </div>
+  {% assign category_name = category | first %}
+  {% assign posts = site.categories[category_name] %}
+
+  <section class="archive-group" id="{{ category_name | slugize }}">
+    <div class="section-head">
+      <h2 class="section-head__title">{{ category_name }}</h2>
+      <span class="section-head__count">{{ posts | size }} {% if posts.size == 1 %}post{% else %}posts{% endif %}</span>
+    </div>
+
+    <ul class="archive-list">
+      {% for post in posts %}
+        <li class="archive-item">
+          <a class="archive-link" href="{{ site.baseurl }}{{ post.url }}">
+            <span class="archive-title">{% if post.title and post.title != "" %}{{ post.title }}{% else %}{{ post.excerpt | strip_html | truncate: 80 }}{% endif %}</span>
+            <span class="archive-date">{{ post.date | date: "%b %e, %Y" }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
 {% endfor %}
 </div>

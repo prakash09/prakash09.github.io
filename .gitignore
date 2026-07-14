@@ -10,3 +10,7 @@ package.json
 *.gem
 *.gemspec
 .jekyll-cache
+
+# Local Jekyll dev
+vendor/
+.bundle/

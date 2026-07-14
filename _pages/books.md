@@ -1,43 +1,12 @@
 ---
 layout: page
 permalink: /books/
+title: Books
+kicker: Shelf
+description: What I've been reading. Pulled live from Goodreads.
+wide: true
 ---
-<style type="text/css" media="screen">
-   .gr_grid_container {
-   display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(98px, 1fr));
-   gap: 16px;
-   padding: 8px;
-   }
 
-   @media screen and (max-width: 375px) {
-     .gr_grid_container {
-       grid-template-columns: repeat(2, 1fr);
-       gap: 12px;
-     }
-   }
-
-   @media screen and (min-width: 376px) and (max-width: 640px) {
-     .gr_grid_container {
-       grid-template-columns: repeat(3, 1fr);
-       gap: 14px;
-     }
-   }
-
-   .gr_grid_book_container {
-   aspect-ratio: 98 / 160;
-   overflow: hidden;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   }
-
-   .gr_grid_book_container img {
-     width: 100%;
-     height: 100%;
-     object-fit: cover;
-   }
-</style>
 <div id="gr_grid_widget_1659774806">
    <!-- Show static html as a placeholder in case js is not enabled - javascript include will override this if things work -->
    <div class="gr_grid_container">

@@ -2,85 +2,228 @@
 layout: default
 ---
 
+{% assign featured = site.posts.first %}
+
 <section class="hero">
-  <div class="hero-content">
-    <h1 class="hero-title">Hey, welcome.</h1>
+  <div class="hero__aurora" aria-hidden="true"></div>
 
-    <div id="intro" class="intro-text is-collapsed">
-      <p>My name is Prakash Kumar. I’m currently building <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a> and <a href="https://videocompany.ai" target="_blank" rel="noopener noreferrer">VideoCompany.ai</a>.</p>
-      <p>I’m a tech entrepreneur with a deep love for coding and building products from first principles. Previously, I co-founded Rheo TV and Relevel.</p>
-      <p>At Rheo TV, we built cutting-edge distributed live-streaming systems. We raised funding from top investors including Sequoia’s Surge and Lightspeed Ventures, and the company was eventually acquired by Unacademy.</p>
-      <p>Post-acquisition, I co-founded Relevel with Unacademy, where I built the product and tech organization from the ground up. Over time, we grew the team to 40+ people and scaled the business to $10M in ARR before my departure.</p>
-      <p>I write these blogs as my public notes—insights, learnings, and reflections, including the mistakes I’ve made along the way.</p>
+  <div class="container container--wide hero__grid">
+    <div class="hero__content">
+      <p class="kicker kicker--ember">
+        Prakash Kumar
+        <span class="kicker__dot"></span>
+        Founder &amp; CTO
+      </p>
+
+      <h1 class="hero__title">
+        I build video infrastructure, and write down what it <span class="hero__mark">actually costs</span>.
+      </h1>
+
+      <p class="hero__lead">
+        Two companies in, one exit, one scale-up. These are my public notes on the
+        engineering, the org, and the decisions I got wrong — currently while building
+        <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>.
+      </p>
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#writing">Read the writing</a>
+        <a class="btn btn--ghost" href="{{ site.baseurl }}/subscribe/">Subscribe</a>
+      </div>
     </div>
 
-    <button id="introToggle" class="intro-toggle" type="button" aria-expanded="false" aria-controls="intro">
-      View more
-    </button>
+    <div class="creds">
+      <p class="creds__label">The record</p>
 
-    <div class="hero-cta">
-      <a class="button primary" href="javascript: scrollToPost();">Read posts</a>
-      <a class="button" href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>
-      <a class="button" href="https://videocompany.ai" target="_blank" rel="noopener noreferrer">VideoCompany.ai</a>
+      <div class="cred">
+        <span class="cred__label">Exit</span>
+        <span class="cred__value">Rheo TV</span>
+        <span class="cred__note">Distributed live-streaming. Backed by Sequoia&rsquo;s Surge and Lightspeed. Acquired by Unacademy.</span>
+      </div>
+
+      <div class="cred">
+        <span class="cred__label">Scale</span>
+        <span class="cred__value">Relevel</span>
+        <span class="cred__note">Co-founded with Unacademy. Built product and engineering from zero to 40+ people and $10M ARR.</span>
+      </div>
+
+      <div class="cred">
+        <span class="cred__label">Now</span>
+        <span class="cred__value">Clipwise.ai</span>
+        <span class="cred__note">
+          AI video generation, end to end.
+          <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">clipwise.ai</a>
+        </span>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="new_section">
-  <h3 id="all_posts">All Posts</h3>
+{% if featured %}
+<section class="section" aria-labelledby="latest-head">
+  <div class="container container--wide">
+    <div class="section-head">
+      <h2 class="section-head__title" id="latest-head">Latest</h2>
+      <span class="section-head__count">{{ featured.date | date: "%B %Y" }}</span>
+    </div>
+
+    <a class="card featured reveal" href="{{ site.baseurl }}{{ featured.url }}">
+      <p class="kicker">
+        {% if featured.categories.size > 0 %}{{ featured.categories.first }}<span class="kicker__dot"></span>{% endif %}
+        {{ featured.content | number_of_words | divided_by: 200 | plus: 1 }} min read
+      </p>
+
+      <h3 class="featured__title">{{ featured.title }}</h3>
+
+      <p class="featured__excerpt">{{ featured.excerpt | strip_html | strip | truncate: 220 }}</p>
+
+      <span class="featured__more">
+        Read essay
+        <svg class="featured__arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </a>
+  </div>
 </section>
+{% endif %}
 
-<section class="posts posts-home">
-  <ul class="post-list">
-    {% for post in paginator.posts %}
-    <li class="post-card">
-      <a class="post-card-link" href="{{ site.baseurl }}{{ post.url }}">
-        <h2 class="post-card-title">{{ post.title }}</h2>
-        <p class="post-card-meta">{{ post.date | date: "%B %e, %Y" }}</p>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
+<section class="section" id="writing" aria-labelledby="writing-head">
+  <div class="container container--wide">
+    <div class="section-head">
+      <h2 class="section-head__title" id="writing-head">All posts</h2>
+      <span class="section-head__count">{{ site.posts | size }} essays</span>
+    </div>
 
-  <!-- pagination -->
-  {% if paginator.total_pages > 1 %}
-  <div class="pagination">
-    {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
-    {% else %}
-      <span>&laquo; Prev</span>
-    {% endif %}
+    <div class="search">
+      <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14"/>
+      </svg>
+      <label class="sr-only" for="search-input">Search posts</label>
+      <input class="field__input search__input" type="search" id="search-input" placeholder="Search posts…" autocomplete="off">
+      <span class="search__hint">/</span>
+      <div class="search__results" id="search-results"></div>
+    </div>
 
-    {% for page in (1..paginator.total_pages) %}
-      {% if page == paginator.page %}
-        <span class="webjeda">{{ page }}</span>
-      {% elsif page == 1 %}
-        <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+    <ul class="post-index">
+      {% for post in paginator.posts %}
+        {% if paginator.page == 1 and post.url == featured.url %}{% continue %}{% endif %}
+        <li class="post-row reveal">
+          <a class="post-row__link" href="{{ site.baseurl }}{{ post.url }}">
+            <span class="post-row__date">{{ post.date | date: "%b %e, %Y" }}</span>
+
+            <span class="post-row__body">
+              <span class="post-row__title">{{ post.title }}</span>
+              <span class="post-row__excerpt">{{ post.excerpt | strip_html | strip | truncate: 165 }}</span>
+
+              <span class="post-row__meta">
+                <span>{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+                {% for category in post.categories limit: 2 %}
+                  <span class="kicker__dot"></span>
+                  <span>{{ category }}</span>
+                {% endfor %}
+              </span>
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if paginator.total_pages > 1 %}
+    <nav class="pagination" aria-label="Pagination">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Previous page">&larr;</a>
       {% else %}
-        <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+        <span class="is-disabled" aria-hidden="true">&larr;</span>
       {% endif %}
-    {% endfor %}
 
-    {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
-    {% else %}
-      <span>Next &raquo;</span>
+      {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+          <span class="is-current" aria-current="page">{{ page }}</span>
+        {% elsif page == 1 %}
+          <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+        {% else %}
+          <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" aria-label="Next page">&rarr;</a>
+      {% else %}
+        <span class="is-disabled" aria-hidden="true">&rarr;</span>
+      {% endif %}
+    </nav>
     {% endif %}
   </div>
-  {% endif %}
 </section>
 
-<script>
-  (function () {
-    var intro = document.getElementById("intro");
-    var toggle = document.getElementById("introToggle");
-    if (!intro || !toggle) return;
+<section class="section" aria-labelledby="background-head">
+  <div class="container container--wide">
+    <div class="section-head">
+      <h2 class="section-head__title" id="background-head">Background</h2>
+      <span class="section-head__count">2014 &rarr; now</span>
+    </div>
 
-    toggle.addEventListener("click", function () {
-      var isCollapsed = intro.classList.contains("is-collapsed");
-      intro.classList.toggle("is-collapsed", !isCollapsed);
-      toggle.setAttribute("aria-expanded", String(isCollapsed));
-      toggle.textContent = isCollapsed ? "View less" : "View more";
-    });
-  })();
+    <ol class="timeline">
+      <li class="timeline__item timeline__item--now reveal">
+        <span class="timeline__when">Now</span>
+        <h3 class="timeline__what">Clipwise.ai</h3>
+        <p class="timeline__body">
+          Building AI video generation end to end — the model orchestration, the render
+          pipeline, and the product on top of it. Back to writing code every day.
+        </p>
+      </li>
+
+      <li class="timeline__item reveal">
+        <span class="timeline__when">Relevel &middot; Unacademy</span>
+        <h3 class="timeline__what">Co-founder &amp; CTO</h3>
+        <p class="timeline__body">
+          Co-founded Relevel with Unacademy post-acquisition. Built the product and
+          engineering organisation from the ground up, grew the team past 40 people, and
+          scaled the business to $10M ARR before leaving.
+        </p>
+      </li>
+
+      <li class="timeline__item reveal">
+        <span class="timeline__when">Rheo TV &rarr; Acquired</span>
+        <h3 class="timeline__what">Co-founder</h3>
+        <p class="timeline__body">
+          Built cutting-edge distributed live-streaming systems. Raised from Sequoia&rsquo;s
+          Surge and Lightspeed Ventures. Acquired by Unacademy.
+        </p>
+      </li>
+
+      <li class="timeline__item reveal">
+        <span class="timeline__when">Before that</span>
+        <h3 class="timeline__what">Engineer, first and still</h3>
+        <p class="timeline__body">
+          A deep love for coding and for building products from first principles. That has
+          not changed across any of the titles above.
+        </p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="container container--wide">
+  <div class="band reveal">
+    <h2 class="band__title">Get the next one by email</h2>
+    <p class="band__body">
+      Occasional, long-form, and written from inside the work — not a newsletter treadmill.
+      No spam, unsubscribe whenever.
+    </p>
+    <a class="btn btn--primary" href="{{ site.baseurl }}/subscribe/">Subscribe</a>
+  </div>
+</section>
+
+<script src="{{ site.baseurl }}/assets/simple-jekyll-search.min.js"></script>
+<script>
+  window.SimpleJekyllSearch({
+    searchInput: document.getElementById("search-input"),
+    resultsContainer: document.getElementById("search-results"),
+    json: "{{ site.baseurl }}/search.json",
+    searchResultTemplate:
+      '<a class="search__result" href="{url}"><span class="search__result-date">{date}</span>{title}</a>',
+    noResultsText: '<p class="muted">No posts matched.</p>',
+    limit: 6
+  });
 </script>

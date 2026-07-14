@@ -1,0 +1,331 @@
+// ============================================================
+// TYPOGRAPHY — headings + the long-form `.prose` contract
+// ============================================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--c-ink);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tk-tight);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: 1.125rem; }
+
+p { margin: 0 0 var(--sp-5); }
+
+strong, b { font-weight: 600; color: var(--c-ink); }
+em, i     { font-style: italic; }
+
+small { font-size: var(--fs-sm); }
+
+hr {
+  height: var(--hairline);
+  margin: var(--sp-8) 0;
+  border: 0;
+  background: var(--c-hairline);
+}
+
+// ---- Display + kicker ---------------------------------------
+
+.display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+// The mono kicker is the site's connective tissue: it labels
+// every section, date and category in the same voice.
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 0 0 var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.kicker--ember { color: var(--c-ember); }
+
+.kicker__dot {
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: var(--r-full);
+  background: currentColor;
+  opacity: 0.6;
+  flex: 0 0 auto;
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+  text-wrap: pretty;
+}
+
+.muted { color: var(--c-muted); }
+
+// Underline that grows from the left rather than blinking on.
+.link-underline {
+  position: relative;
+  background-image: linear-gradient(var(--c-ember), var(--c-ember));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 0.0625rem;
+  transition: background-size var(--dur) var(--ease);
+
+  &:hover { background-size: 100% 0.0625rem; }
+}
+
+// ============================================================
+// .prose — everything inside a post body
+// ============================================================
+
+.prose {
+  color: var(--c-ink-soft);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  max-width: var(--w-prose);
+
+  p { text-wrap: pretty; }
+
+  > * + * { margin-top: 0; }
+
+  h2 {
+    position: relative;
+    margin: var(--sp-9) 0 var(--sp-4);
+    padding-left: var(--sp-4);
+    color: var(--c-ink);
+
+    // Ember tick — the section marker, repeated site-wide.
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.28em;
+      bottom: 0.18em;
+      width: 0.1875rem;
+      border-radius: var(--r-full);
+      background: var(--c-ember);
+    }
+  }
+
+  h3 {
+    margin: var(--sp-7) 0 var(--sp-3);
+    color: var(--c-ink);
+  }
+
+  h4 {
+    margin: var(--sp-6) 0 var(--sp-3);
+    color: var(--c-ink);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    letter-spacing: var(--tk-micro);
+    text-transform: uppercase;
+  }
+
+  a {
+    color: var(--c-cyan);
+    background-image: linear-gradient(var(--c-cyan), var(--c-cyan));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0.0625rem;
+    transition: background-size var(--dur) var(--ease), color var(--dur-fast) var(--ease);
+
+    &:hover {
+      color: var(--c-cyan-hi);
+      background-size: 100% 0.125rem;
+    }
+  }
+
+  // ---- Lists ------------------------------------------------
+  ul, ol {
+    margin: 0 0 var(--sp-5);
+    padding-left: var(--sp-5);
+  }
+
+  li {
+    margin-bottom: var(--sp-2);
+    padding-left: var(--sp-2);
+
+    &::marker { color: var(--c-ember); }
+  }
+
+  ul { list-style: none; }
+
+  // Custom bullet: a small ember square, not a browser dot.
+  ul > li {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: calc(var(--sp-5) * -1);
+      top: 0.7em;
+      width: 0.3125rem;
+      height: 0.3125rem;
+      border-radius: 0.0625rem;
+      background: var(--c-ember);
+      opacity: 0.85;
+    }
+  }
+
+  ol { list-style: decimal; }
+
+  ul ul, ol ol, ul ol, ol ul {
+    margin-top: var(--sp-2);
+    margin-bottom: 0;
+  }
+
+  // ---- Quotes -----------------------------------------------
+  blockquote {
+    position: relative;
+    margin: var(--sp-6) 0;
+    padding: var(--sp-4) var(--sp-5);
+    border-left: 0.1875rem solid var(--c-ember);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    background: var(--c-ember-wash);
+    color: var(--c-ink);
+    font-size: var(--fs-lead);
+    line-height: 1.6;
+
+    p:last-child { margin-bottom: 0; }
+
+    cite {
+      display: block;
+      margin-top: var(--sp-3);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-style: normal;
+      letter-spacing: var(--tk-micro);
+      text-transform: uppercase;
+      color: var(--c-muted);
+    }
+  }
+
+  // ---- Code -------------------------------------------------
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    border: var(--hairline) solid var(--c-hairline);
+    border-radius: var(--r-xs);
+    background: var(--c-surface);
+    color: var(--c-ember-hi);
+    word-break: break-word;
+  }
+
+  pre {
+    margin: var(--sp-6) 0;
+    padding: var(--sp-5);
+    border: var(--hairline) solid var(--c-hairline);
+    border-radius: var(--r-md);
+    background: var(--c-canvas-sunk);
+    overflow-x: auto;
+    font-size: var(--fs-sm);
+    line-height: 1.65;
+
+    code {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--c-ink-soft);
+      font-size: inherit;
+    }
+  }
+
+  // ---- Media ------------------------------------------------
+  img {
+    margin: var(--sp-6) auto;
+    border: var(--hairline) solid var(--c-hairline);
+    border-radius: var(--r-md);
+  }
+
+  figure {
+    margin: var(--sp-6) 0;
+
+    img { margin: 0; }
+  }
+
+  figcaption {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+    color: var(--c-muted);
+    text-align: center;
+  }
+
+  // ---- Tables -----------------------------------------------
+  // Wide tables scroll inside themselves; the page never does.
+  .table-scroll {
+    margin: var(--sp-6) 0;
+    overflow-x: auto;
+    border: var(--hairline) solid var(--c-hairline);
+    border-radius: var(--r-md);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-sm);
+  }
+
+  th, td {
+    padding: var(--sp-3) var(--sp-4);
+    text-align: left;
+    border-bottom: var(--hairline) solid var(--c-hairline);
+  }
+
+  th {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: var(--tk-micro);
+    text-transform: uppercase;
+    color: var(--c-muted);
+    background: var(--c-surface);
+  }
+
+  tr:last-child td { border-bottom: 0; }
+
+  hr {
+    margin: var(--sp-8) auto;
+    width: 5rem;
+    height: 0.125rem;
+    background: var(--grad-signature);
+    opacity: 0.5;
+    border-radius: var(--r-full);
+  }
+}
+
+// Pull-quote in the margin on wide screens, inline on small.
+span[data-pullquote] {
+  display: block;
+
+  &::before {
+    content: attr(data-pullquote);
+    float: right;
+    width: 13rem;
+    margin: 0 0 var(--sp-4) var(--sp-6);
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    line-height: 1.35;
+    color: var(--c-ember);
+    letter-spacing: var(--tk-tight);
+  }
+
+  @include tablet-down {
+    display: none;
+  }
+}

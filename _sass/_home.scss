@@ -1,0 +1,513 @@
+// ============================================================
+// HOME — hero, credibility strip, timeline, post index
+// ============================================================
+
+// ---- Hero ----------------------------------------------------
+
+.hero {
+  position: relative;
+  padding: var(--sp-10) 0 var(--sp-9);
+
+  @include phone {
+    padding: var(--sp-8) 0 var(--sp-7);
+  }
+}
+
+// Aurora bloom — two low-alpha radials behind the hero, masked
+// so they dissolve rather than end. The only lit region on the
+// site; everything below is flat graphite by design.
+// Spans the hero, never the viewport: a full-bleed decoration must
+// not be able to widen the document.
+.hero__aurora {
+  position: absolute;
+  top: -10rem;
+  left: 0;
+  right: 0;
+  height: 38rem;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(45% 50% at 20% 38%, var(--c-ember-glow), transparent 70%),
+    radial-gradient(40% 46% at 78% 26%, var(--c-cyan-wash), transparent 72%);
+  -webkit-mask-image: radial-gradient(70% 65% at 45% 45%, #000 20%, transparent 80%);
+  mask-image: radial-gradient(70% 65% at 45% 45%, #000 20%, transparent 80%);
+  filter: blur(1.5rem);
+}
+
+// Two real columns on desktop: the argument on the left, the record
+// on the right. A hero that abandons half the screen reads as an
+// unfinished template.
+.hero__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: var(--sp-9);
+  align-items: center;
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+  }
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 34rem;
+}
+
+.hero__title {
+  margin: 0 0 var(--sp-5);
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.032em;
+  color: var(--c-ink);
+  text-wrap: balance;
+}
+
+// The single ember word in the headline. Restraint is the point:
+// one accent, one time.
+.hero__mark {
+  color: var(--c-ember);
+}
+
+.hero__lead {
+  margin: 0 0 var(--sp-6);
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+  text-wrap: pretty;
+
+  a { color: var(--c-cyan); }
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+// ---- The record ----------------------------------------------
+// Label / value, mono labels, hairline dividers. It states the
+// record and gets out of the way. It fills the hero's right column
+// on desktop and stacks underneath on smaller screens.
+
+.creds {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-6);
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-lg);
+  background: rgba(19, 21, 25, 0.55);
+  -webkit-backdrop-filter: blur(0.5rem);
+  backdrop-filter: blur(0.5rem);
+
+  @include tablet-down {
+    padding: var(--sp-5);
+  }
+}
+
+.creds__label {
+  margin: 0 0 var(--sp-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+}
+
+.cred {
+  position: relative;
+  padding-left: var(--sp-4);
+  border-left: 0.125rem solid var(--c-hairline);
+  transition: border-color var(--dur) var(--ease);
+
+  &:hover { border-left-color: var(--c-ember); }
+}
+
+.cred__label {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-ember);
+}
+
+.cred__value {
+  display: block;
+  margin-bottom: var(--sp-1);
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  color: var(--c-ink);
+}
+
+.cred__note {
+  display: block;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--c-muted);
+
+  a { color: var(--c-cyan); }
+}
+
+// ---- Generic home section ------------------------------------
+
+.section {
+  padding: var(--sp-section) 0 0;
+}
+
+// ---- Background timeline -------------------------------------
+// Replaces the dead cd-timeline CSS from the original theme with
+// a real component: a single hairline spine, ember nodes.
+
+.timeline {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 var(--sp-6);
+  list-style: none;
+
+  // The spine.
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0.28125rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: var(--hairline);
+    background: var(--c-hairline);
+  }
+}
+
+.timeline__item {
+  position: relative;
+  padding: 0 0 var(--sp-6);
+
+  &:last-child { padding-bottom: 0; }
+
+  // The node.
+  &::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--sp-6) * -1);
+    top: 0.55rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: var(--r-full);
+    border: 0.125rem solid var(--c-canvas);
+    background: var(--c-hairline-hi);
+    transition: background-color var(--dur) var(--ease),
+                box-shadow var(--dur) var(--ease);
+  }
+
+  &:hover::before {
+    background: var(--c-ember);
+    box-shadow: 0 0 0 0.25rem var(--c-ember-wash);
+  }
+}
+
+// The current chapter gets the live node.
+.timeline__item--now::before {
+  background: var(--c-ember);
+  box-shadow: 0 0 0 0.25rem var(--c-ember-wash);
+}
+
+.timeline__when {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+}
+
+.timeline__what {
+  margin: 0 0 var(--sp-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  color: var(--c-ink);
+}
+
+.timeline__body {
+  margin: 0;
+  max-width: 38rem;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--c-muted);
+
+  a { color: var(--c-cyan); }
+}
+
+// ---- Featured post -------------------------------------------
+
+.featured {
+  display: block;
+  padding: var(--sp-6);
+
+  @include phone { padding: var(--sp-5); }
+}
+
+.featured__title {
+  margin: var(--sp-2) 0 var(--sp-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  line-height: var(--lh-snug);
+  color: var(--c-ink);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.featured:hover .featured__title { color: var(--c-ember); }
+
+.featured__excerpt {
+  margin: 0 0 var(--sp-4);
+  max-width: 42rem;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--c-muted);
+}
+
+.featured__more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-ember);
+}
+
+.featured__arrow {
+  transition: transform var(--dur) var(--ease);
+}
+
+.featured:hover .featured__arrow { transform: translateX(0.25rem); }
+
+// ---- Search --------------------------------------------------
+
+.search {
+  position: relative;
+  margin-bottom: var(--sp-6);
+}
+
+.search__input {
+  padding-left: var(--sp-9);
+  padding-right: var(--sp-9);
+}
+
+.search__icon {
+  position: absolute;
+  left: var(--sp-4);
+  top: 50%;
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.5rem;
+  color: var(--c-faint);
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.search__hint {
+  position: absolute;
+  right: var(--sp-3);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.125rem var(--sp-2);
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-xs);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--c-faint);
+  pointer-events: none;
+
+  @include phone { display: none; }
+}
+
+.search__results {
+  margin-top: var(--sp-3);
+
+  &:empty { display: none; }
+}
+
+.search__result {
+  display: block;
+  padding: var(--sp-3) var(--sp-4);
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-sm);
+  margin-bottom: var(--sp-2);
+  color: var(--c-ink);
+  font-size: var(--fs-sm);
+
+  &:hover {
+    color: var(--c-ember);
+    border-color: var(--c-ember-ring);
+    background: var(--c-ember-wash);
+  }
+}
+
+.search__result-date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+}
+
+// ---- Post index ----------------------------------------------
+// Hairline rows, not boxes. A list of essays should read as a
+// list, and the type should carry it.
+
+.post-index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: var(--hairline) solid var(--c-hairline);
+}
+
+.post-row {
+  border-bottom: var(--hairline) solid var(--c-hairline);
+}
+
+.post-row__link {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: var(--sp-5);
+  align-items: baseline;
+  padding: var(--sp-5) var(--sp-3);
+  border-radius: var(--r-sm);
+  transition: background-color var(--dur) var(--ease);
+
+  &:hover {
+    background: var(--c-surface);
+
+    .post-row__title { color: var(--c-ember); }
+    .post-row__arrow { opacity: 1; transform: translateX(0); }
+  }
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+    gap: var(--sp-2);
+  }
+}
+
+.post-row__date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+  white-space: nowrap;
+  padding-top: 0.25rem;
+}
+
+.post-row__body {
+  display: block;
+  min-width: 0;
+}
+
+.post-row__title {
+  display: block;
+  margin: 0 0 var(--sp-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  line-height: var(--lh-snug);
+  color: var(--c-ink);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.post-row__excerpt {
+  display: block;
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--c-muted);
+  text-wrap: pretty;
+}
+
+.post-row__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+}
+
+.post-row__arrow {
+  opacity: 0;
+  transform: translateX(-0.25rem);
+  color: var(--c-ember);
+  transition: opacity var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
+
+  @include tablet-down { display: none; }
+}
+
+// ---- Subscribe band ------------------------------------------
+
+.band {
+  position: relative;
+  margin-top: var(--sp-section);
+  padding: var(--sp-8);
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-xl);
+  background: var(--c-surface);
+  overflow: hidden;
+
+  // A single ember hairline across the top edge.
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0.0625rem;
+    background: var(--grad-signature);
+    opacity: 0.8;
+  }
+
+  @include phone { padding: var(--sp-6) var(--sp-5); }
+}
+
+.band__title {
+  margin: 0 0 var(--sp-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  color: var(--c-ink);
+}
+
+.band__body {
+  margin: 0 0 var(--sp-5);
+  max-width: 34rem;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--c-muted);
+}

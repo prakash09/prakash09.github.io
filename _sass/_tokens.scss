@@ -1,0 +1,142 @@
+// ============================================================
+// GRAPHITE & EMBER — DESIGN TOKENS
+// The single source of truth. No hex values anywhere else.
+// All sizes in rem (1rem = 16px). Never px.
+//
+// NOTE ON clamp(): this site is built by GitHub Pages with Ruby
+// Sass 3.7, which evaluates math in ordinary declarations and
+// chokes on `1rem + 2vw`. Custom-property values are passed
+// through literally, so every clamp() must live in a token here
+// and be consumed via var(). Do not inline clamp() elsewhere.
+// ============================================================
+
+:root {
+  // ---- Color: graphite base ----------------------------------
+  --c-canvas:       #0B0C0E;
+  --c-canvas-sunk:  #08090A;
+  --c-surface:      #131519;
+  --c-surface-hi:   #181B20;
+  --c-hairline:     #23262C;
+  --c-hairline-hi:  #2E323A;
+
+  // ---- Color: ink --------------------------------------------
+  --c-ink:          #ECEDEE;
+  --c-ink-soft:     #C3C7CC;
+  --c-muted:        #8B9099;
+  --c-faint:        #5C616A;
+
+  // ---- Color: accents ----------------------------------------
+  --c-ember:        #FF7A45;
+  --c-ember-hi:     #FF9366;
+  --c-rose:         #F0568A;
+  --c-cyan:         #58C4DC;
+  --c-cyan-hi:      #7BD5E8;
+
+  // Translucent accent washes (tints, rings, glows)
+  --c-ember-wash:   rgba(255, 122, 69, 0.10);
+  --c-ember-ring:   rgba(255, 122, 69, 0.34);
+  --c-ember-glow:   rgba(255, 122, 69, 0.20);
+  --c-cyan-wash:    rgba(88, 196, 220, 0.10);
+
+  // ---- Signature gradient ------------------------------------
+  --grad-signature: linear-gradient(90deg, #FF7A45 0%, #F0568A 52%, #58C4DC 100%);
+  --grad-ring:      linear-gradient(140deg, #FF7A45 0%, #F0568A 50%, #58C4DC 100%);
+
+  // ---- Type --------------------------------------------------
+  --font-display: "Inter Tight", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body:    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --fs-display: clamp(2.5rem, 1.85rem + 2.9vw, 4rem);
+  --fs-h1:      clamp(2rem, 1.55rem + 2vw, 3rem);
+  --fs-h2:      clamp(1.5rem, 1.32rem + 0.8vw, 1.9rem);
+  --fs-h3:      clamp(1.25rem, 1.16rem + 0.4vw, 1.45rem);
+  --fs-lead:    clamp(1.125rem, 1.06rem + 0.3vw, 1.3125rem);
+  --fs-body:    1.1875rem;
+  --fs-sm:      0.9375rem;
+  --fs-xs:      0.8125rem;
+  --fs-micro:   0.75rem;
+
+  --lh-tight:   1.12;
+  --lh-snug:    1.28;
+  --lh-body:    1.75;
+
+  // Light-on-dark small text blooms; a touch of tracking counters it.
+  --tk-micro:   0.12em;
+  --tk-tight:   -0.022em;
+  --tk-body:    0.005em;
+
+  // ---- Space (0.25rem base) ----------------------------------
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.5rem;
+  --sp-6:  2rem;
+  --sp-7:  2.5rem;
+  --sp-8:  3rem;
+  --sp-9:  4rem;
+  --sp-10: 5rem;
+  --sp-11: 6rem;
+  --sp-12: 8rem;
+
+  // Fluid section rhythm
+  --sp-section: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+
+  // ---- Layout ------------------------------------------------
+  --w-text:   44rem;   // reading column
+  --w-page:   52rem;   // default page container
+  --w-wide:   72rem;   // hero / archive / books
+  --w-prose:  68ch;    // hard measure cap for long-form
+  --hairline: 0.0625rem;
+  --nav-h:    4.25rem;
+
+  // ---- Shape -------------------------------------------------
+  --r-xs:   0.375rem;
+  --r-sm:   0.5rem;
+  --r-md:   0.75rem;
+  --r-lg:   1rem;
+  --r-xl:   1.5rem;
+  --r-full: 62.4375rem;
+
+  // ---- Elevation ---------------------------------------------
+  --e-1: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.40);
+  --e-2: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.45);
+  --e-3: 0 1.5rem 3rem rgba(0, 0, 0, 0.55);
+  --glow-ember: 0 0.5rem 1.75rem var(--c-ember-glow);
+
+  // ---- Motion ------------------------------------------------
+  --ease:      cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in:   cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --dur-fast:  120ms;
+  --dur:       200ms;
+  --dur-slow:  400ms;
+
+  // ---- Depth -------------------------------------------------
+  --z-grain: 1;
+  --z-toc:   40;
+  --z-nav:   100;
+}
+
+// ---- Breakpoints ---------------------------------------------
+// Kept as Sass mixins (media queries can't read custom properties).
+@mixin phone {
+  @media screen and (max-width: 40rem) { @content; }
+}
+
+@mixin tablet-down {
+  @media screen and (max-width: 64rem) { @content; }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 64.0625rem) { @content; }
+}
+
+// The floating table of contents only earns its space here.
+@mixin toc-up {
+  @media screen and (min-width: 80rem) { @content; }
+}
+
+@mixin motion-ok {
+  @media (prefers-reduced-motion: no-preference) { @content; }
+}

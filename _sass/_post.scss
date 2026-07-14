@@ -1,0 +1,281 @@
+// ============================================================
+// POST — editorial header, floating TOC, footer apparatus
+// ============================================================
+
+.post {
+  position: relative;
+  padding-top: var(--sp-9);
+
+  @include phone { padding-top: var(--sp-7); }
+}
+
+// ---- Header --------------------------------------------------
+// Left-aligned. A centred title reads as a template; an essay
+// should start where the text starts.
+
+.post__header {
+  margin-bottom: var(--sp-7);
+}
+
+.post__title {
+  margin: 0 0 var(--sp-4);
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.028em;
+  color: var(--c-ink);
+  text-align: left;
+  text-wrap: balance;
+}
+
+.post__deck {
+  margin: 0 0 var(--sp-5);
+  max-width: var(--w-prose);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--c-muted);
+  text-wrap: pretty;
+}
+
+.post__byline {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-5);
+}
+
+.post__avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.post__byline-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.post__author {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--c-ink);
+}
+
+.post__dates {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+}
+
+.post__updated { color: var(--c-ember); }
+
+// ---- Body ----------------------------------------------------
+
+.post__body {
+  padding-top: var(--sp-6);
+  border-top: var(--hairline) solid var(--c-hairline);
+}
+
+// ---- The reading grid ----------------------------------------
+// Below the TOC breakpoint this is a single centred reading column.
+// Above it, prose and contents become two real columns that are
+// centred together — so the margins are symmetric and the page reads
+// as a composition rather than a narrow strip with something bolted
+// to the right of it.
+
+.post__grid {
+  width: 100%;
+  max-width: var(--w-text);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+
+  @include phone { padding: 0 var(--sp-4); }
+
+  @include toc-up {
+    display: grid;
+    grid-template-columns: minmax(0, var(--w-text)) 13rem;
+    justify-content: center;
+    align-items: start;
+    gap: 5rem;
+    max-width: 68rem;
+  }
+}
+
+.post__main { min-width: 0; }
+
+// ---- Table of contents ---------------------------------------
+// Sticky within its own column. It exists only where there is
+// genuinely room for it — no cramped two-column compromise.
+
+.toc {
+  display: none;
+
+  @include toc-up {
+    display: block;
+    position: sticky;
+    top: 7rem;
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
+    padding-left: var(--sp-4);
+    border-left: var(--hairline) solid var(--c-hairline);
+  }
+}
+
+// Short posts get no contents list at all; JS unsets [hidden] only
+// once it has found enough headings to be worth one.
+.toc[hidden] { display: none; }
+
+.toc__label {
+  margin: 0 0 var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+}
+
+.toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc__item { margin-bottom: var(--sp-1); }
+
+.toc__item--h3 { padding-left: var(--sp-3); }
+
+.toc__link {
+  display: block;
+  padding: var(--sp-1) 0;
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--c-faint);
+  transition: color var(--dur-fast) var(--ease);
+
+  &:hover { color: var(--c-ink-soft); }
+
+  &.is-active {
+    color: var(--c-ember);
+    font-weight: 500;
+  }
+}
+
+// ---- Footer apparatus ----------------------------------------
+
+.post__footer {
+  margin-top: var(--sp-9);
+  padding-top: var(--sp-6);
+  border-top: var(--hairline) solid var(--c-hairline);
+}
+
+.post__tags {
+  margin-bottom: var(--sp-6);
+}
+
+.share {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+}
+
+.share__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+}
+
+// ---- Prev / next ---------------------------------------------
+
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-8);
+
+  @include phone { grid-template-columns: 1fr; }
+}
+
+.post-nav__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-5);
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-lg);
+  background: var(--c-surface);
+  transition: border-color var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
+
+  &:hover {
+    border-color: var(--c-hairline-hi);
+    background: var(--c-surface-hi);
+    transform: translateY(-0.125rem);
+
+    .post-nav__title { color: var(--c-ember); }
+  }
+}
+
+.post-nav__link--next {
+  text-align: right;
+
+  @include phone { text-align: left; }
+}
+
+.post-nav__dir {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+}
+
+.post-nav__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: var(--tk-tight);
+  color: var(--c-ink);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+// ---- Copy-link toast -----------------------------------------
+
+.copied {
+  position: fixed;
+  left: 50%;
+  bottom: var(--sp-6);
+  z-index: 200;
+  padding: var(--sp-3) var(--sp-5);
+  border: var(--hairline) solid var(--c-ember-ring);
+  border-radius: var(--r-full);
+  background: var(--c-surface);
+  color: var(--c-ink);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  box-shadow: var(--e-3);
+  opacity: 0;
+  transform: translate(-50%, 0.75rem);
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
+
+  &.is-shown {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

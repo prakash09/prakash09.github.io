@@ -1,0 +1,251 @@
+// ============================================================
+// PAGES — archive, books, subscribe, 404
+// ============================================================
+
+.page {
+  padding-top: var(--sp-9);
+
+  @include phone { padding-top: var(--sp-7); }
+}
+
+.page__header {
+  margin-bottom: var(--sp-8);
+}
+
+.page__title {
+  margin: 0 0 var(--sp-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.028em;
+  color: var(--c-ink);
+  text-align: left;
+}
+
+.page__deck {
+  margin: 0;
+  max-width: var(--w-prose);
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--c-muted);
+  text-wrap: pretty;
+}
+
+// ---- Archive -------------------------------------------------
+
+.archive-group {
+  margin-bottom: var(--sp-9);
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.archive-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.archive-item {
+  border-bottom: var(--hairline) solid var(--c-hairline);
+
+  &:last-child { border-bottom: 0; }
+}
+
+.archive-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  padding: var(--sp-4) var(--sp-3);
+  border-radius: var(--r-sm);
+  transition: background-color var(--dur) var(--ease);
+
+  &:hover {
+    background: var(--c-surface);
+
+    .archive-title { color: var(--c-ember); }
+  }
+
+  @include phone {
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+}
+
+.archive-title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  line-height: 1.4;
+  color: var(--c-ink);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.archive-date {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-faint);
+  white-space: nowrap;
+}
+
+// ---- Books ---------------------------------------------------
+// The Goodreads widget replaces the markup at runtime with its
+// own, so these must stay keyed to its class names.
+
+.gr_grid_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: var(--sp-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include phone {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-3);
+  }
+
+  // The widget emits a <br clear> and a noscript blurb it expects
+  // to float around; in a grid they'd each claim a cell.
+  br { display: none; }
+}
+
+.gr_grid_book_container {
+  position: relative;
+  aspect-ratio: 98 / 150;
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-sm);
+  background: var(--c-surface);
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+
+  a, img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    object-fit: cover;
+    // Covers are printed for white pages; knock them back a hair
+    // so the grid sits in the dark instead of glaring out of it.
+    filter: saturate(0.92) brightness(0.9);
+    transition: filter var(--dur) var(--ease);
+  }
+
+  &:hover {
+    transform: translateY(-0.25rem);
+    border-color: var(--c-ember-ring);
+    box-shadow: var(--e-2), var(--glow-ember);
+
+    img { filter: none; }
+  }
+}
+
+// ---- Subscribe -----------------------------------------------
+
+.subscribe {
+  max-width: 30rem;
+}
+
+.subscribe__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.subscribe__note {
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  color: var(--c-faint);
+}
+
+.subscribe__error {
+  display: none;
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--c-ember);
+
+  &.is-shown { display: block; }
+}
+
+.subscribe__success {
+  display: none;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  padding: var(--sp-6);
+  border: var(--hairline) solid var(--c-ember-ring);
+  border-radius: var(--r-lg);
+  background: var(--c-ember-wash);
+
+  &.is-shown { display: flex; }
+}
+
+.subscribe__success-title {
+  margin: 0 0 var(--sp-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  color: var(--c-ink);
+}
+
+.subscribe__success-body {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+}
+
+// The form posts into a hidden iframe so the page never navigates
+// away to Google's confirmation screen.
+.subscribe__sink {
+  display: none;
+}
+
+// ---- 404 -----------------------------------------------------
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--sp-11) 0 var(--sp-10);
+}
+
+.notfound__code {
+  margin: 0 0 var(--sp-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-display);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  background: var(--grad-signature);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.notfound__title {
+  margin: 0 0 var(--sp-4);
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: var(--tk-tight);
+  color: var(--c-ink);
+}
+
+.notfound__body {
+  margin: 0 0 var(--sp-6);
+  max-width: 30rem;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--c-muted);
+}

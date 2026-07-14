@@ -1,0 +1,59 @@
+// ============================================================
+// SYNTAX — Rouge highlighting, tuned to the graphite palette
+// Replaces the imported Darcula theme, which was a foreign
+// palette bolted onto the page.
+// ============================================================
+
+.highlight,
+.highlighter-rouge .highlight {
+  background: var(--c-canvas-sunk);
+  color: var(--c-ink-soft);
+  border-radius: var(--r-md);
+}
+
+.highlight {
+  // Comments — recede
+  .c, .cd, .cm, .c1, .cs { color: var(--c-faint); font-style: italic; }
+  .cp { color: var(--c-muted); }
+
+  // Keywords — ember
+  .k, .kc, .kd, .kn, .kp, .kr, .kt, .kv { color: var(--c-ember); }
+  .o, .ow { color: var(--c-ember-hi); }
+
+  // Strings — cyan
+  .s, .s1, .s2, .sa, .sb, .sc, .sd, .se, .sh, .si, .sr, .sx, .dl { color: var(--c-cyan); }
+
+  // Numbers / literals — rose
+  .m, .mb, .mf, .mh, .mi, .mo, .mx, .il { color: var(--c-rose); }
+  .no, .nb, .bp { color: var(--c-rose); }
+
+  // Names
+  .n, .nx, .py, .nv, .vc, .vg, .vi { color: var(--c-ink); }
+  .nf, .fm { color: var(--c-cyan-hi); }
+  .nc, .nn { color: var(--c-ember-hi); }
+  .na, .nt { color: var(--c-cyan); }
+  .nd, .ni, .ne, .nl { color: var(--c-rose); }
+
+  .p, .pi { color: var(--c-muted); }
+
+  // Diffs
+  .gd { color: #FF8A8A; background: rgba(255, 90, 90, 0.10); }
+  .gi { color: #7EE7A8; background: rgba(80, 220, 140, 0.10); }
+  .gh { color: var(--c-muted); font-weight: 600; }
+  .gu { color: var(--c-faint); }
+  .ge { font-style: italic; }
+  .gs { font-weight: 600; }
+
+  // Errors
+  .err { color: #FF8A8A; background: rgba(255, 90, 90, 0.10); }
+
+  // Line numbers
+  .lineno {
+    color: var(--c-faint);
+    -webkit-user-select: none;
+    user-select: none;
+    padding-right: var(--sp-4);
+  }
+
+  .w { color: var(--c-faint); }
+}

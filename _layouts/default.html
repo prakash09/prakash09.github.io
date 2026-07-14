@@ -1,66 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <script>document.documentElement.className += " js";</script>
     <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }}{% if site.description and site.description != "" %} – {{ site.description }}{% endif %}</title>
     {% seo title=false %}
     {% include meta.html %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
 
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}{% if site.description and site.description != "" %} - {{ site.description }}{% endif %}" href="{{ site.baseurl }}/feed.xml" />
     <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#0B0C0E">
+    <meta name="color-scheme" content="dark">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon-32x32.png">
     {% include analytics_head.html %}
   </head>
 
   <body>
-    <div id="bar"></div>
-    <div class="wrapper-container">
-      <div class="wrapper-masthead">
-        <div class="container">
-          <header class="masthead clearfix">
-            <div class="masthead-left">
-              <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.baseurl }}{{ site.avatar }}" alt="{{ site.title }}" /></a>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-              <div class="site-info">
-                <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-                {% if site.description and site.description != "" %}
-                  <p class="site-description">{{ site.description }}</p>
-                {% endif %}
-              </div>
+    <div class="page-shell">
+      <header class="masthead" id="masthead">
+        <div class="container container--wide masthead__inner">
+          <a href="{{ site.baseurl }}/" class="masthead__brand">
+            <span class="avatar-ring masthead__avatar">
+              <img src="{{ site.baseurl }}{{ site.avatar }}" alt="" width="36" height="36" />
+            </span>
+            <span class="masthead__id">
+              <span class="masthead__wordmark">{{ site.name }}</span>
+              <span class="masthead__tagline">Notes from building</span>
+            </span>
+          </a>
+
+          <nav class="nav" aria-label="Primary">
+            <a class="nav__link{% if page.url == '/' %} is-active{% endif %}" href="{{ site.baseurl }}/">Home</a>
+            <a class="nav__link{% if page.url contains '/categories' %} is-active{% endif %}" href="{{ site.baseurl }}/categories/">Writing</a>
+            <a class="nav__link{% if page.url contains '/books' %} is-active{% endif %}" href="{{ site.baseurl }}/books/">Books</a>
+            <a class="nav__link{% if page.url contains '/subscribe' %} is-active{% endif %}" href="{{ site.baseurl }}/subscribe/">Subscribe</a>
+          </nav>
+
+          <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navSheet" aria-label="Menu">
+            <span class="nav-toggle__bar"></span>
+          </button>
+
+          <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="nav-sheet" id="navSheet">
+          <a class="nav-sheet__link" href="{{ site.baseurl }}/">Home</a>
+          <a class="nav-sheet__link" href="{{ site.baseurl }}/categories/">Writing</a>
+          <a class="nav-sheet__link" href="{{ site.baseurl }}/books/">Books</a>
+          <a class="nav-sheet__link" href="{{ site.baseurl }}/subscribe/">Subscribe</a>
+        </div>
+      </header>
+
+      <main class="main" id="main">
+        {{ content }}
+      </main>
+
+      <footer class="footer">
+        <div class="container container--wide">
+          <div class="footer__inner">
+            <div class="footer__brand">
+              <p class="footer__name">{{ site.name }}</p>
+              <p class="footer__blurb">Public notes on building companies and the products inside them — including the mistakes.</p>
             </div>
 
-            <nav class="masthead-nav">
-              <a href="{{ site.baseurl }}/">Home</a>
-              <a href="javascript: scrollToPost();">Posts</a>
-              <a href="{{ site.baseurl }}/books">Books</a>
-              <a href="{{ site.baseurl }}/subscribe/">Subscribe</a>
+            <nav class="footer__nav" aria-label="Footer">
+              <a class="footer__nav-link" href="{{ site.baseurl }}/categories/">Writing</a>
+              <a class="footer__nav-link" href="{{ site.baseurl }}/books/">Books</a>
+              <a class="footer__nav-link" href="{{ site.baseurl }}/subscribe/">Subscribe</a>
+              <a class="footer__nav-link" href="{{ site.baseurl }}/feed.xml">RSS</a>
             </nav>
-          </header>
-        </div>
-      </div>
 
-      <div class="wrapper-main">
-        <div id="main" role="main" class="container">
-          {{ content }}
-        </div>
-      </div>
+            <div class="footer__social">
+              {% include social.html %}
+            </div>
+          </div>
 
-      <div class="wrapper-footer">
-        <div class="container">
-          <footer class="footer">
-            {% include svg-icons.html %}
-          </footer>
+          <div class="footer__meta">
+            <span>&copy; {{ site.time | date: "%Y" }} {{ site.author }}</span>
+            <span>Built in the open</span>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
 
     {% include analytics.html %}
-<script>
-    function scrollToPost() {
-      window.location.href = "{{ site.baseurl }}/#all_posts";
-    }
-  </script>
+    <script src="{{ site.baseurl }}/assets/js/site.js" defer></script>
   </body>
 </html>
