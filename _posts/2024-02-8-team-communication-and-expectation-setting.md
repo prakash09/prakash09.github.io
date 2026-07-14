@@ -1,7 +1,9 @@
 ---
 layout: post
-title:  Setting expectations with your team; why it's important
-
+title: "Setting expectations with your team; why it's important"
+description: "Hiring the best talent is only half of it. Keeping them aligned takes clear expectations and open communication. Here is what I've found actually works."
+categories: [Teams]
+prose_style: numbered
 ---
 
 As a founder, one of your key responsibilities is to hire the best talent and keep them engaged. It's challenging to find individuals who share your vision and commitment, but it's crucial to take the time to identify and inspire these talents to believe in your mission. The most important aspect is to clearly set expectations and maintain open communication to ensure unity and prepare your team for success.

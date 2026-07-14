@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "Favourite quotes and thoughts"
-
+description: "Lines I keep coming back to: on audacity, trust, systems, and the difference between what people feel is wrong and what they think will fix it."
+categories: [Notes]
+prose_style: numbered
 ---
 
 1. “The world meets you at your level of audacity” means life, opportunity, and results often rise only to the level of boldness, courage, and standards you demand for yourself.
@@ -18,15 +20,15 @@ title: "Favourite quotes and thoughts"
 
 7. As a founder - Resist the urge to jump in. Enable your people. Company building isn't a solo act; it's a team sport built for the long haul.
 
-8. When someone tells you they don’t like something, they’re almost always right. When they tell you how to fix it, they’re almost always wrong. People can feel what’s off, but they rarely know the solution. Your job as the builder is to accept what’s wrong—and fix it in a way that stays true to your vision. (Inspired by Bill Hader)
+8. When someone tells you they don’t like something, they’re almost always right. When they tell you how to fix it, they’re almost always wrong. People can feel what’s off, but they rarely know the solution. Your job as the builder is to accept what’s wrong, and fix it in a way that stays true to your vision. (Inspired by Bill Hader)
 
 9. People make decisions through gut and then justify with logic.
 
-10. People don't buy products or services — they buy results, benefits and solutions.
+10. People don't buy products or services; they buy results, benefits and solutions.
 
 11. Bad products are not hated. They are ignored.
 
-12. A healthy society has layers: Compassion at the center, vigilance at the edges. When compassion replaces vigilance, the center doesn’t become kinder — it becomes unprotected.
+12. A healthy society has layers: Compassion at the center, vigilance at the edges. When compassion replaces vigilance, the center doesn’t become kinder; it becomes unprotected.
 
 13. Negativity spreads on its own. Goodness needs visibility, and every shared good act becomes an invitation for more.
 
@@ -50,4 +52,4 @@ title: "Favourite quotes and thoughts"
 
 23. Think in decades. Most people overestimate what they can do in one year and underestimate what they can do in ten years.
 
-24. The future isn't built by those who know every rule, but by those who know how to wire the pieces together. You don't need to play every instrument to conduct the orchestra—you need only the vision to make them sing as one.
+24. The future isn't built by those who know every rule, but by those who know how to wire the pieces together. You don't need to play every instrument to conduct the orchestra; you need only the vision to make them sing as one.

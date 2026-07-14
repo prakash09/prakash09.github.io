@@ -97,7 +97,8 @@
   // ---- Layout ------------------------------------------------
   --w-text:   44rem;   // reading column
   --w-page:   52rem;   // default page container
-  --w-wide:   72rem;   // hero / archive / books
+  --w-home:   60rem;   // home: rail + prose, sized so neither floats in a void
+  --w-wide:   72rem;   // archive / books grids
   --w-prose:  68ch;    // hard measure cap for long-form
   --hairline: 0.0625rem;
   --nav-h:    4.25rem;

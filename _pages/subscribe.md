@@ -3,7 +3,7 @@ layout: page
 title: Subscribe
 permalink: /subscribe/
 kicker: Newsletter
-description: Long-form notes on building companies and the products inside them — the engineering, the org, and the calls I got wrong. Occasional, never a treadmill.
+description: "Long-form notes on building companies and the products inside them: the engineering, the org, and the calls I got wrong. Occasional, never a treadmill."
 ---
 
 <div class="subscribe">
@@ -65,7 +65,7 @@ description: Long-form notes on building companies and the products inside them 
 
     // The browser's own constraint validation gates this handler, so by
     // the time it runs the POST is already on its way to Google inside
-    // the hidden iframe — the page itself never navigates.
+    // the hidden iframe; the page itself never navigates.
     form.addEventListener("submit", function () {
       submitted = true;
       button.disabled = true;

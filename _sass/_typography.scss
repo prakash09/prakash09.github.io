@@ -182,13 +182,41 @@ hr {
     }
   }
 
-  ol { list-style: decimal; }
+  // Ordered lists carry an argument, so the numbers are part of the
+  // typography: a mono index hanging in the margin, ember, so the eye
+  // can find its place in a long list without the text indenting away.
+  ol {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: prose-item;
+  }
+
+  ol > li {
+    position: relative;
+    counter-increment: prose-item;
+    padding-left: 2.75rem;
+    margin-bottom: var(--sp-4);
+
+    &::before {
+      content: counter(prose-item, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 0.2em;
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--c-ember);
+    }
+  }
 
   ul ul, ol ol, ul ol, ol ul {
     margin-top: var(--sp-2);
     margin-bottom: 0;
   }
 
+  // Nested ordered lists restart cleanly and stay quieter than the parent.
+  ol ol > li::before { color: var(--c-faint); }
   // ---- Quotes -----------------------------------------------
   blockquote {
     position: relative;
@@ -308,6 +336,45 @@ hr {
     border-radius: var(--r-full);
   }
 }
+
+// ---- prose--numbered ----------------------------------------
+// For posts that ARE a list: standalone quotes, principles, rules. Each
+// item is a unit of thought, not a bullet in an argument, so it gets the
+// weight of one: bigger type, air around it, and a hairline between. Set
+// with `prose_style: numbered` in the post's front matter.
+
+.prose--numbered {
+  // No top rule: each item carries a bottom hairline, and the post header
+  // already draws a line above. Two would read as an empty first row.
+  > ol {
+    margin-bottom: var(--sp-7);
+  }
+
+  > ol > li {
+    margin-bottom: 0;
+    padding: var(--sp-5) 0 var(--sp-5) 3.5rem;
+    border-bottom: var(--hairline) solid var(--c-hairline);
+    font-size: var(--fs-lead);
+    line-height: 1.6;
+    color: var(--c-ink);
+    text-wrap: pretty;
+
+    &::before {
+      top: 1.55rem;
+      font-size: var(--fs-xs);
+      color: var(--c-faint);
+    }
+
+    // The number warms up as you read the line it belongs to.
+    &:hover::before { color: var(--c-ember); }
+
+    @include phone {
+      padding-left: 2.5rem;
+      font-size: var(--fs-body);
+    }
+  }
+}
+
 
 // Pull-quote in the margin on wide screens, inline on small.
 span[data-pullquote] {

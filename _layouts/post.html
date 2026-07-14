@@ -40,7 +40,7 @@ layout: default
       </div>
     </header>
 
-    <div class="post__body prose" id="postBody">
+    <div class="post__body prose{% if page.prose_style %} prose--{{ page.prose_style }}{% endif %}" id="postBody">
       {{ content }}
     </div>
 

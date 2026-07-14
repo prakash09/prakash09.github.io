@@ -14,6 +14,7 @@
 }
 
 .container--wide { max-width: var(--w-wide); }
+.container--home { max-width: var(--w-home); }
 .container--text { max-width: var(--w-text); }
 
 // ---- Buttons -------------------------------------------------
@@ -86,6 +87,12 @@
   flex: 0 0 auto;
 }
 
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
 // ---- Card ----------------------------------------------------
 // Hover reveals an ember tick that wipes down the left edge.
 // Transform + scale only — the card never changes size, so
@@ -134,7 +141,7 @@
 
   // A chip is a link. On a touch screen it has to be thumb-sized.
   @include touch {
-    min-height: 2.25rem;
+    min-height: 2.75rem;
     padding: var(--sp-2) var(--sp-4);
   }
   border: var(--hairline) solid var(--c-hairline);

@@ -4,63 +4,44 @@ layout: default
 
 {% assign featured = site.posts.first %}
 
-<section class="hero">
-  <div class="hero__aurora" aria-hidden="true"></div>
+<section class="intro">
+  <div class="intro__aurora" aria-hidden="true"></div>
 
-  <div class="container container--wide hero__grid">
-    <div class="hero__content">
-      <p class="kicker kicker--ember">
-        Prakash Kumar
-        <span class="kicker__dot"></span>
-        Founder &amp; CTO
-      </p>
+  <div class="container container--home intro__grid">
+    <aside class="intro__id">
+      <span class="avatar-ring intro__avatar">
+        <img src="{{ site.baseurl }}/images/prakash.png" alt="Prakash Kumar" width="112" height="112" />
+      </span>
 
-      <h1 class="hero__title">
-        I build video infrastructure, and write down what it <span class="hero__mark">actually costs</span>.
-      </h1>
+      <p class="intro__name">Prakash Kumar</p>
+      <p class="intro__role">Founder &amp; CTO</p>
 
-      <p class="hero__lead">
-        Two companies in, one exit, one scale-up. These are my public notes on the
-        engineering, the org, and the decisions I got wrong — currently while building
-        <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>.
-      </p>
-
-      <div class="hero__cta">
-        <a class="btn btn--primary" href="#writing">Read the writing</a>
-        <a class="btn btn--ghost" href="{{ site.baseurl }}/subscribe/">Subscribe</a>
+      <div class="intro__links">
+        <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>
+        <a href="https://x.com/{{ site.footer-links.twitter }}" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://www.linkedin.com/in/{{ site.footer-links.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
-    </div>
+    </aside>
 
-    <div class="creds">
-      <p class="creds__label">The record</p>
+    <div class="intro__body">
+      <h1 class="intro__hello">Hey, welcome.</h1>
 
-      <div class="cred">
-        <span class="cred__label">Exit</span>
-        <span class="cred__value">Rheo TV</span>
-        <span class="cred__note">Distributed live-streaming. Backed by Sequoia&rsquo;s Surge and Lightspeed. Acquired by Unacademy.</span>
-      </div>
+      <p>My name is Prakash Kumar. I’m currently building <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">Clipwise.ai</a>.</p>
 
-      <div class="cred">
-        <span class="cred__label">Scale</span>
-        <span class="cred__value">Relevel</span>
-        <span class="cred__note">Co-founded with Unacademy. Built product and engineering from zero to 40+ people and $10M ARR.</span>
-      </div>
+      <p>I’m a tech entrepreneur with a deep love for coding and building products from first principles. Previously, I co-founded Rheo TV and Relevel.</p>
 
-      <div class="cred">
-        <span class="cred__label">Now</span>
-        <span class="cred__value">Clipwise.ai</span>
-        <span class="cred__note">
-          AI video generation, end to end.
-          <a href="https://clipwise.ai" target="_blank" rel="noopener noreferrer">clipwise.ai</a>
-        </span>
-      </div>
+      <p>At Rheo TV, we built cutting-edge distributed live-streaming systems. We raised funding from top investors including Sequoia’s Surge and Lightspeed Ventures, and the company was eventually acquired by Unacademy.</p>
+
+      <p>Post-acquisition, I co-founded Relevel with Unacademy, where I built the product and tech organization from the ground up. Over time, we grew the team to 40+ people and scaled the business to $10M in ARR before my departure.</p>
+
+      <p class="intro__note">I write these blogs as my public notes: insights, learnings, and reflections, including the mistakes I’ve made along the way.</p>
     </div>
   </div>
 </section>
 
 {% if featured %}
 <section class="section" aria-labelledby="latest-head">
-  <div class="container container--wide">
+  <div class="container container--home">
     <div class="section-head">
       <h2 class="section-head__title" id="latest-head">Latest</h2>
       <span class="section-head__count">{{ featured.date | date: "%B %Y" }}</span>
@@ -88,7 +69,7 @@ layout: default
 {% endif %}
 
 <section class="section" id="writing" aria-labelledby="writing-head">
-  <div class="container container--wide">
+  <div class="container container--home">
     <div class="section-head">
       <h2 class="section-head__title" id="writing-head">All posts</h2>
       <span class="section-head__count">{{ site.posts | size }} essays</span>
@@ -156,59 +137,11 @@ layout: default
   </div>
 </section>
 
-<section class="section" aria-labelledby="background-head">
-  <div class="container container--wide">
-    <div class="section-head">
-      <h2 class="section-head__title" id="background-head">Background</h2>
-      <span class="section-head__count">2014 &rarr; now</span>
-    </div>
-
-    <ol class="timeline">
-      <li class="timeline__item timeline__item--now reveal">
-        <span class="timeline__when">Now</span>
-        <h3 class="timeline__what">Clipwise.ai</h3>
-        <p class="timeline__body">
-          Building AI video generation end to end — the model orchestration, the render
-          pipeline, and the product on top of it. Back to writing code every day.
-        </p>
-      </li>
-
-      <li class="timeline__item reveal">
-        <span class="timeline__when">Relevel &middot; Unacademy</span>
-        <h3 class="timeline__what">Co-founder &amp; CTO</h3>
-        <p class="timeline__body">
-          Co-founded Relevel with Unacademy post-acquisition. Built the product and
-          engineering organisation from the ground up, grew the team past 40 people, and
-          scaled the business to $10M ARR before leaving.
-        </p>
-      </li>
-
-      <li class="timeline__item reveal">
-        <span class="timeline__when">Rheo TV &rarr; Acquired</span>
-        <h3 class="timeline__what">Co-founder</h3>
-        <p class="timeline__body">
-          Built cutting-edge distributed live-streaming systems. Raised from Sequoia&rsquo;s
-          Surge and Lightspeed Ventures. Acquired by Unacademy.
-        </p>
-      </li>
-
-      <li class="timeline__item reveal">
-        <span class="timeline__when">Before that</span>
-        <h3 class="timeline__what">Engineer, first and still</h3>
-        <p class="timeline__body">
-          A deep love for coding and for building products from first principles. That has
-          not changed across any of the titles above.
-        </p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<section class="container container--wide">
+<section class="container container--home">
   <div class="band reveal">
     <h2 class="band__title">Get the next one by email</h2>
     <p class="band__body">
-      Occasional, long-form, and written from inside the work — not a newsletter treadmill.
+      Occasional, long-form, and written from inside the work, not a newsletter treadmill.
       No spam, unsubscribe whenever.
     </p>
     <a class="btn btn--primary" href="{{ site.baseurl }}/subscribe/">Subscribe</a>

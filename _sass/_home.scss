@@ -1,256 +1,176 @@
 // ============================================================
-// HOME — hero, credibility strip, timeline, post index
+// HOME — author intro, featured post, search, post index
 // ============================================================
 
-// ---- Hero ----------------------------------------------------
+// ---- Intro ---------------------------------------------------
+// This is an author's introduction, not a product hero. No giant
+// marketing headline, no stat tiles, no CTA row — those read as a
+// SaaS landing page. Identity on the left, his own prose on the
+// right, and the writing itself starts inside the first screen.
 
-.hero {
+.intro {
   position: relative;
-  padding: var(--sp-10) 0 var(--sp-9);
+  padding: var(--sp-9) 0 var(--sp-8);
 
   @include phone {
-    padding: var(--sp-8) 0 var(--sp-7);
+    padding: var(--sp-7) 0 var(--sp-6);
   }
 }
 
-// Aurora bloom — two low-alpha radials behind the hero, masked
-// so they dissolve rather than end. The only lit region on the
-// site; everything below is flat graphite by design.
-// Spans the hero, never the viewport: a full-bleed decoration must
-// not be able to widen the document.
-.hero__aurora {
+.intro__aurora {
   position: absolute;
-  top: -10rem;
+  top: -12rem;
   left: 0;
   right: 0;
-  height: 38rem;
+  height: 32rem;
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(45% 50% at 20% 38%, var(--c-ember-glow), transparent 70%),
-    radial-gradient(40% 46% at 78% 26%, var(--c-cyan-wash), transparent 72%);
-  -webkit-mask-image: radial-gradient(70% 65% at 45% 45%, #000 20%, transparent 80%);
-  mask-image: radial-gradient(70% 65% at 45% 45%, #000 20%, transparent 80%);
+    radial-gradient(40% 46% at 18% 46%, var(--c-ember-glow), transparent 70%),
+    radial-gradient(36% 42% at 74% 30%, var(--c-cyan-wash), transparent 72%);
+  -webkit-mask-image: radial-gradient(70% 65% at 45% 50%, #000 15%, transparent 80%);
+  mask-image: radial-gradient(70% 65% at 45% 50%, #000 15%, transparent 80%);
   filter: blur(1.5rem);
+  opacity: 0.75;
 }
 
-// Two real columns on desktop: the argument on the left, the record
-// on the right. A hero that abandons half the screen reads as an
-// unfinished template.
-.hero__grid {
+// The rail and the prose together fill the container exactly. The earlier
+// version capped the prose at 40rem inside a 72rem page, which left a dead
+// right-hand third and made the whole thing read as an unfinished template.
+.intro__grid {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: var(--sp-9);
-  align-items: center;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  gap: var(--sp-8);
+  align-items: start;
 
   @include tablet-down {
     grid-template-columns: 1fr;
-    gap: var(--sp-7);
+    gap: var(--sp-5);
   }
 }
 
-.hero__content {
-  position: relative;
-  z-index: 1;
-  max-width: 34rem;
-}
-
-.hero__title {
-  margin: 0 0 var(--sp-5);
-  font-family: var(--font-display);
-  font-size: var(--fs-display);
-  font-weight: 600;
-  line-height: var(--lh-tight);
-  letter-spacing: -0.032em;
-  color: var(--c-ink);
-  text-wrap: balance;
-}
-
-// The single ember word in the headline. Restraint is the point:
-// one accent, one time.
-.hero__mark {
-  color: var(--c-ember);
-}
-
-.hero__lead {
-  margin: 0 0 var(--sp-6);
-  font-size: var(--fs-lead);
-  line-height: 1.6;
-  color: var(--c-ink-soft);
-  text-wrap: pretty;
-
-  a { color: var(--c-cyan); }
-}
-
-.hero__cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-3);
-}
-
-// ---- The record ----------------------------------------------
-// Label / value, mono labels, hairline dividers. It states the
-// record and gets out of the way. It fills the hero's right column
-// on desktop and stacks underneath on smaller screens.
-
-.creds {
-  position: relative;
-  z-index: 1;
+.intro__id {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-5);
-  padding: var(--sp-6);
-  border: var(--hairline) solid var(--c-hairline);
-  border-radius: var(--r-lg);
-  background: rgba(19, 21, 25, 0.55);
-  -webkit-backdrop-filter: blur(0.5rem);
-  backdrop-filter: blur(0.5rem);
+  align-items: flex-start;
+  gap: var(--sp-1);
 
+  // On a phone the identity reads as a byline: photo beside the name,
+  // not a column of its own.
   @include tablet-down {
-    padding: var(--sp-5);
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-4);
   }
 }
 
-.creds__label {
-  margin: 0 0 var(--sp-1);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
+.intro__avatar {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: var(--sp-3);
+  border-radius: var(--r-full);
+
+  img { border-radius: var(--r-full); }
+
+  @include tablet-down {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 0;
+  }
 }
 
-.cred {
-  position: relative;
-  padding-left: var(--sp-4);
-  border-left: 0.125rem solid var(--c-hairline);
-  transition: border-color var(--dur) var(--ease);
-
-  &:hover { border-left-color: var(--c-ember); }
-}
-
-.cred__label {
-  display: block;
-  margin-bottom: var(--sp-2);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-ember);
-}
-
-.cred__value {
-  display: block;
-  margin-bottom: var(--sp-1);
+.intro__name {
+  margin: 0;
   font-family: var(--font-display);
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   font-weight: 600;
   letter-spacing: var(--tk-tight);
   color: var(--c-ink);
 }
 
-.cred__note {
-  display: block;
-  font-size: var(--fs-sm);
-  line-height: 1.5;
-  color: var(--c-muted);
+.intro__role {
+  margin: 0 0 var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-ember);
+}
+
+// Stacked, so they read as three links and not as one run-on string
+// ("CLIPWISE.AI X LINKEDIN").
+.intro__links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-1);
+  margin-top: var(--sp-3);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: var(--tk-micro);
+    text-transform: uppercase;
+    color: var(--c-faint);
+
+    // "X" is one glyph wide. A thumb is not.
+    @include touch {
+      min-height: 2.75rem;
+      min-width: 2.75rem;
+    }
+
+    &:hover { color: var(--c-ember); }
+  }
+
+  @include tablet-down {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--sp-4);
+    margin-top: 0;
+    width: 100%;
+  }
+}
+
+.intro__body {
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--c-ink-soft);
+
+  p { margin: 0 0 var(--sp-4); }
 
   a { color: var(--c-cyan); }
+}
+
+.intro__hello {
+  margin: 0 0 var(--sp-5);
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.028em;
+  color: var(--c-ink);
+}
+
+// The line that says what this site actually is.
+.intro__note {
+  margin: var(--sp-5) 0 0;
+  padding-left: var(--sp-4);
+  border-left: 0.125rem solid var(--c-ember);
+  color: var(--c-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
 }
 
 // ---- Generic home section ------------------------------------
 
 .section {
   padding: var(--sp-section) 0 0;
-}
-
-// ---- Background timeline -------------------------------------
-// Replaces the dead cd-timeline CSS from the original theme with
-// a real component: a single hairline spine, ember nodes.
-
-.timeline {
-  position: relative;
-  margin: 0;
-  padding: 0 0 0 var(--sp-6);
-  list-style: none;
-
-  // The spine.
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0.28125rem;
-    top: 0.5rem;
-    bottom: 0.5rem;
-    width: var(--hairline);
-    background: var(--c-hairline);
-  }
-}
-
-.timeline__item {
-  position: relative;
-  padding: 0 0 var(--sp-6);
-
-  &:last-child { padding-bottom: 0; }
-
-  // The node.
-  &::before {
-    content: "";
-    position: absolute;
-    left: calc(var(--sp-6) * -1);
-    top: 0.55rem;
-    width: 0.625rem;
-    height: 0.625rem;
-    border-radius: var(--r-full);
-    border: 0.125rem solid var(--c-canvas);
-    background: var(--c-hairline-hi);
-    transition: background-color var(--dur) var(--ease),
-                box-shadow var(--dur) var(--ease);
-  }
-
-  &:hover::before {
-    background: var(--c-ember);
-    box-shadow: 0 0 0 0.25rem var(--c-ember-wash);
-  }
-}
-
-// The current chapter gets the live node.
-.timeline__item--now::before {
-  background: var(--c-ember);
-  box-shadow: 0 0 0 0.25rem var(--c-ember-wash);
-}
-
-.timeline__when {
-  display: block;
-  margin-bottom: var(--sp-2);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
-}
-
-.timeline__what {
-  margin: 0 0 var(--sp-2);
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-weight: 600;
-  letter-spacing: var(--tk-tight);
-  color: var(--c-ink);
-}
-
-.timeline__body {
-  margin: 0;
-  max-width: 38rem;
-  font-size: var(--fs-sm);
-  line-height: 1.7;
-  color: var(--c-muted);
-
-  a { color: var(--c-cyan); }
 }
 
 // ---- Featured post -------------------------------------------

@@ -35,7 +35,7 @@ wide: true
 
   {% comment %}
     Posts currently carry no categories. If any are added later, they get
-    their own grouped index here automatically — and the category chips in
+    their own grouped index here automatically, and the category chips in
     the post footer start linking somewhere real.
   {% endcomment %}
   {% if site.categories.size > 0 %}
