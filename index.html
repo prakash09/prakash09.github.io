@@ -6,13 +6,30 @@ layout: default
   <div class="lede__aurora" aria-hidden="true"></div>
 
   <div class="container container--home lede__grid">
+    {% comment %}
+      The fold is the newest essay, not a mission statement. A visitor
+      landing on a writing site should land on writing: the hero is
+      entry 01 of the index below, given the front page.
+    {% endcomment %}
+    {% assign latest = site.posts.first %}
     <div class="lede__say">
-      <p class="kicker kicker--ember">Notes from building</p>
+      <p class="lede__eyebrow">
+        <span class="lede__flag">The latest</span>
+        {% for category in latest.categories limit: 1 %}
+          <span class="kicker__dot"></span>
+          <span>{{ category }}</span>
+        {% endfor %}
+        <span class="kicker__dot"></span>
+        <span>{{ latest.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+      </p>
 
       <h1 class="lede__title">
-        Insights, learnings and reflections, including the mistakes
-        I&rsquo;ve made along the way.
+        <a class="lede__title-link" href="{{ site.baseurl }}{{ latest.url }}">{{ latest.title }}</a>
       </h1>
+
+      <p class="lede__deck">{{ latest.excerpt | strip_html | strip | truncate: 200 }}</p>
+
+      <a class="btn btn--primary lede__cta" href="{{ site.baseurl }}{{ latest.url }}">Read the essay</a>
     </div>
 
     <aside class="ident">
@@ -62,10 +79,15 @@ layout: default
 
     <ol class="entries">
       {% for post in paginator.posts %}
-        {% comment %} Index numbers keep counting across pages, so 01 is always the newest. {% endcomment %}
+        {% comment %}
+          The newest essay is the hero above, so the index skips it here
+          and opens at 02 — the hero is 01. Numbers keep counting across
+          pages either way.
+        {% endcomment %}
+        {% if paginator.page == 1 and forloop.first %}{% continue %}{% endif %}
         {% assign seen = paginator.page | minus: 1 | times: paginator.per_page %}
         {% assign n = seen | plus: forloop.index %}
-        <li class="entry reveal{% if paginator.page == 1 and forloop.first %} entry--lead{% endif %}">
+        <li class="entry reveal">
           <a class="entry__link" href="{{ site.baseurl }}{{ post.url }}">
             <span class="entry__num" aria-hidden="true">{{ n | prepend: '0' | slice: -2, 2 }}</span>
 

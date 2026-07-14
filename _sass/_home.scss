@@ -3,12 +3,11 @@
 // ============================================================
 //
 // The front page of a blog should be the writing. Earlier versions
-// opened with a wall of biography above the fold, which pushed every
-// essay below it and left the reader nothing to read. So: one line
-// saying what this is, one strip saying who wrote it, and then the
-// essays, immediately, with the weight of a table of contents.
-// The full biography still lives here, in his own words, further down
-// where someone who wants it will go looking.
+// opened with a wall of biography, then with a mission statement — both
+// made the visitor read *about* the writing before reading any of it.
+// Now the fold IS the newest essay: headline, deck, a way in, with the
+// byline card beside it. The rest of the index follows, and the full
+// biography lives further down where someone who wants it will look.
 
 // ---- Lede ----------------------------------------------------
 
@@ -41,15 +40,15 @@
   opacity: 0.75;
 }
 
-// Statement left, identity right. Two columns because one column of
-// text in a 72rem page is a column of text with a 30rem hole beside it.
+// Featured essay left, identity right. Two columns because one column
+// of text in a 72rem page is a column of text with a 30rem hole beside it.
 .lede__grid {
   position: relative;
   z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 18rem;
   gap: var(--sp-9);
-  align-items: end;
+  align-items: center;
 
   @include tablet-down {
     grid-template-columns: 1fr;
@@ -57,17 +56,50 @@
   }
 }
 
-// His own sentence, given the weight of a masthead. Not a product
-// claim, not a positioning line: a description of the writing.
+// The hero is the newest essay, so the biggest type on the site is a
+// headline you can click, not a slogan you can only read.
+.lede__eyebrow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin: 0 0 var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--tk-micro);
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.lede__flag {
+  color: var(--c-ember);
+}
+
 .lede__title {
-  margin: 0;
+  margin: 0 0 var(--sp-4);
   font-family: var(--font-display);
   font-size: var(--fs-h1);
   font-weight: 600;
   line-height: var(--lh-tight);
   letter-spacing: var(--tk-tight);
-  color: var(--c-ink);
   text-wrap: balance;
+}
+
+.lede__title-link {
+  color: var(--c-ink);
+  transition: color var(--dur-fast) var(--ease);
+
+  &:hover { color: var(--c-ember); }
+}
+
+.lede__deck {
+  margin: 0 0 var(--sp-6);
+  max-width: 38rem;
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--c-muted);
+  text-wrap: pretty;
 }
 
 // ---- Identity ------------------------------------------------
@@ -189,9 +221,9 @@
 // ---- The writing index ---------------------------------------
 // A numbered index, not a stack of cards. The hanging mono numeral is
 // the same device the numbered posts use inside `.prose--numbered`, so
-// the site indexes itself in one voice. Newest is 01 and carries the
-// largest title, which is what a "featured" card was doing before,
-// without repeating the post twice on one page.
+// the site indexes itself in one voice. The newest essay is the hero
+// above — it is 01 — so the index opens at 02 and never prints the
+// same post twice on one page.
 
 // No top border: the section heading already draws one, and two hairlines
 // a few rem apart read as a mistake rather than a rule.
@@ -277,23 +309,6 @@
   color: var(--c-ink);
   text-wrap: balance;
   transition: color var(--dur-fast) var(--ease);
-}
-
-// The newest essay is the one you are most likely to want. It gets the
-// size a featured card used to get, in the row it already occupies,
-// rather than being printed twice on one page.
-.entry--lead .entry__title {
-  font-size: var(--fs-title);
-}
-
-.entry--lead .entry__link {
-  padding-top: var(--sp-7);
-  padding-bottom: var(--sp-7);
-
-  @include tablet-down {
-    padding-top: var(--sp-6);
-    padding-bottom: var(--sp-6);
-  }
 }
 
 .entry__excerpt {
