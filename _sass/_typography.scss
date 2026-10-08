@@ -3,7 +3,6 @@
 // ============================================================
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
   color: var(--c-ink);
   font-weight: 600;
   line-height: var(--lh-snug);
@@ -30,10 +29,9 @@ hr {
   background: var(--c-hairline);
 }
 
-// ---- Display + kicker ---------------------------------------
+// ---- Display + meta -----------------------------------------
 
 .display {
-  font-family: var(--font-display);
   font-size: var(--fs-display);
   font-weight: 600;
   line-height: var(--lh-tight);
@@ -41,30 +39,21 @@ hr {
   text-wrap: balance;
 }
 
-// The mono kicker is the site's connective tissue: it labels
-// every section, date and category in the same voice.
-.kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  margin: 0 0 var(--sp-4);
-  font-family: var(--font-mono);
+// One quiet line of facts about a post: date, topic, length. The dot
+// trails each item, so a wrapped line never starts with a separator.
+.meta {
   font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
+  line-height: 1.5;
   color: var(--c-muted);
-}
+  font-variant-numeric: tabular-nums;
 
-.kicker--ember { color: var(--c-ember); }
+  > * { white-space: nowrap; }
 
-.kicker__dot {
-  width: 0.25rem;
-  height: 0.25rem;
-  border-radius: var(--r-full);
-  background: currentColor;
-  opacity: 0.6;
-  flex: 0 0 auto;
+  > :not(:last-child)::after {
+    content: "\00B7";
+    padding: 0 0.25em 0 0.5em;
+    color: var(--c-faint);
+  }
 }
 
 .lead {
@@ -96,45 +85,18 @@ hr {
   color: var(--c-ink-soft);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  max-width: var(--w-prose);
 
   p { text-wrap: pretty; }
 
   > * + * { margin-top: 0; }
 
-  h2 {
-    position: relative;
-    margin: var(--sp-9) 0 var(--sp-4);
-    padding-left: var(--sp-4);
-    color: var(--c-ink);
+  // A heading belongs to the text below it: about four times the air
+  // above as below, and always more above than between two paragraphs.
+  h2 { margin: var(--sp-8) 0 var(--sp-3); }
+  h3 { margin: var(--sp-7) 0 var(--sp-2); }
+  h4 { margin: var(--sp-6) 0 var(--sp-2); }
 
-    // Ember tick — the section marker, repeated site-wide.
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.28em;
-      bottom: 0.18em;
-      width: 0.1875rem;
-      border-radius: var(--r-full);
-      background: var(--c-ember);
-    }
-  }
-
-  h3 {
-    margin: var(--sp-7) 0 var(--sp-3);
-    color: var(--c-ink);
-  }
-
-  h4 {
-    margin: var(--sp-6) 0 var(--sp-3);
-    color: var(--c-ink);
-    font-family: var(--font-mono);
-    font-size: var(--fs-sm);
-    font-weight: 600;
-    letter-spacing: var(--tk-micro);
-    text-transform: uppercase;
-  }
+  hr { margin: var(--sp-8) 0; }
 
   a {
     color: var(--c-cyan);
@@ -167,117 +129,77 @@ hr {
   // ---- Lists ------------------------------------------------
   ul, ol {
     margin: 0 0 var(--sp-5);
-    padding-left: var(--sp-5);
+    padding-left: 1.75rem;
   }
 
   li {
     margin-bottom: var(--sp-2);
-    padding-left: var(--sp-2);
+    padding-left: var(--sp-1);
 
-    &::marker { color: var(--c-ember); }
-  }
-
-  ul { list-style: none; }
-
-  // Custom bullet: a small ember square, not a browser dot.
-  ul > li {
-    position: relative;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: calc(var(--sp-5) * -1);
-      top: 0.7em;
-      width: 0.3125rem;
-      height: 0.3125rem;
-      border-radius: 0.0625rem;
-      background: var(--c-ember);
-      opacity: 0.85;
-    }
-  }
-
-  // Ordered lists carry an argument, so the numbers are part of the
-  // typography: a mono index hanging in the margin, ember, so the eye
-  // can find its place in a long list without the text indenting away.
-  ol {
-    list-style: none;
-    padding-left: 0;
-    counter-reset: prose-item;
-  }
-
-  ol > li {
-    position: relative;
-    counter-increment: prose-item;
-    padding-left: 2.75rem;
-    margin-bottom: var(--sp-4);
-
-    &::before {
-      content: counter(prose-item, decimal-leading-zero);
-      position: absolute;
-      left: 0;
-      top: 0.2em;
-      font-family: var(--font-mono);
-      font-size: var(--fs-sm);
-      font-weight: 600;
+    &::marker {
+      color: var(--c-muted);
       font-variant-numeric: tabular-nums;
-      color: var(--c-ember);
     }
   }
+
+  ul { list-style: disc; }
+  ol { list-style: decimal; }
+
+  // Kramdown wraps each item of a spaced-out list in a <p>; its bottom
+  // margin must not stack on the item's own.
+  li > p:last-child { margin-bottom: 0; }
 
   ul ul, ol ol, ul ol, ol ul {
     margin-top: var(--sp-2);
     margin-bottom: 0;
   }
 
-  // Nested ordered lists restart cleanly and stay quieter than the parent.
-  ol ol > li::before { color: var(--c-faint); }
   // ---- Quotes -----------------------------------------------
   blockquote {
-    position: relative;
     margin: var(--sp-6) 0;
-    padding: var(--sp-4) var(--sp-5);
+    padding: var(--sp-1) 0 var(--sp-1) var(--sp-5);
     border-left: 0.1875rem solid var(--c-ember);
-    border-radius: 0 var(--r-md) var(--r-md) 0;
-    background: var(--c-ember-wash);
     color: var(--c-ink);
-    font-size: var(--fs-lead);
-    line-height: 1.6;
 
     p:last-child { margin-bottom: 0; }
+
+    // An attribution in its own paragraph still belongs to the quote.
+    p:has(cite) { margin-top: calc(-1 * var(--sp-3)); }
 
     cite {
       display: block;
       margin-top: var(--sp-3);
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
+      font-size: var(--fs-micro);
       font-style: normal;
-      letter-spacing: var(--tk-micro);
-      text-transform: uppercase;
       color: var(--c-muted);
     }
   }
 
   // ---- Code -------------------------------------------------
+  // Code is copied and compared character by character, so the mono
+  // face keeps its ligatures off: `!=` must look like `!=`.
   code {
     font-family: var(--font-mono);
     font-size: 0.875em;
+    font-feature-settings: "liga" 0, "calt" 0;
     padding: 0.15em 0.4em;
     border: var(--hairline) solid var(--c-hairline);
     border-radius: var(--r-xs);
-    background: var(--c-surface);
-    color: var(--c-ember-hi);
+    background: var(--c-canvas-sunk);
+    color: var(--c-ink);
     word-break: break-word;
   }
 
   pre {
     margin: var(--sp-6) 0;
-    padding: var(--sp-5);
+    padding: var(--sp-4) var(--sp-5);
     border: var(--hairline) solid var(--c-hairline);
     border-radius: var(--r-md);
     background: var(--c-canvas-sunk);
     overflow-x: auto;
-    font-size: var(--fs-sm);
-    line-height: 1.65;
+    font-size: var(--fs-micro);
+    line-height: 1.6;
+    tab-size: 4;
 
     code {
       padding: 0;
@@ -285,7 +207,72 @@ hr {
       background: none;
       color: var(--c-ink-soft);
       font-size: inherit;
+      word-break: normal;
     }
+  }
+
+  kbd {
+    padding: 0.1em 0.4em;
+    border: var(--hairline) solid var(--c-hairline-hi);
+    border-bottom-width: 0.125rem;
+    border-radius: var(--r-xs);
+    background: var(--c-surface);
+    font-family: var(--font-mono);
+    font-size: 0.8125em;
+    color: var(--c-ink);
+  }
+
+  // A highlighted block is a frame: an optional bar with the language
+  // and a copy button (added by site.js), then the code. The frame owns
+  // the border, so the <pre> inside it carries none.
+  div.highlighter-rouge {
+    margin: var(--sp-6) 0;
+    border: var(--hairline) solid var(--c-hairline);
+    border-radius: var(--r-md);
+    background: var(--c-canvas-sunk);
+    overflow: hidden;
+
+    pre {
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+    }
+  }
+
+  .code__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    padding: 0 var(--sp-2) 0 var(--sp-5);
+    border-bottom: var(--hairline) solid var(--c-hairline);
+    font-size: var(--fs-micro);
+    color: var(--c-muted);
+  }
+
+  .code__copy {
+    min-height: 2.25rem;
+    margin-left: auto;
+    padding: 0 var(--sp-3);
+    border: 0;
+    border-radius: var(--r-xs);
+    background: transparent;
+    color: var(--c-muted);
+    font-family: var(--font-body);
+    font-size: var(--fs-micro);
+    font-weight: 500;
+    cursor: pointer;
+    transition: color var(--dur-fast) var(--ease),
+                background-color var(--dur-fast) var(--ease);
+
+    @include touch { min-height: 2.75rem; }
+
+    &:hover {
+      color: var(--c-ink);
+      background: var(--c-surface-hi);
+    }
+
+    &.is-done { color: var(--c-good); }
   }
 
   // ---- Media ------------------------------------------------
@@ -330,24 +317,21 @@ hr {
   }
 
   th {
-    font-family: var(--font-mono);
-    font-size: var(--fs-xs);
+    font-size: var(--fs-micro);
     font-weight: 600;
-    letter-spacing: var(--tk-micro);
-    text-transform: uppercase;
     color: var(--c-muted);
-    background: var(--c-surface);
+    background: var(--c-canvas-sunk);
   }
 
   tr:last-child td { border-bottom: 0; }
 
-  hr {
-    margin: var(--sp-8) auto;
-    width: 5rem;
-    height: 0.125rem;
-    background: var(--grad-signature);
-    opacity: 0.5;
-    border-radius: var(--r-full);
+  // Whatever follows a heading sits at the heading's own gap: a quote,
+  // a code block or a smaller heading must not push it away. The named
+  // blocks are listed because their own margin rules are more specific.
+  h2, h3, h4 {
+    & + *,
+    & + div.highlighter-rouge,
+    & + .table-scroll { margin-top: 0; }
   }
 }
 
@@ -358,37 +342,60 @@ hr {
 // with `prose_style: numbered` in the post's front matter.
 
 .prose--numbered {
-  // No top rule: each item carries a bottom hairline, and the post header
-  // already draws a line above. Two would read as an empty first row.
+  // A list opens with a rule and has one between items, like a ruled
+  // heading and its rows. It has none at its end: the gap closes it.
   > ol {
+    list-style: none;
     margin-bottom: var(--sp-7);
+    padding-left: 0;
+    border-top: var(--hairline) solid var(--c-hairline);
+    counter-reset: prose-item;
   }
 
+  // A list that opens the post already has the header rule above it.
+  > ol:first-child {
+    border-top: 0;
+
+    > li:first-child {
+      padding-top: 0;
+
+      &::before { top: 0.2em; }
+    }
+  }
+
+  // The heading of a list sits on the list's rule.
+  > h2, > h3, > h4 { margin-bottom: var(--sp-3); }
+
   > ol > li {
+    position: relative;
+    counter-increment: prose-item;
     margin-bottom: 0;
-    padding: var(--sp-5) 0 var(--sp-5) 3.5rem;
+    padding: var(--sp-5) 0 var(--sp-5) 3rem;
     border-bottom: var(--hairline) solid var(--c-hairline);
-    font-size: var(--fs-lead);
-    line-height: 1.6;
     color: var(--c-ink);
     text-wrap: pretty;
 
+    // The number hangs in its own gutter, so every item starts on the
+    // same edge whether it is item 3 or item 25.
     &::before {
-      top: 1.55rem;
-      font-size: var(--fs-xs);
+      content: counter(prose-item);
+      position: absolute;
+      left: 0;
+      top: calc(var(--sp-5) + 0.2em);
+      font-family: var(--font-mono);
+      font-size: var(--fs-micro);
+      font-variant-numeric: tabular-nums;
       color: var(--c-faint);
     }
 
-    // The number warms up as you read the line it belongs to.
-    &:hover::before { color: var(--c-ember); }
+    @include phone { padding-left: 2.25rem; }
 
-    @include phone {
-      padding-left: 2.5rem;
-      font-size: var(--fs-body);
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
     }
   }
 }
-
 
 // Pull-quote in the margin on wide screens, inline on small.
 span[data-pullquote] {
@@ -399,7 +406,6 @@ span[data-pullquote] {
     float: right;
     width: 13rem;
     margin: 0 0 var(--sp-4) var(--sp-6);
-    font-family: var(--font-display);
     font-size: var(--fs-h3);
     line-height: 1.35;
     color: var(--c-ember);

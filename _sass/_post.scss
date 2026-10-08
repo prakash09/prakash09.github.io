@@ -1,12 +1,10 @@
 // ============================================================
-// POST — editorial header, floating TOC, footer apparatus
+// POST — header, reading column, margin TOC, footer apparatus
 // ============================================================
 
 .post {
   position: relative;
-  padding-top: var(--sp-7);
-
-  @include phone { padding-top: var(--sp-6); }
+  padding-top: var(--sp-top);
 }
 
 // ---- Header --------------------------------------------------
@@ -23,8 +21,7 @@
 }
 
 .post__title {
-  margin: 0 0 var(--sp-4);
-  font-family: var(--font-display);
+  margin: 0 0 var(--sp-3);
   font-size: var(--fs-title);
   font-weight: 600;
   line-height: var(--lh-tight);
@@ -35,83 +32,74 @@
 }
 
 .post__deck {
-  margin: 0 0 var(--sp-5);
-  max-width: 42rem;
-  font-size: 1.125rem;
+  margin: 0 0 var(--sp-4);
+  font-size: var(--fs-lead);
   line-height: 1.6;
   color: var(--c-muted);
   text-wrap: pretty;
 }
 
-// One line of apparatus: author, date, category, length. Mono because
-// it is data, quiet because it is not the point.
 .post__meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--sp-3);
   margin: 0;
-  padding-bottom: var(--sp-5);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
 }
 
 .post__author {
-  color: var(--c-muted);
-}
+  font-weight: 500;
+  color: var(--c-ink-soft);
 
-.post__updated { color: var(--c-ember); }
+  // One author writes here, so on a phone the name gives its place to
+  // the facts and the line holds without a wrap.
+  @include phone { display: none; }
+}
 
 // ---- Body ----------------------------------------------------
 
 .post__body {
-  padding-top: var(--sp-5);
+  padding-top: var(--sp-6);
   border-top: var(--hairline) solid var(--c-hairline);
 }
 
 // ---- The reading grid ----------------------------------------
-// Below the TOC breakpoint this is a single centred reading column.
-// Above it, prose and contents become two real columns that are
-// centred together — so the margins are symmetric and the page reads
-// as a composition rather than a narrow strip with something bolted
-// to the right of it.
+// The essay always sits in the page column, on the same two edges as
+// the masthead. Above the TOC breakpoint the grid adds a margin on each
+// side and the contents list lives in the right one, so it never moves
+// the text off centre.
 
 .post__grid {
+  @include toc-up {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--w-page)) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.post__main {
   width: 100%;
-  max-width: var(--w-text);
+  max-width: var(--w-page);
+  min-width: 0;
   margin: 0 auto;
   padding: 0 var(--sp-5);
 
   @include phone { padding: 0 var(--sp-4); }
 
-  @include toc-up {
-    display: grid;
-    grid-template-columns: minmax(0, var(--w-text)) 13rem;
-    justify-content: center;
-    align-items: start;
-    gap: 5rem;
-    max-width: 68rem;
-  }
+  @include toc-up { grid-column: 2; }
 }
 
-.post__main { min-width: 0; }
-
 // ---- Table of contents ---------------------------------------
-// Sticky within its own column. It exists only where there is
-// genuinely room for it — no cramped two-column compromise.
+// Sticky in the right margin. It exists only where that margin is
+// wide enough to hold it.
 
 .toc {
   display: none;
 
   @include toc-up {
     display: block;
+    grid-column: 3;
     position: sticky;
     top: 7rem;
+    width: 13rem;
     max-height: calc(100vh - 10rem);
+    margin-left: var(--sp-5);
     overflow-y: auto;
     padding-left: var(--sp-4);
     border-left: var(--hairline) solid var(--c-hairline);
@@ -124,12 +112,9 @@
 
 .toc__label {
   margin: 0 0 var(--sp-3);
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
+  font-weight: 600;
+  color: var(--c-ink);
 }
 
 .toc__list {
@@ -145,12 +130,12 @@
 .toc__link {
   display: block;
   padding: var(--sp-1) 0;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-micro);
   line-height: 1.45;
-  color: var(--c-faint);
+  color: var(--c-muted);
   transition: color var(--dur-fast) var(--ease);
 
-  &:hover { color: var(--c-ink-soft); }
+  &:hover { color: var(--c-ink); }
 
   &.is-active {
     color: var(--c-ember);
@@ -161,13 +146,13 @@
 // ---- Footer apparatus ----------------------------------------
 
 .post__footer {
-  margin-top: var(--sp-9);
+  margin-top: var(--sp-section);
   padding-top: var(--sp-6);
   border-top: var(--hairline) solid var(--c-hairline);
 }
 
 .post__tags {
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-5);
 }
 
 .share {
@@ -175,16 +160,13 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--sp-3);
-  margin-bottom: var(--sp-8);
+  margin-bottom: var(--sp-6);
 }
 
 .share__label {
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
   font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
+  color: var(--c-muted);
 }
 
 // ---- Prev / next ---------------------------------------------
@@ -193,7 +175,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--sp-4);
-  margin-bottom: var(--sp-8);
 
   @include phone { grid-template-columns: 1fr; }
 }
@@ -226,16 +207,12 @@
 }
 
 .post-nav__dir {
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
   font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
+  color: var(--c-muted);
 }
 
 .post-nav__title {
-  font-family: var(--font-display);
   font-size: var(--fs-sm);
   font-weight: 600;
   line-height: 1.4;
@@ -256,10 +233,7 @@
   border-radius: var(--r-full);
   background: var(--c-surface);
   color: var(--c-ink);
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
   box-shadow: var(--e-3);
   opacity: 0;
   transform: translate(-50%, 0.75rem);

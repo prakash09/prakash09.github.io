@@ -1,232 +1,93 @@
 // ============================================================
-// HOME — lede, identity strip, the writing index, about
+// HOME — intro, the writing index, about
 // ============================================================
 //
-// The front page of a blog should be the writing. Earlier versions
-// opened with a wall of biography, then with a mission statement — both
-// made the visitor read *about* the writing before reading any of it.
-// Now the fold IS the newest essay: headline, deck, a way in, with the
-// byline card beside it. The rest of the index follows, and the full
-// biography lives further down where someone who wants it will look.
+// One column, top to bottom: who writes this, what they have written,
+// and more about them for anyone who scrolls that far. The index lists
+// every post once, newest first, in the same shape each time.
 
-// ---- Lede ----------------------------------------------------
+// ---- Intro ---------------------------------------------------
+// The statement leads. Who wrote it and where to follow them is one
+// card below, so the top of the page is two things, not four.
 
-// The section below supplies its own top rhythm, so the lede adds no
-// bottom padding of its own. Stacking both left a dead band of canvas
-// between the byline and the first essay.
-.lede {
-  position: relative;
-  padding: var(--sp-8) 0 0;
-
-  @include phone {
-    padding: var(--sp-6) 0 0;
-  }
+.intro {
+  padding-top: var(--sp-top);
 }
 
-.lede__aurora {
-  position: absolute;
-  top: -14rem;
-  left: 0;
-  right: 0;
-  height: 32rem;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(38% 44% at 22% 52%, var(--c-ember-glow), transparent 70%),
-    radial-gradient(34% 40% at 76% 34%, var(--c-cyan-wash), transparent 72%);
-  -webkit-mask-image: radial-gradient(70% 65% at 45% 55%, #000 15%, transparent 80%);
-  mask-image: radial-gradient(70% 65% at 45% 55%, #000 15%, transparent 80%);
-  filter: blur(1.5rem);
-  opacity: 0.75;
-}
-
-// Featured essay left, identity right. Two columns because one column
-// of text in a 72rem page is a column of text with a 30rem hole beside it.
-.lede__grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 18rem;
-  gap: var(--sp-9);
-  align-items: center;
-
-  @include tablet-down {
-    grid-template-columns: 1fr;
-    gap: var(--sp-6);
-  }
-}
-
-// The hero is the newest essay, so the biggest type on the site is a
-// headline you can click, not a slogan you can only read.
-.lede__eyebrow {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--sp-3);
+.intro__title {
   margin: 0 0 var(--sp-4);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-muted);
-}
-
-.lede__flag {
-  color: var(--c-ember);
-}
-
-.lede__title {
-  margin: 0 0 var(--sp-4);
-  font-family: var(--font-display);
   font-size: var(--fs-h1);
-  font-weight: 600;
-  line-height: var(--lh-tight);
-  letter-spacing: var(--tk-tight);
-  text-wrap: balance;
 }
 
-.lede__title-link {
-  color: var(--c-ink);
-  transition: color var(--dur-fast) var(--ease);
-
-  &:hover { color: var(--c-ember); }
-}
-
-.lede__deck {
+.intro__body {
   margin: 0 0 var(--sp-6);
-  max-width: 38rem;
   font-size: var(--fs-lead);
   line-height: 1.6;
-  color: var(--c-muted);
+  color: var(--c-ink-soft);
   text-wrap: pretty;
 }
 
-// ---- Identity ------------------------------------------------
-// A byline card, not a rail: hairline on its inner edge, hugging the
-// baseline of the statement it belongs to. Credentials as one factual
-// sentence rather than stat tiles.
-
-.ident {
-  padding-left: var(--sp-5);
-  border-left: var(--hairline) solid var(--c-hairline);
-
-  @include tablet-down {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
-    gap: 0 var(--sp-4);
-    padding: var(--sp-5) 0 0;
-    border-left: 0;
-    border-top: var(--hairline) solid var(--c-hairline);
-  }
+.intro__card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-lg);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
-.ident__avatar {
-  width: 3.25rem;
-  height: 3.25rem;
-  margin-bottom: var(--sp-3);
+.intro__who {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+
+  &:hover .intro__name { color: var(--c-ember); }
+}
+
+.intro__avatar {
+  width: 3rem;
+  height: 3rem;
   border-radius: var(--r-full);
 
   img { border-radius: var(--r-full); }
-
-  @include tablet-down {
-    grid-row: span 2;
-    margin-bottom: 0;
-  }
 }
 
-.ident__name {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.0625rem;
-  font-weight: 600;
-  letter-spacing: var(--tk-tight);
-  color: var(--c-ink);
-
-  @include tablet-down { align-self: end; }
-}
-
-.ident__role {
-  margin: 0 0 var(--sp-3);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-ember);
-
-  @include tablet-down {
-    margin-bottom: 0;
-    align-self: start;
-  }
-}
-
-.ident__facts {
-  margin: 0 0 var(--sp-4);
+.intro__name {
+  display: block;
   font-size: var(--fs-sm);
-  line-height: 1.6;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--c-ink);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.intro__role {
+  display: block;
+  font-size: var(--fs-micro);
+  line-height: 1.5;
   color: var(--c-muted);
-  text-wrap: pretty;
-
-  a { color: var(--c-cyan); }
-
-  @include tablet-down {
-    grid-column: 1 / -1;
-    margin-top: var(--sp-4);
-  }
 }
 
-.ident__links {
+.intro__social {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--sp-4);
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    font-family: var(--font-mono);
-    font-size: var(--fs-micro);
-    letter-spacing: var(--tk-micro);
-    text-transform: uppercase;
-    color: var(--c-faint);
-    transition: color var(--dur-fast) var(--ease);
-
-    // "X" is one glyph wide. A thumb is not.
-    @include touch {
-      min-height: 2.75rem;
-      min-width: 2.75rem;
-    }
-
-    &:hover { color: var(--c-ember); }
-  }
-
-  @include tablet-down { grid-column: 1 / -1; }
-}
-
-.ident__links .ident__more {
-  gap: var(--sp-1);
-  color: var(--c-ember);
-
-  &::after { content: "\2193"; }
+  gap: var(--sp-2);
 }
 
 // ---- Generic home section ------------------------------------
 
 .section {
-  padding: var(--sp-section) 0 0;
+  padding-top: var(--sp-section);
 }
 
 // ---- The writing index ---------------------------------------
-// A numbered index, not a stack of cards. The hanging mono numeral is
-// the same device the numbered posts use inside `.prose--numbered`, so
-// the site indexes itself in one voice. The newest essay is the hero
-// above — it is 01 — so the index opens at 02 and never prints the
-// same post twice on one page.
+// When it was written on the left, what it says on the right, so the eye
+// runs down one edge of titles. On a phone the two stack. The first and
+// last rows give up their outer padding: the section sets those gaps.
 
-// No top border: the section heading already draws one, and two hairlines
-// a few rem apart read as a mistake rather than a rule.
 .entries {
   list-style: none;
   margin: 0;
@@ -235,74 +96,62 @@
 
 .entry {
   border-bottom: var(--hairline) solid var(--c-hairline);
+
+  &:first-child .entry__link { padding-top: 0; }
+
+  &:last-child {
+    border-bottom: 0;
+
+    .entry__link { padding-bottom: 0; }
+  }
 }
 
-// Three columns: the index number, the headline, and the summary. It is
-// a table of contents, so it is set like one, and it uses the full width
-// of the page instead of stacking everything into one narrow gutter.
 .entry__link {
   display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: var(--sp-6);
-  align-items: start;
-  padding: var(--sp-6) var(--sp-3);
-  border-radius: var(--r-sm);
-  transition: background-color var(--dur) var(--ease);
+  grid-template-columns: 10rem minmax(0, 1fr);
+  column-gap: var(--sp-5);
+  align-items: baseline;
+  padding: var(--sp-5) 0;
 
-  &:hover {
-    background: var(--c-surface);
+  &:hover .entry__title { color: var(--c-ember); }
 
-    .entry__title { color: var(--c-ember); }
-    .entry__num   { color: var(--c-ember); }
-    .entry__go    { opacity: 1; transform: none; }
-  }
-
-  @include tablet-down {
-    grid-template-columns: 1fr;
-    gap: var(--sp-3);
-    padding: var(--sp-5) var(--sp-2);
-  }
-}
-
-.entry__num {
-  padding-top: 0.4rem;
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: var(--tk-micro);
-  color: var(--c-faint);
-  transition: color var(--dur-fast) var(--ease);
-
-  // On a phone the gutter would eat a third of the line. The date in
-  // the meta row already tells you where you are.
-  @include tablet-down { display: none; }
-}
-
-.entry__head,
-.entry__side {
-  display: block;
-  min-width: 0;
+  @include phone { display: block; }
 }
 
 .entry__meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-3);
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
+  line-height: 1.5;
   color: var(--c-muted);
+  font-variant-numeric: tabular-nums;
+
+  @include phone {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.5em;
+    margin-bottom: var(--sp-2);
+  }
+}
+
+.entry__date {
+  display: block;
+  font-weight: 500;
+  color: var(--c-ink-soft);
+
+  // Stacked on one line, the date needs the same dot the other facts get.
+  @include phone {
+    &::after {
+      content: "\00B7";
+      padding-left: 0.5em;
+      font-weight: 400;
+      color: var(--c-faint);
+    }
+  }
 }
 
 .entry__title {
   display: block;
-  font-family: var(--font-display);
-  font-size: var(--fs-h2);
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-h3);
   font-weight: 600;
   line-height: var(--lh-snug);
   letter-spacing: var(--tk-tight);
@@ -313,41 +162,17 @@
 
 .entry__excerpt {
   display: block;
-  margin: 0 0 var(--sp-4);
-  font-size: 1.0625rem;
-  line-height: 1.7;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
   color: var(--c-muted);
   text-wrap: pretty;
-}
-
-.entry__go {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-ember);
-  opacity: 0;
-  transform: translateX(-0.25rem);
-  transition: opacity var(--dur) var(--ease),
-              transform var(--dur) var(--ease);
-
-  // Hover is not a thing a finger does; on touch the affordance is
-  // simply always there.
-  @include touch {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 // ---- Search --------------------------------------------------
 
 .search {
   position: relative;
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-head);
 }
 
 .search__input {
@@ -407,10 +232,7 @@
 
 .search__result-date {
   display: block;
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
   color: var(--c-faint);
 }
 
@@ -419,40 +241,10 @@
 // rather than the place that blocks the writing.
 
 .about {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: var(--sp-9);
-  align-items: start;
-
-  @include tablet-down {
-    grid-template-columns: 1fr;
-    gap: var(--sp-6);
-  }
-}
-
-.about__body {
-  font-size: var(--fs-body);
-  line-height: 1.7;
   color: var(--c-ink-soft);
 
   p { margin: 0 0 var(--sp-4); }
   p:last-child { margin-bottom: 0; }
-
-  a { color: var(--c-cyan); }
-}
-
-// The line that says what the whole site is for. It was a footnote under
-// the biography; here it is the thing your eye lands on beside it.
-.about__note {
-  margin: 0;
-  padding: 0 0 0 var(--sp-5);
-  border-left: 0.125rem solid var(--c-ember);
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-style: italic;
-  line-height: 1.5;
-  color: var(--c-ink);
-  text-wrap: pretty;
 }
 
 // ---- Subscribe band ------------------------------------------
@@ -460,7 +252,7 @@
 .band {
   position: relative;
   margin-top: var(--sp-section);
-  padding: var(--sp-8);
+  padding: var(--sp-6);
   border: var(--hairline) solid var(--c-hairline);
   border-radius: var(--r-xl);
   background: var(--c-surface);
@@ -478,12 +270,11 @@
     opacity: 0.8;
   }
 
-  @include phone { padding: var(--sp-6) var(--sp-5); }
+  @include phone { padding: var(--sp-5); }
 }
 
 .band__title {
-  margin: 0 0 var(--sp-3);
-  font-family: var(--font-display);
+  margin: 0 0 var(--sp-2);
   font-size: var(--fs-h2);
   font-weight: 600;
   letter-spacing: var(--tk-tight);

@@ -40,10 +40,9 @@ body {
 }
 
 // ---- Grain -------------------------------------------------
-// A fixed fractal-noise film over the whole canvas. On a dark
-// background this both kills gradient banding and gives the
-// surface a physical, non-flat quality. Zero image weight,
-// composited once, never repainted.
+// A fixed fractal-noise film over the whole canvas. It kills
+// gradient banding and gives the surface a physical, non-flat
+// quality. Zero image weight, composited once, never repainted.
 body::before {
   content: "";
   position: fixed;
@@ -85,11 +84,8 @@ a {
   padding: var(--sp-3) var(--sp-4);
   background: var(--c-ember);
   color: var(--c-canvas);
-  font-family: var(--font-mono);
   font-size: var(--fs-xs);
   font-weight: 600;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
   border-radius: var(--r-sm);
   transition: top var(--dur) var(--ease);
 

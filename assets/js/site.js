@@ -8,8 +8,6 @@
 (function () {
   "use strict";
 
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   /* ---- Masthead: earn the border only once scrolled --------- */
   var masthead = document.getElementById("masthead");
   var progress = document.getElementById("progress");
@@ -75,32 +73,85 @@
     });
   }
 
-  /* ---- Reveal on scroll ------------------------------------- */
-  var reveals = document.querySelectorAll(".reveal");
+  /* ---- Theme toggle ------------------------------------------ */
+  // The system setting decides until the reader picks; the pick is stored
+  // and applied by the inline script in <head> on every later page.
+  var root = document.documentElement;
+  var themeToggle = document.getElementById("themeToggle");
+  var systemDark = window.matchMedia("(prefers-color-scheme: dark)");
 
-  if (reduced || !("IntersectionObserver" in window)) {
-    // No observer, no motion preference: just show everything.
-    for (var i = 0; i < reveals.length; i++) {
-      reveals[i].classList.add("is-in");
-    }
-  } else {
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-in");
-          io.unobserve(entry.target);
-        });
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 }
-    );
+  function currentTheme() {
+    return root.getAttribute("data-theme") || (systemDark.matches ? "dark" : "light");
+  }
 
-    for (var j = 0; j < reveals.length; j++) {
-      // Stagger within a group without touching layout.
-      reveals[j].style.transitionDelay = Math.min(j % 6, 5) * 45 + "ms";
-      io.observe(reveals[j]);
+  function syncTheme() {
+    // Browser chrome follows the page, including an explicit choice that
+    // disagrees with the system setting.
+    var canvas = window.getComputedStyle(root).getPropertyValue("--c-canvas").trim();
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    for (var c = 0; c < metas.length; c++) metas[c].setAttribute("content", canvas);
+
+    if (themeToggle) {
+      var other = currentTheme() === "dark" ? "light" : "dark";
+      themeToggle.setAttribute("aria-label", "Switch to " + other + " theme");
     }
   }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try {
+        window.localStorage.setItem("theme", next);
+      } catch (e) {}
+      syncTheme();
+    });
+  }
+
+  if (systemDark.addEventListener) systemDark.addEventListener("change", syncTheme);
+  syncTheme();
+
+  /* ---- Code blocks: language label + copy -------------------- */
+  var blocks = document.querySelectorAll(".prose div.highlighter-rouge");
+
+  var addCodeBar = function (block) {
+    var code = block.querySelector("pre code") || block.querySelector("pre");
+    if (!code) return;
+
+    var bar = document.createElement("div");
+    bar.className = "code__bar";
+
+    var lang = (block.className.match(/language-([\w+#-]+)/) || [])[1];
+    if (lang && lang !== "plaintext") {
+      var label = document.createElement("span");
+      label.textContent = lang;
+      bar.appendChild(label);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      var copy = document.createElement("button");
+      copy.className = "code__copy";
+      copy.type = "button";
+      copy.textContent = "Copy";
+
+      copy.addEventListener("click", function () {
+        navigator.clipboard.writeText(code.textContent).then(function () {
+          copy.textContent = "Copied";
+          copy.classList.add("is-done");
+          window.setTimeout(function () {
+            copy.textContent = "Copy";
+            copy.classList.remove("is-done");
+          }, 1800);
+        }, function () {});
+      });
+
+      bar.appendChild(copy);
+    }
+
+    if (bar.firstChild) block.insertBefore(bar, block.firstChild);
+  };
+
+  for (var b = 0; b < blocks.length; b++) addCodeBar(blocks[b]);
 
   /* ---- Wrap wide tables so the page never scrolls sideways --- */
   var tables = document.querySelectorAll(".prose table");

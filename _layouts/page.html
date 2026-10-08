@@ -3,14 +3,10 @@ layout: default
 ---
 
 <article class="page">
-  <div class="container {% if page.wide %}container--wide{% else %}container--text{% endif %}">
+  <div class="container">
     {% unless page.hide_title %}
       {% if page.title and page.title != "" %}
         <header class="page__header">
-          {% if page.kicker %}
-            <p class="kicker kicker--ember">{{ page.kicker }}</p>
-          {% endif %}
-
           <h1 class="page__title">{{ page.title }}</h1>
 
           {% if page.description and page.description != "" %}
@@ -21,12 +17,12 @@ layout: default
     {% endunless %}
 
     {% comment %}
-      Wide pages (books, the archive) are grids and lists with their own
-      components, not running text. Wrapping them in .prose would inherit
-      the reading measure, the ember list bullets and the link underlines,
-      none of which belong on a card grid.
+      Books and the archive are grids and lists with their own components,
+      not running text. Wrapping them in .prose would inherit the list
+      bullets and the link underlines, none of which belong on a grid.
+      They opt out with `prose: false`.
     {% endcomment %}
-    <div class="{% if page.wide %}page__content{% else %}prose{% endif %}">
+    <div class="{% if page.prose == false %}page__content{% else %}prose{% endif %}">
       {{ content }}
     </div>
   </div>

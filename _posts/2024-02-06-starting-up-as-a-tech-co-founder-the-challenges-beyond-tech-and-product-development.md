@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Starting up as a tech co-founder: the challenges beyond tech and product development"
+title: "Preparing to start up is easy. Starting up is not."
 description: "Preparation for the startup is easy; you control how hard you work. Starting up is a very different beast. What actually got hard: hiring, culture, visibility, and the internal struggle of no longer building."
 categories: [Founding]
 ---
@@ -60,7 +60,7 @@ Again improving and working on yourself is easy. Ben Horowitz, in his book *The 
 >
 > <cite>Ben Horowitz</cite>
 
-This was something I learned early on when we hired our first senior engineer. I used to report to him in a previous company, so when he came on board, it was like having Richard and Ethan from Silicon Valley in the mix. We accepted some of his initial demands, but they were never-ending. From increasing his salary in 3 months to knowing details of investor interactions - he wanted to know it all. I took a stand and soon after he and his other referrals left. It forced me to define the company values and communicate expectations upfront. It also made me think about our culture. 
+This was something I learned early on when we hired our first senior engineer. We accepted some of his initial demands, but they were never-ending. I took a stand and soon after he and his other referrals left. It forced me to define the company values and communicate expectations upfront. It also made me think about our culture.
 
 As a young founder, it can be really tough to retain people. You start questioning your abilities and go into a self-deprecating loop about what you could have done better. Reaching out to mentors or working with a leadership coach can help. But soon you realize that you need missionaries, not mercenaries. And you accept your limitations.
 
@@ -76,7 +76,7 @@ Expecting everyone to be comfortable with chaos is unreasonable. It's essential 
 We came up with something like this for weekly metrics review:
 
 <figure>
-  <img src="{{ site.baseurl }}/images/metrics_review.png" alt="A weekly metrics review sheet: one row per team, columns for the metrics each owns." loading="lazy" />
+  <img src="{{ site.baseurl }}/images/metrics_review.png" alt="A weekly metrics review sheet: one row per team, columns for the metrics each owns." width="1278" height="1092" loading="lazy" />
   <figcaption>The weekly metrics review we settled on: one row per team, and the metric each one owns.</figcaption>
 </figure>
 
@@ -87,14 +87,6 @@ When you're busy and someone reports a product issue, the business team may not 
 1. When something goes wrong, a member of the tech team should announce it first in a public group.
 2. Additionally, we should write detailed Root Cause Analyses (RCAs) for SEV-1/SEV-2 issues.
 3. Define success metrics and report them weekly in the public group, such as uptime, tech tickets, etc.
-
-### Working with people with very different values
-As you scale, you hire team members experienced in managing large systems, who may not be familiar with your journey. They often express concerns about ongoing chaos and compare it unfavorably to their previous organization's clear six-month roadmaps and superior system and colleague quality. However, I've found there are fundamentally two types of people: energy-givers and energy-takers. Spending just half an hour with someone is enough to determine which category they fall into:
-
-- **Energy-givers** make you feel motivated, inspired, and willing to exert extra effort.
-- **Energy-takers** leave you feeling tired, drained, and demotivated, ultimately bringing you down.
-
-Therefore, when hiring new team members, prioritize energy-givers. They might lack experience with large systems, but their positivity and enthusiasm for the journey ahead are invaluable.
 
 ## Internal Struggle
 You haven't coded much in the last six months and feel out of touch. You begin reading Hacker News daily and experimenting with the latest advancements, you experience serious FOMO. Encountering a friend who's actively building in this space, you decide to invest in their startup, yearning for the early days of hands-on creation.

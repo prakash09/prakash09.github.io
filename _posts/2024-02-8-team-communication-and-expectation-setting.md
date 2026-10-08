@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Setting expectations with your team; why it's important"
+title: "Rules for running a startup team"
 description: "Hiring the best talent is only half of it. Keeping them aligned takes clear expectations and open communication. Here is what I've found actually works."
 categories: [Teams]
 prose_style: numbered
@@ -23,11 +23,10 @@ Here I am listing some points:
 11. Good leaders are adept at self-evaluation.
 12. Always be on the lookout for people with the founder’s DNA within the company. Look for those who go beyond their duty.
 13. Don’t take criticism from people from whom you wouldn't accept advice.
-14. From the VP level up, excuses don’t matter.
-15. Every person should have a one-on-one meeting with their reporting manager every month.
-16. Make people believers in 90 days - Assign a buddy to the new hire who is already a believer.
-17. Celebrate small successes.
-18. Communicate more in times of crisis.
+14. Every person should have a one-on-one meeting with their reporting manager every month.
+15. Make people believers in 90 days - Assign a buddy to the new hire who is already a believer.
+16. Celebrate small successes.
+17. Communicate more in times of crisis.
 
 #### When communicating to junior team members:
 1. Talk about the impact being created.

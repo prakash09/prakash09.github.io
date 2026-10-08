@@ -2,7 +2,6 @@
 layout: page
 title: Subscribe
 permalink: /subscribe/
-kicker: Newsletter
 description: "Long-form notes on building companies and the products inside them: the engineering, the org, and the calls I got wrong. Occasional, never a treadmill."
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Favourite quotes and thoughts"
-description: "Lines I keep coming back to: on audacity, trust, systems, and the difference between what people feel is wrong and what they think will fix it."
+title: "Lines I keep coming back to"
+description: "Quotes and thoughts on audacity, trust, systems, and the difference between what people feel is wrong and what they think will fix it."
 categories: [Notes]
 prose_style: numbered
 ---
