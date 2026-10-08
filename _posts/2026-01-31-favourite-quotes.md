@@ -53,3 +53,5 @@ prose_style: numbered
 23. Think in decades. Most people overestimate what they can do in one year and underestimate what they can do in ten years.
 
 24. The future isn't built by those who know every rule, but by those who know how to wire the pieces together. You don't need to play every instrument to conduct the orchestra; you need only the vision to make them sing as one.
+
+25. Stop chasing dopamine from knowing what to do. Start finding satisfaction in actually doing it. Knowledge feels like progress, but action creates progress.
