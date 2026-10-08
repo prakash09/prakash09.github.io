@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Starting up as a tech co-founder: the challenges beyond tech and product development"
+title: "Preparing to start up is easy. Starting up is not."
 description: "Preparation for the startup is easy; you control how hard you work. Starting up is a very different beast. What actually got hard: hiring, culture, visibility, and the internal struggle of no longer building."
 categories: [Founding]
 ---

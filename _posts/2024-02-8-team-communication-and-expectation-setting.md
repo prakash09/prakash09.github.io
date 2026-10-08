@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Setting expectations with your team; why it's important"
+title: "Rules for running a startup team"
 description: "Hiring the best talent is only half of it. Keeping them aligned takes clear expectations and open communication. Here is what I've found actually works."
 categories: [Teams]
 prose_style: numbered
