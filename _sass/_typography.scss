@@ -91,10 +91,12 @@ hr {
   > * + * { margin-top: 0; }
 
   // A heading belongs to the text below it: about four times the air
-  // above as below.
+  // above as below, and always more above than between two paragraphs.
   h2 { margin: var(--sp-8) 0 var(--sp-3); }
-  h3 { margin: var(--sp-6) 0 var(--sp-2); }
-  h4 { margin: var(--sp-5) 0 var(--sp-2); }
+  h3 { margin: var(--sp-7) 0 var(--sp-2); }
+  h4 { margin: var(--sp-6) 0 var(--sp-2); }
+
+  hr { margin: var(--sp-8) 0; }
 
   a {
     color: var(--c-cyan);
@@ -160,6 +162,9 @@ hr {
     color: var(--c-ink);
 
     p:last-child { margin-bottom: 0; }
+
+    // An attribution in its own paragraph still belongs to the quote.
+    p:has(cite) { margin-top: calc(-1 * var(--sp-3)); }
 
     cite {
       display: block;
@@ -319,6 +324,15 @@ hr {
   }
 
   tr:last-child td { border-bottom: 0; }
+
+  // Whatever follows a heading sits at the heading's own gap: a quote,
+  // a code block or a smaller heading must not push it away. The named
+  // blocks are listed because their own margin rules are more specific.
+  h2, h3, h4 {
+    & + *,
+    & + div.highlighter-rouge,
+    & + .table-scroll { margin-top: 0; }
+  }
 }
 
 // ---- prose--numbered ----------------------------------------
@@ -328,14 +342,29 @@ hr {
 // with `prose_style: numbered` in the post's front matter.
 
 .prose--numbered {
-  // No top rule: each item carries a bottom hairline, and the post header
-  // already draws a line above. Two would read as an empty first row.
+  // A list opens with a rule and has one between items, like a ruled
+  // heading and its rows. It has none at its end: the gap closes it.
   > ol {
     list-style: none;
     margin-bottom: var(--sp-7);
     padding-left: 0;
+    border-top: var(--hairline) solid var(--c-hairline);
     counter-reset: prose-item;
   }
+
+  // A list that opens the post already has the header rule above it.
+  > ol:first-child {
+    border-top: 0;
+
+    > li:first-child {
+      padding-top: 0;
+
+      &::before { top: 0.2em; }
+    }
+  }
+
+  // The heading of a list sits on the list's rule.
+  > h2, > h3, > h4 { margin-bottom: var(--sp-3); }
 
   > ol > li {
     position: relative;
@@ -360,13 +389,6 @@ hr {
     }
 
     @include phone { padding-left: 2.25rem; }
-
-    // The rules around the list set its outer gaps, as in every list.
-    &:first-child {
-      padding-top: 0;
-
-      &::before { top: 0.2em; }
-    }
 
     &:last-child {
       padding-bottom: 0;

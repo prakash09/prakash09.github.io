@@ -108,7 +108,24 @@ are one quiet sentence-case line (`.meta`).
 A list gives up the outer padding of its first and last row, so the gap around the
 list always comes from one of these three tokens, not from a sum of paddings. Inside a
 group the steps are 0.5rem (a title and its summary), 1rem (related lines) and 1.5rem
-(rows and paragraphs). In prose a heading has about four times the air above as below.
+(rows and paragraphs).
+
+**Inside a post the gap says what belongs together.** A heading sits close to the text
+it names and far from the text before it.
+
+| Pair | Gap |
+|---|---|
+| paragraph to paragraph, paragraph to list | 1.5rem |
+| text to `h2`, then `h2` to its text | 3rem, 0.75rem |
+| text to `h3`, then `h3` to its text | 2.5rem, 0.5rem |
+| text to `h4`, then `h4` to its text | 2rem, 0.5rem |
+| quote, code block, table, figure | 2rem above and below |
+| `hr` | 3rem above and below |
+| quote to its attribution | 0.75rem |
+
+The block after a heading has no top margin of its own: a quote, a code block or a
+smaller heading starts at the heading's gap. An image in a post has `width` and
+`height` attributes, so the text does not jump when the image loads.
 
 `--sp-1` … `--sp-12` on a `0.25rem` base. Radii `--r-xs` … `--r-full`. Elevation
 `--e-1/2/3`, plus `--glow-ember` — used in exactly one place (the primary button),
@@ -134,7 +151,8 @@ item; the dot trails the item, so a wrapped line never starts with a separator.
 `.prose` is the contract for everything inside a post body: headings, lists with muted
 markers, ember-barred blockquotes, inline code, `kbd`, captioned images, and tables
 that scroll inside themselves so the page never does. `prose_style: numbered` in a
-post's front matter turns a post that is one long list into ruled, numbered items.
+post's front matter turns a post that is one long list into ruled, numbered items: a
+rule opens each list and divides its items, and no rule closes it.
 
 ### Code blocks
 

@@ -76,7 +76,7 @@ Expecting everyone to be comfortable with chaos is unreasonable. It's essential 
 We came up with something like this for weekly metrics review:
 
 <figure>
-  <img src="{{ site.baseurl }}/images/metrics_review.png" alt="A weekly metrics review sheet: one row per team, columns for the metrics each owns." loading="lazy" />
+  <img src="{{ site.baseurl }}/images/metrics_review.png" alt="A weekly metrics review sheet: one row per team, columns for the metrics each owns." width="1278" height="1092" loading="lazy" />
   <figcaption>The weekly metrics review we settled on: one row per team, and the metric each one owns.</figcaption>
 </figure>
 
