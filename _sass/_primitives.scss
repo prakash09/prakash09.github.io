@@ -29,6 +29,9 @@
   font-family: var(--font-body);
   font-size: var(--fs-xs);
   font-weight: 500;
+  // A link inherits the body line-height and a <button> does not; set
+  // it here so both come out the same height.
+  line-height: 1.25;
   cursor: pointer;
   transition: transform var(--dur-fast) var(--ease),
               border-color var(--dur-fast) var(--ease),
@@ -185,7 +188,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: var(--sp-4);
-  margin-bottom: var(--sp-5);
+  margin-bottom: var(--sp-head);
   padding-bottom: var(--sp-3);
   border-bottom: var(--hairline) solid var(--c-hairline);
 }

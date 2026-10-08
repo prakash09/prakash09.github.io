@@ -7,18 +7,45 @@
 // every post once, newest first, in the same shape each time.
 
 // ---- Intro ---------------------------------------------------
+// The statement leads. Who wrote it and where to follow them is one
+// card below, so the top of the page is two things, not four.
 
 .intro {
-  padding-top: var(--sp-9);
+  padding-top: var(--sp-top);
+}
 
-  @include phone { padding-top: var(--sp-7); }
+.intro__title {
+  margin: 0 0 var(--sp-4);
+  font-size: var(--fs-h1);
+}
+
+.intro__body {
+  margin: 0 0 var(--sp-6);
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+  text-wrap: pretty;
+}
+
+.intro__card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  border: var(--hairline) solid var(--c-hairline);
+  border-radius: var(--r-lg);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
 .intro__who {
   display: flex;
   align-items: center;
   gap: var(--sp-3);
-  margin-bottom: var(--sp-5);
+
+  &:hover .intro__name { color: var(--c-ember); }
 }
 
 .intro__avatar {
@@ -30,58 +57,36 @@
 }
 
 .intro__name {
-  margin: 0;
+  display: block;
   font-size: var(--fs-sm);
   font-weight: 600;
   line-height: 1.35;
   color: var(--c-ink);
+  transition: color var(--dur-fast) var(--ease);
 }
 
 .intro__role {
   display: block;
   font-size: var(--fs-micro);
-  font-weight: 400;
+  line-height: 1.5;
   color: var(--c-muted);
 }
 
-.intro__title {
-  margin: 0 0 var(--sp-4);
-  font-size: var(--fs-h1);
-}
-
-.intro__body {
-  margin: 0 0 var(--sp-4);
-  font-size: var(--fs-lead);
-  line-height: 1.6;
-  color: var(--c-ink-soft);
-  text-wrap: pretty;
-}
-
-.intro__links {
-  margin: 0;
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    font-weight: 500;
-
-    // "X" is one glyph wide. A thumb is not.
-    @include touch {
-      min-height: 2.75rem;
-      min-width: 2.75rem;
-    }
-  }
+.intro__social {
+  display: flex;
+  gap: var(--sp-2);
 }
 
 // ---- Generic home section ------------------------------------
 
 .section {
-  padding: var(--sp-section) 0 0;
+  padding-top: var(--sp-section);
 }
 
 // ---- The writing index ---------------------------------------
-// Date, title, summary: the order a reader decides in. No top border on
-// the list, because the section heading already draws one.
+// When it was written on the left, what it says on the right, so the eye
+// runs down one edge of titles. On a phone the two stack. The first and
+// last rows give up their outer padding: the section sets those gaps.
 
 .entries {
   list-style: none;
@@ -92,19 +97,55 @@
 .entry {
   border-bottom: var(--hairline) solid var(--c-hairline);
 
-  &:last-child { border-bottom: 0; }
+  &:first-child .entry__link { padding-top: 0; }
+
+  &:last-child {
+    border-bottom: 0;
+
+    .entry__link { padding-bottom: 0; }
+  }
 }
 
 .entry__link {
-  display: block;
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  column-gap: var(--sp-5);
+  align-items: baseline;
   padding: var(--sp-5) 0;
 
   &:hover .entry__title { color: var(--c-ember); }
+
+  @include phone { display: block; }
 }
 
 .entry__meta {
+  font-size: var(--fs-micro);
+  line-height: 1.5;
+  color: var(--c-muted);
+  font-variant-numeric: tabular-nums;
+
+  @include phone {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.5em;
+    margin-bottom: var(--sp-2);
+  }
+}
+
+.entry__date {
   display: block;
-  margin-bottom: var(--sp-2);
+  font-weight: 500;
+  color: var(--c-ink-soft);
+
+  // Stacked on one line, the date needs the same dot the other facts get.
+  @include phone {
+    &::after {
+      content: "\00B7";
+      padding-left: 0.5em;
+      font-weight: 400;
+      color: var(--c-faint);
+    }
+  }
 }
 
 .entry__title {
@@ -122,7 +163,7 @@
 .entry__excerpt {
   display: block;
   font-size: var(--fs-sm);
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--c-muted);
   text-wrap: pretty;
 }
@@ -131,7 +172,7 @@
 
 .search {
   position: relative;
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-head);
 }
 
 .search__input {
@@ -211,7 +252,7 @@
 .band {
   position: relative;
   margin-top: var(--sp-section);
-  padding: var(--sp-8);
+  padding: var(--sp-6);
   border: var(--hairline) solid var(--c-hairline);
   border-radius: var(--r-xl);
   background: var(--c-surface);
@@ -229,11 +270,11 @@
     opacity: 0.8;
   }
 
-  @include phone { padding: var(--sp-6) var(--sp-5); }
+  @include phone { padding: var(--sp-5); }
 }
 
 .band__title {
-  margin: 0 0 var(--sp-3);
+  margin: 0 0 var(--sp-2);
   font-size: var(--fs-h2);
   font-weight: 600;
   letter-spacing: var(--tk-tight);

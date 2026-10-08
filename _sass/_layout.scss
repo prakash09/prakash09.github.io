@@ -251,10 +251,16 @@
   position: relative;
   flex: 0 0 auto;
   margin-top: auto;
-  padding: var(--sp-9) 0 var(--sp-7);
+  padding: var(--sp-7) 0 var(--sp-6);
   border-top: var(--hairline) solid var(--c-hairline);
   background: var(--c-canvas-sunk);
   overflow: hidden;
+
+  // One height for the first row of all three columns, so the name, the
+  // first link and the icons sit on one line.
+  --footer-row: 2.5rem;
+
+  @include touch { --footer-row: 2.75rem; }
 
   // Hairline grid: the second and last texture on the site.
   &::before {
@@ -290,9 +296,10 @@
 }
 
 .footer__name {
-  margin: 0 0 var(--sp-2);
+  margin: 0;
   font-size: 1.0625rem;
   font-weight: 600;
+  line-height: var(--footer-row);
   letter-spacing: var(--tk-tight);
   color: var(--c-ink);
 }
@@ -307,18 +314,14 @@
 .footer__nav {
   display: flex;
   flex-direction: column;
-
-  @include touch { gap: 0; }
 }
 
 .footer__nav-link {
   display: inline-flex;
   align-items: center;
-  padding: var(--sp-2) 0;
+  min-height: var(--footer-row);
   color: var(--c-muted);
   font-size: var(--fs-sm);
-
-  @include touch { min-height: 2.75rem; }
 
   &:hover { color: var(--c-ink); }
 }
@@ -342,6 +345,11 @@
               background-color var(--dur-fast) var(--ease),
               transform var(--dur-fast) var(--ease);
 
+  @include touch {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
   svg {
     width: 1.0625rem;
     height: 1.0625rem;
@@ -362,7 +370,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--sp-4);
-  margin-top: var(--sp-8);
+  margin-top: var(--sp-7);
   padding-top: var(--sp-5);
   border-top: var(--hairline) solid var(--c-hairline);
   font-size: var(--fs-micro);

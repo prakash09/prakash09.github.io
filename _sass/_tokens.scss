@@ -163,8 +163,11 @@
   --sp-11: 6rem;
   --sp-12: 8rem;
 
-  // Fluid section rhythm
-  --sp-section: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  // Rhythm: the three gaps that set the pace of every page. A layout
+  // uses these, not a step picked by eye, so pages cannot drift apart.
+  --sp-top:     3.5rem;  // masthead to the first line of content
+  --sp-section: 4rem;    // one section to the next
+  --sp-head:    1.5rem;  // a ruled heading to the content it names
 
   // ---- Layout ------------------------------------------------
   // One column for the whole site: masthead, lists and prose share the
@@ -223,7 +226,12 @@
   @media (hover: none) and (pointer: coarse) { @content; }
 }
 
-// A phone holds fewer characters a line, so body type steps down once.
+// A phone holds fewer characters a line, so body type steps down once,
+// and the page rhythm tightens with it.
 @include phone {
-  :root { --fs-body: 1.0625rem; }
+  :root {
+    --fs-body:    1.0625rem;
+    --sp-top:     2rem;
+    --sp-section: 3rem;
+  }
 }

@@ -90,17 +90,11 @@ hr {
 
   > * + * { margin-top: 0; }
 
-  h2 {
-    margin: var(--sp-9) 0 var(--sp-4);
-  }
-
-  h3 {
-    margin: var(--sp-7) 0 var(--sp-3);
-  }
-
-  h4 {
-    margin: var(--sp-6) 0 var(--sp-3);
-  }
+  // A heading belongs to the text below it: about four times the air
+  // above as below.
+  h2 { margin: var(--sp-8) 0 var(--sp-3); }
+  h3 { margin: var(--sp-6) 0 var(--sp-2); }
+  h4 { margin: var(--sp-5) 0 var(--sp-2); }
 
   a {
     color: var(--c-cyan);
@@ -366,6 +360,18 @@ hr {
     }
 
     @include phone { padding-left: 2.25rem; }
+
+    // The rules around the list set its outer gaps, as in every list.
+    &:first-child {
+      padding-top: 0;
+
+      &::before { top: 0.2em; }
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
   }
 }
 

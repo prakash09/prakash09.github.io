@@ -4,16 +4,6 @@ layout: default
 
 <section class="intro">
   <div class="container">
-    <div class="intro__who">
-      <span class="avatar-ring intro__avatar">
-        <img src="{{ site.baseurl }}/images/prakash.png" alt="" width="104" height="104" />
-      </span>
-      <p class="intro__name">
-        Prakash Kumar
-        <span class="intro__role">Founder &amp; CTO, Clipwise.ai</span>
-      </p>
-    </div>
-
     <h1 class="intro__title">Notes on building software, products and companies.</h1>
 
     <p class="intro__body">
@@ -22,12 +12,21 @@ layout: default
       These are my public notes, including the mistakes.
     </p>
 
-    <p class="intro__links meta">
-      <a href="#about">About me</a>
-      <a href="https://x.com/{{ site.footer-links.twitter }}" target="_blank" rel="noopener noreferrer">X</a>
-      <a href="https://www.linkedin.com/in/{{ site.footer-links.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="{{ site.baseurl }}/feed.xml">RSS</a>
-    </p>
+    <div class="intro__card">
+      <a class="intro__who" href="#about">
+        <span class="avatar-ring intro__avatar">
+          <img src="{{ site.baseurl }}/images/prakash.png" alt="" width="104" height="104" />
+        </span>
+        <span>
+          <span class="intro__name">Prakash Kumar</span>
+          <span class="intro__role">Founder &amp; CTO, Clipwise.ai</span>
+        </span>
+      </a>
+
+      <div class="intro__social">
+        {% include social.html %}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -58,17 +57,20 @@ layout: default
       {% for post in paginator.posts %}
         <li class="entry">
           <a class="entry__link" href="{{ site.baseurl }}{{ post.url }}">
-            <span class="entry__meta meta">
-              <span>{{ post.date | date: "%b %-d, %Y" }}</span>
-              {% for category in post.categories limit: 1 %}
-                <span>{{ category }}</span>
-              {% endfor %}
-              <span>{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+            <span class="entry__meta">
+              <span class="entry__date">{{ post.date | date: "%b %-d, %Y" }}</span>
+              <span class="meta">
+                {% for category in post.categories limit: 1 %}
+                  <span>{{ category }}</span>
+                {% endfor %}
+                <span>{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
+              </span>
             </span>
 
-            <span class="entry__title">{{ post.title }}</span>
-
-            <span class="entry__excerpt">{{ post.description | default: post.excerpt | strip_html | strip | truncate: 220 }}</span>
+            <span class="entry__body">
+              <span class="entry__title">{{ post.title }}</span>
+              <span class="entry__excerpt">{{ post.description | default: post.excerpt | strip_html | strip | truncate: 220 }}</span>
+            </span>
           </a>
         </li>
       {% endfor %}

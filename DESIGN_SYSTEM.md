@@ -97,6 +97,19 @@ are one quiet sentence-case line (`.meta`).
 
 ## Space, shape, motion
 
+**Three gaps set the pace of every page.** Use them; do not pick a step by eye.
+
+| Token | Desktop | Phone | Use |
+|---|---|---|---|
+| `--sp-top` | 3.5rem | 2rem | masthead to the first line of content |
+| `--sp-section` | 4rem | 3rem | one section to the next, and the last section to the footer |
+| `--sp-head` | 1.5rem | 1.5rem | a ruled heading (`.section-head`) to the content it names |
+
+A list gives up the outer padding of its first and last row, so the gap around the
+list always comes from one of these three tokens, not from a sum of paddings. Inside a
+group the steps are 0.5rem (a title and its summary), 1rem (related lines) and 1.5rem
+(rows and paragraphs). In prose a heading has about four times the air above as below.
+
 `--sp-1` … `--sp-12` on a `0.25rem` base. Radii `--r-xs` … `--r-full`. Elevation
 `--e-1/2/3`, plus `--glow-ember` — used in exactly one place (the primary button),
 because a glow everywhere is a glow nowhere.
@@ -110,6 +123,10 @@ must not re-declare their own opt-out.
 
 `.btn` (`--primary` / `--ghost` / `--sm`) · `.card` · `.chip` · `.meta` · `.callout`
 · `.field` · `.pagination` · `.avatar-ring` · `.section-head` · `.prose`.
+
+The home page is three parts in one column: the intro (statement, two lines, and one
+author card with the social links), the post index (`.entries`: date and facts on the
+left, title and summary on the right, stacked on a phone), and About.
 
 `.meta` is the one line of facts about a post: date · topic · length. Each child is one
 item; the dot trails the item, so a wrapped line never starts with a separator.
