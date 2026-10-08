@@ -2,9 +2,8 @@
 layout: page
 permalink: /categories/
 title: Writing
-kicker: Archive
 description: Everything I've published, newest first.
-wide: true
+prose: false
 ---
 
 <div class="archive">
@@ -22,9 +21,9 @@ wide: true
           <li class="archive-item">
             <a class="archive-link" href="{{ site.baseurl }}{{ post.url }}">
               <span class="archive-title">{% if post.title and post.title != "" %}{{ post.title }}{% else %}{{ post.excerpt | strip_html | truncate: 80 }}{% endif %}</span>
-              <span class="archive-meta">
-                <span class="archive-read">{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min</span>
-                <span class="archive-date">{{ post.date | date: "%b %e" }}</span>
+              <span class="archive-meta meta">
+                <span class="archive-date">{{ post.date | date: "%b %-d" }}</span>
+                <span class="archive-read">{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read</span>
               </span>
             </a>
           </li>
@@ -57,7 +56,7 @@ wide: true
               <li class="archive-item">
                 <a class="archive-link" href="{{ site.baseurl }}{{ post.url }}">
                   <span class="archive-title">{{ post.title }}</span>
-                  <span class="archive-meta"><span class="archive-date">{{ post.date | date: "%b %e, %Y" }}</span></span>
+                  <span class="archive-meta meta"><span class="archive-date">{{ post.date | date: "%b %-d, %Y" }}</span></span>
                 </a>
               </li>
             {% endfor %}

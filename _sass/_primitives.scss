@@ -13,10 +13,6 @@
   }
 }
 
-.container--wide { max-width: var(--w-wide); }
-.container--home { max-width: var(--w-home); }
-.container--text { max-width: var(--w-text); }
-
 // ---- Buttons -------------------------------------------------
 
 .btn {
@@ -30,14 +26,9 @@
   border-radius: var(--r-sm);
   background: transparent;
   color: var(--c-ink);
-
-  // The reading faces are for reading. Controls speak in mono, like the
-  // kickers and tags, so interface and prose never wear the same voice.
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: var(--fs-xs);
   font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
   cursor: pointer;
   transition: transform var(--dur-fast) var(--ease),
               border-color var(--dur-fast) var(--ease),
@@ -152,11 +143,8 @@
   border-radius: var(--r-full);
   background: var(--c-surface);
   color: var(--c-muted);
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
   font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
   white-space: nowrap;
   transition: color var(--dur-fast) var(--ease),
               border-color var(--dur-fast) var(--ease),
@@ -208,11 +196,8 @@
 }
 
 .section-head__count {
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
+  color: var(--c-muted);
   white-space: nowrap;
 }
 
@@ -239,11 +224,8 @@
 }
 
 .field__label {
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
   font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
   color: var(--c-muted);
 }
 
@@ -298,7 +280,6 @@
   padding: 0 var(--sp-3);
   border: var(--hairline) solid var(--c-hairline);
   border-radius: var(--r-sm);
-  font-family: var(--font-mono);
   font-size: var(--fs-xs);
   color: var(--c-muted);
   transition: color var(--dur-fast) var(--ease),
@@ -336,26 +317,6 @@
     height: 100%;
     border-radius: 0.40625rem;
     background: var(--c-canvas);
-  }
-}
-
-// ---- Reveal on scroll ----------------------------------------
-// Scoped to .js, which is set on <html> by an inline script in the
-// head. Content is therefore hidden ONLY when JS is running and can
-// be counted on to reveal it again — never stranded at opacity 0
-// because a script failed to load. Reduced motion opts out too.
-
-@include motion-ok {
-  .js .reveal {
-    opacity: 0;
-    transform: translateY(0.75rem);
-    transition: opacity var(--dur-slow) var(--ease),
-                transform var(--dur-slow) var(--ease);
-  }
-
-  .js .reveal.is-in {
-    opacity: 1;
-    transform: none;
   }
 }
 

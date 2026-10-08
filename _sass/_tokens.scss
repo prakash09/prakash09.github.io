@@ -1,5 +1,5 @@
 // ============================================================
-// GRAPHITE & EMBER — DESIGN TOKENS
+// THE CANDOR — DESIGN TOKENS
 // The single source of truth. No hex values anywhere else.
 // All sizes in rem (1rem = 16px). Never px.
 //
@@ -10,82 +10,143 @@
 // and be consumed via var(). Do not inline clamp() elsewhere.
 // ============================================================
 
+// ---- Colour: light (the default) -----------------------------
+// Every ink below is real text, so every one clears WCAG AA (4.5:1)
+// against canvas, canvas-sunk, surface and surface-hi. --c-faint is
+// the floor: nothing may be quieter than it.
 :root {
-  // ---- Color: graphite base ----------------------------------
-  --c-canvas:       #0B0C0E;
-  --c-canvas-sunk:  #08090A;
-  --c-surface:      #131519;
-  --c-surface-hi:   #181B20;
-  --c-hairline:     #23262C;
-  --c-hairline-hi:  #2E323A;
+  --c-canvas:       #FBFBF9;
+  --c-canvas-sunk:  #F3F3F0;
+  --c-surface:      #FFFFFF;
+  --c-surface-hi:   #F6F6F3;
+  --c-hairline:     #E4E4DF;
+  --c-hairline-hi:  #CFCFC8;
+  --c-canvas-veil:    rgba(251, 251, 249, 0.80);
+  --c-canvas-veil-hi: rgba(251, 251, 249, 0.94);
 
-  // ---- Color: ink --------------------------------------------
-  // Every one of these is real text (dates, kickers, TOC links), so
-  // every one clears WCAG AA against canvas AND surface. --c-faint is
-  // the floor: anything quieter than this fails, so nothing is.
-  --c-ink:          #ECEDEE;  // 16.7:1 on canvas
-  --c-ink-soft:     #C3C7CC;  // 11.5:1
-  --c-muted:        #8B9099;  //  6.1:1
-  --c-faint:        #808691;  //  5.4:1 on canvas, 4.7:1 on surface-hi
+  --c-ink:          #15171A;  // 17.3:1 on canvas
+  --c-ink-soft:     #2A2D33;  // 13.3:1
+  --c-muted:        #5A606A;  //  6.1:1
+  --c-faint:        #676D78;  //  5.0:1 on canvas, 4.7:1 on canvas-sunk
 
-  // ---- Color: accents ----------------------------------------
+  // Ember is the accent, cyan is the link. On a light canvas both
+  // drop to a darker shade of the same hue so they still pass as text.
+  --c-ember:        #C2410C;
+  --c-ember-hi:     #9A3412;
+  --c-rose:         #BE185D;
+  --c-cyan:         #0B5CAD;
+  --c-cyan-hi:      #084A8C;
+
+  --c-ember-wash:   rgba(194, 65, 12, 0.07);
+  --c-ember-ring:   rgba(194, 65, 12, 0.35);
+  --c-ember-glow:   rgba(194, 65, 12, 0.18);
+  --c-cyan-wash:    rgba(11, 92, 173, 0.08);
+
+  // Only for things that are semantically good/bad: diff lines and
+  // syntax errors. Never decorative.
+  --c-good:         #15803D;
+  --c-good-wash:    rgba(21, 128, 61, 0.10);
+  --c-bad:          #B91C1C;
+  --c-bad-wash:     rgba(185, 28, 28, 0.08);
+
+  --e-1: 0 0.0625rem 0.125rem rgba(21, 23, 26, 0.06);
+  --e-2: 0 0.5rem 1.5rem rgba(21, 23, 26, 0.10);
+  --e-3: 0 1.5rem 3rem rgba(21, 23, 26, 0.14);
+
+  // Book covers are printed for white pages; only the dark theme
+  // needs to knock them back.
+  --cover-filter: none;
+
+  // Native controls and scrollbars follow the palette, and the masthead
+  // toggle reads these two to show the icon for the other theme.
+  color-scheme: light;
+  --show-on-light: block;
+  --show-on-dark:  none;
+}
+
+// ---- Colour: dark ---------------------------------------------
+@mixin dark-palette {
+  --c-canvas:       #101215;
+  --c-canvas-sunk:  #0B0D0F;
+  --c-surface:      #181B20;
+  --c-surface-hi:   #1E2228;
+  --c-hairline:     #262A31;
+  --c-hairline-hi:  #343943;
+  --c-canvas-veil:    rgba(16, 18, 21, 0.78);
+  --c-canvas-veil-hi: rgba(16, 18, 21, 0.94);
+
+  --c-ink:          #ECEDEE;  // 16.0:1 on canvas
+  --c-ink-soft:     #D5D8DD;  // 13.1:1
+  --c-muted:        #A0A6B0;  //  7.7:1
+  --c-faint:        #8C929D;  //  6.0:1 on canvas, 5.1:1 on surface-hi
+
   --c-ember:        #FF7A45;
   --c-ember-hi:     #FF9366;
-  --c-rose:         #F0568A;
-  --c-cyan:         #58C4DC;
-  --c-cyan-hi:      #7BD5E8;
+  --c-rose:         #F472A0;
+  --c-cyan:         #6CC8E0;
+  --c-cyan-hi:      #8FD8EA;
 
-  // Translucent accent washes (tints, rings, glows)
   --c-ember-wash:   rgba(255, 122, 69, 0.10);
   --c-ember-ring:   rgba(255, 122, 69, 0.34);
   --c-ember-glow:   rgba(255, 122, 69, 0.20);
-  --c-cyan-wash:    rgba(88, 196, 220, 0.10);
+  --c-cyan-wash:    rgba(108, 200, 224, 0.10);
 
-  // ---- Color: status -----------------------------------------
-  // Only for things that are semantically good/bad — diff lines and
-  // syntax errors. Never decorative; the accent above does that job.
   --c-good:         #7EE7A8;
   --c-good-wash:    rgba(126, 231, 168, 0.10);
   --c-bad:          #FF8A8A;
   --c-bad-wash:     rgba(255, 138, 138, 0.10);
 
+  --e-1: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.40);
+  --e-2: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.45);
+  --e-3: 0 1.5rem 3rem rgba(0, 0, 0, 0.55);
+
+  --cover-filter: saturate(0.92) brightness(0.9);
+
+  color-scheme: dark;
+  --show-on-light: none;
+  --show-on-dark:  block;
+}
+
+// The reader's system setting decides, unless the masthead toggle has
+// stored an explicit choice in [data-theme].
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { @include dark-palette; }
+}
+
+:root[data-theme="dark"] { @include dark-palette; }
+
+:root {
   // ---- Signature gradient ------------------------------------
-  --grad-signature: linear-gradient(90deg, #FF7A45 0%, #F0568A 52%, #58C4DC 100%);
-  --grad-ring:      linear-gradient(140deg, #FF7A45 0%, #F0568A 50%, #58C4DC 100%);
+  --grad-signature: linear-gradient(90deg, var(--c-ember) 0%, var(--c-rose) 52%, var(--c-cyan) 100%);
+  --grad-ring:      linear-gradient(140deg, var(--c-ember) 0%, var(--c-rose) 50%, var(--c-cyan) 100%);
+  --glow-ember:     0 0.5rem 1.75rem var(--c-ember-glow);
 
   // ---- Type --------------------------------------------------
-  // Inter is the default typeface of every SaaS product on the web, and
-  // it is a *UI* face: built for buttons and tables, not for reading a
-  // 3,000-word essay. This is a publication, so it gets a publication's
-  // typography — an expressive display serif, a calm text serif built
-  // for screens, and a mono that keeps the engineering in the room.
-  --font-display: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
-  --font-body:    "Source Serif 4", "Source Serif Pro", Georgia, Cambria, serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  // Two faces. Inter reads cleanly at every size on every screen and
+  // carries both prose and interface; JetBrains Mono is for code and
+  // for numerals that must line up. Nothing else.
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --fs-display: clamp(2.5rem, 1.85rem + 2.9vw, 4rem);
-  --fs-h1:      clamp(2rem, 1.6rem + 1.8vw, 2.875rem);
-  // Post titles. Deliberately below --fs-h1: a headline that fills three
-  // lines before the reader reaches a single word of the essay is not a
-  // headline, it is an obstacle.
-  --fs-title:   clamp(1.625rem, 1.4rem + 1vw, 2.125rem);
-  --fs-h2:      clamp(1.5rem, 1.35rem + 0.7vw, 1.875rem);
-  --fs-h3:      clamp(1.25rem, 1.18rem + 0.35vw, 1.4rem);
-  --fs-lead:    clamp(1.1875rem, 1.11rem + 0.35vw, 1.375rem);
-  --fs-body:    1.25rem;
+  --fs-display: clamp(2.5rem, 1.9rem + 2.6vw, 3.75rem);
+  --fs-h1:      clamp(1.625rem, 1.45rem + 0.8vw, 2rem);
+  // Post titles: one clear step above h2, and small enough that a long
+  // headline holds to two lines and the essay starts on the first screen.
+  --fs-title:   clamp(1.5rem, 1.35rem + 0.7vw, 1.875rem);
+  --fs-h2:      clamp(1.25rem, 1.19rem + 0.3vw, 1.4375rem);
+  --fs-h3:      clamp(1.125rem, 1.08rem + 0.25vw, 1.25rem);
+  --fs-lead:    clamp(1.125rem, 1.08rem + 0.25vw, 1.25rem);
+  --fs-body:    1.125rem;
   --fs-sm:      1rem;
-  --fs-xs:      0.875rem;
-  --fs-micro:   0.75rem;
+  --fs-xs:      0.9375rem;
+  --fs-micro:   0.875rem;
 
-  --lh-tight:   1.14;
+  --lh-tight:   1.15;
   --lh-snug:    1.3;
   --lh-body:    1.7;
 
-  // Light-on-dark small text blooms; a touch of tracking counters it.
-  // Serifs need far less negative tracking than a grotesk: the tight
-  // -0.022em that suited Inter smears Fraunces.
-  --tk-micro:   0.12em;
-  --tk-tight:   -0.011em;
+  // A grotesk wants tightening as it grows; body text stays at zero.
+  --tk-tight:   -0.021em;
   --tk-body:    0;
 
   // ---- Space (0.25rem base) ----------------------------------
@@ -106,11 +167,9 @@
   --sp-section: clamp(3.5rem, 2.5rem + 4vw, 6rem);
 
   // ---- Layout ------------------------------------------------
-  --w-text:   44rem;   // reading column
-  --w-page:   52rem;   // default page container
-  --w-home:   72rem;   // home: a two-column fold and a three-column index both need the room
-  --w-wide:   72rem;   // archive / books grids
-  --w-prose:  68ch;    // hard measure cap for long-form
+  // One column for the whole site: masthead, lists and prose share the
+  // same two edges. At body size it holds about 70 characters a line.
+  --w-page:   45rem;
   --hairline: 0.0625rem;
   --nav-h:    4.25rem;
 
@@ -121,12 +180,6 @@
   --r-lg:   1rem;
   --r-xl:   1.5rem;
   --r-full: 62.4375rem;
-
-  // ---- Elevation ---------------------------------------------
-  --e-1: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.40);
-  --e-2: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.45);
-  --e-3: 0 1.5rem 3rem rgba(0, 0, 0, 0.55);
-  --glow-ember: 0 0.5rem 1.75rem var(--c-ember-glow);
 
   // ---- Motion ------------------------------------------------
   --ease:      cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -168,4 +221,9 @@
 // from viewport width.
 @mixin touch {
   @media (hover: none) and (pointer: coarse) { @content; }
+}
+
+// A phone holds fewer characters a line, so body type steps down once.
+@include phone {
+  :root { --fs-body: 1.0625rem; }
 }

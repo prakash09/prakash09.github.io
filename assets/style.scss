@@ -5,7 +5,7 @@
 // ============================================================
 // THE CANDOR — "Graphite & Ember"
 //
-// A dark design system. Read _sass/_tokens.scss first: it is the
+// A light and dark design system. Read _sass/_tokens.scss first: it is the
 // single source of truth for colour, type, space, shape, motion.
 // Nothing below hardcodes a hex value or a px.
 //
@@ -18,7 +18,7 @@
 @import "typography"; // headings + the .prose contract
 @import "primitives"; // buttons, cards, chips, fields, pagination
 @import "layout";     // masthead, progress, footer
-@import "home";       // hero, creds, timeline, post index
+@import "home";       // intro, post index, about
 @import "post";       // post header, TOC, post footer
 @import "pages";      // archive, books, subscribe, 404
 @import "syntax";     // Rouge highlighting

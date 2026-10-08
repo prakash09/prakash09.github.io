@@ -23,7 +23,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-nav);
-  background: rgba(11, 12, 14, 0.72);
+  background: var(--c-canvas-veil);
   -webkit-backdrop-filter: saturate(1.6) blur(0.75rem);
   backdrop-filter: saturate(1.6) blur(0.75rem);
   border-bottom: var(--hairline) solid transparent;
@@ -34,7 +34,7 @@
   // when there is content behind it.
   &.is-stuck {
     border-bottom-color: var(--c-hairline);
-    background: rgba(11, 12, 14, 0.88);
+    background: var(--c-canvas-veil-hi);
   }
 }
 
@@ -53,8 +53,6 @@
   min-width: 0;
 
   @include touch { min-height: 2.75rem; }
-
-  &:hover .masthead__wordmark { color: var(--c-ink); }
 }
 
 // The mark inherits colour, so it can warm to ember on hover without
@@ -71,33 +69,20 @@
   transform: rotate(-12deg);
 }
 
-.masthead__id { min-width: 0; }
-
 .masthead__wordmark {
-  display: block;
-  margin: 0;
-  font-family: var(--font-display);
   font-size: 1.0625rem;
   font-weight: 600;
   letter-spacing: var(--tk-tight);
-  line-height: 1.2;
   color: var(--c-ink);
   white-space: nowrap;
-  transition: color var(--dur-fast) var(--ease);
 }
 
-.masthead__tagline {
-  display: block;
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  font-weight: 500;
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
-  color: var(--c-faint);
-  white-space: nowrap;
+.masthead__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
 
-  @include phone { display: none; }
+  @include phone { gap: var(--sp-2); }
 }
 
 // ---- Nav -----------------------------------------------------
@@ -114,7 +99,7 @@
   position: relative;
   padding: var(--sp-2) 0;
   color: var(--c-muted);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   font-weight: 500;
   transition: color var(--dur-fast) var(--ease);
 
@@ -145,24 +130,49 @@
   }
 }
 
-// ---- Mobile menu ---------------------------------------------
+// ---- Theme toggle + mobile menu -------------------------------
+// Two square buttons of the same size. The toggle shows the theme it
+// switches TO: a moon on the light page, a sun on the dark one. It
+// needs JS, so it stays hidden until JS is known to be running.
 
+.theme-toggle,
 .nav-toggle {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   padding: 0;
   border: var(--hairline) solid var(--c-hairline);
   border-radius: var(--r-sm);
   background: transparent;
-  color: var(--c-ink);
+  color: var(--c-muted);
   cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease);
+  transition: color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
 
-  &:hover { border-color: var(--c-hairline-hi); }
+  &:hover {
+    color: var(--c-ink);
+    border-color: var(--c-hairline-hi);
+  }
 
+  @include touch {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+.js .theme-toggle { display: inline-flex; }
+
+.theme-toggle svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.theme-toggle__moon { display: var(--show-on-light); }
+.theme-toggle__sun  { display: var(--show-on-dark); }
+
+.nav-toggle {
   @include phone { display: inline-flex; }
 }
 
@@ -246,7 +256,7 @@
   background: var(--c-canvas-sunk);
   overflow: hidden;
 
-  // Hairline grid — the third and last texture on the site.
+  // Hairline grid: the second and last texture on the site.
   &::before {
     content: "";
     position: absolute;
@@ -281,7 +291,6 @@
 
 .footer__name {
   margin: 0 0 var(--sp-2);
-  font-family: var(--font-display);
   font-size: 1.0625rem;
   font-weight: 600;
   letter-spacing: var(--tk-tight);
@@ -356,10 +365,7 @@
   margin-top: var(--sp-8);
   padding-top: var(--sp-5);
   border-top: var(--hairline) solid var(--c-hairline);
-  font-family: var(--font-mono);
   font-size: var(--fs-micro);
-  letter-spacing: var(--tk-micro);
-  text-transform: uppercase;
   color: var(--c-faint);
 
   @include phone {

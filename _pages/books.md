@@ -2,9 +2,8 @@
 layout: page
 permalink: /books/
 title: Books
-kicker: Shelf
 description: What I've been reading. Pulled live from Goodreads.
-wide: true
+prose: false
 ---
 
 <div id="gr_grid_widget_1659774806">
